@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <vector>
-#include "../Standard52Deck.hpp"
+#include "../Deck.hpp"
 
 TEST(DeckTest, cardsLeftAll)
 {
@@ -16,7 +16,7 @@ bool containsEach(std::vector<Card> cards)
 	{
 		bool contained = false;
 		for (int i = 0; i < cards.size(); ++i)
-			if (((int) cards[i].rank == s) && ((int) cards[i].suit == s)) contained = true;
+			if (((int) cards[i].rank == r) && ((int) cards[i].suit == s)) contained = true;
 		if(!contained) ok = false; 
 	}
 	return ok;
