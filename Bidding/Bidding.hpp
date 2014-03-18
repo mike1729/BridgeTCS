@@ -6,9 +6,18 @@
 class Bidding 
 {
 public:
-	Bidding();
+
+	Bidding()
+	{
+	}
+
+	Contract getContract()
+	{
+		return currentContract;
+	}
+
 	bool makeCall(Call call);
-	Contract getContract();
+
 private:
 	Contract currentContract;
 	int consectutivePasses;

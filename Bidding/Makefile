@@ -1,4 +1,4 @@
-CC=g++
+CC=clang++
 CFLAGS=-std=c++11 -c -Wall -O2
 TESTFLAGS=-lgtest -lgtest_main -pthread
 LDFLAGS=

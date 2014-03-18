@@ -1,11 +1,5 @@
 #include "Bidding.hpp"
 
-Bidding::Bidding() {
-	currentContract.level = 0;
-	currentContract.redeal = false;
-	consectutivePasses = 0;
-}
-
 bool Bidding::makeCall(Call call)
 {
 	//TODO: validation of call.
@@ -21,9 +15,4 @@ bool Bidding::makeCall(Call call)
 		}
 	}
 	return true;
-}
-
-Contract Bidding::getContract()
-{
-	return currentContract;
 }
