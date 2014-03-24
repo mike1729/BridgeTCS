@@ -8,14 +8,16 @@ TESTSOURCE=BiddingTest.cpp
 TESTOBJECT=$(TESTSOURCE:.cpp=.o)
 TESTEXECUTABLE=BiddingTest
 
+HEADERS=*.hpp
+
 test : $(TESTEXECUTABLE)
 	./$(TESTEXECUTABLE)
 
 $(TESTEXECUTABLE) : $(OBJECTS) $(TESTOBJECT)
 	$(CC) $(LDFLAGS) $(TESTFLAGS) $^ -o $@ 
 
-%.o : %.cpp
-	$(CC) $(CFLAGS) $^ -o $@
+%.o : %.cpp $(HEADERS)
+	$(CC) $(CFLAGS) $< -o $@
 
 $(TESTOBJECT) : test/$(TESTSOURCE)
 	$(CC) $(CFLAGS) $(TESTFLAGS) $^ -o $@

@@ -88,3 +88,10 @@ TEST_F(BiddingTest, RealFinish)
 	ASSERT_EQ(bidding.makeCall(pass), false);
 	ASSERT_EQ(bidding.makeCall(oneClub), false);
 }
+
+TEST_F(BiddingTest, WrongDouble)
+{
+	ASSERT_EQ(bidding.makeCall(oneClub), true);
+	ASSERT_EQ(bidding.makeCall(pass), true);
+	ASSERT_EQ(bidding.makeCall(doubleCall), false);
+}
