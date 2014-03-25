@@ -1,6 +1,10 @@
 #ifndef BIDDING_HPP
 #define BIDDING_HPP
+#include <array>
 #include "Contract.hpp"
+#include "../Rubber/Arbiter.hpp"
+
+using ArbiterArray = std::array<Arbiter, 4>;
 
 enum class CallType
 {
@@ -39,7 +43,7 @@ class Bidding
 {
 public:
 
-	Bidding()
+	Bidding(ArbiterArray arbiters, int firstCaller) : arbiters(arbiters), firstCaller(firstCaller)
 	{
 	}
 
@@ -48,12 +52,16 @@ public:
 		return currentContract;
 	}
 
-	bool makeCall(Call call);
+	Contract perform();
 
 private:
 	int callNumber = 0;
 	Contract currentContract;
 	int consectutivePasses = 0;
 	bool biddingDone = false;
+	ArbiterArray const & arbiters;
+	int firstCaller;
+
+	bool makeCall(Call call);
 };
 #endif

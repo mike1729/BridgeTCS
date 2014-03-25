@@ -101,3 +101,8 @@ bool Bidding::makeCall(Call call)
 	callNumber++;
 	return true;
 }
+
+Contract Bidding::perform()
+{
+	return currentContract;
+}

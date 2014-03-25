@@ -13,9 +13,10 @@ public:
 	Call threeSpades = Call::BID(3, Denomination::SPADE);
 	Call fiveDiamonds = Call::BID(5, Denomination::DIAMOND);
 	Call doubleCall = Call::DOUBLE();
+	ArbiterArray arbiters;
 	void SetUp()
 	{
-		bidding = new Bidding();
+		bidding = new Bidding(arbiters, 0);
 	}
 	void TearDown()
 	{
