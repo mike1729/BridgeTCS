@@ -4,7 +4,7 @@ TESTFLAGS=-lgtest -lgtest_main -pthread
 LDFLAGS=
 SOURCES=Deck.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-TESTSOURCES=CardTest.cpp DeckTest.cpp
+TESTSOURCES=DeckTest.cpp
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 TESTEXECUTABLE=DeckTest
 

@@ -9,7 +9,7 @@ class IDeck
 {
 public:
 	virtual void shuffle() = 0;
-	virtual Card dealCard() = 0;
+	virtual Card&& dealCard() = 0;
 	virtual int cardsLeft() = 0;
 	virtual bool empty() = 0;
 };
@@ -24,7 +24,7 @@ public:
 	Standard52Deck();
 
 	virtual void shuffle();
-	virtual Card dealCard();
+	virtual Card&& dealCard();
 	virtual int cardsLeft();
 	virtual bool empty();
 };
