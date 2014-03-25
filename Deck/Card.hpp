@@ -41,5 +41,5 @@ public:
 	{
 	} 
 
-	Card(const Card& card) = delete;
+	Card(Card const& card) = delete;
 };
