@@ -14,15 +14,15 @@ test : $(TESTEXECUTABLE)
 	./$(TESTEXECUTABLE)
 
 $(TESTEXECUTABLE) : $(OBJECTS) $(TESTOBJECT)
-	$(CC) $(LDFLAGS) $(TESTFLAGS) $^ -o $@ 
+	$(CC) $^ $(LDFLAGS) $(TESTFLAGS) -o $@ 
 
 %.o : %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
 $(TESTOBJECT) : test/$(TESTSOURCE)
-	$(CC) $(CFLAGS) $(TESTFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ $(TESTFLAGS) -o $@
 
 clean :
-	rm -f Bidding.o BiddingTest.o BiddingTest
+	rm -f $(OBJECTS) $(TESTEXECUTABLE) $(TESTOBJECT)
 
 .PHONY : test clean
