@@ -19,7 +19,9 @@ public:
 	bool makeCall(Call call);
 
 private:
+	int callNumber = 0;
 	Contract currentContract;
-	int consectutivePasses;
+	int consectutivePasses = 0;
+	bool biddingDone = false;
 };
 #endif

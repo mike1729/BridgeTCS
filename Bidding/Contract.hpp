@@ -8,6 +8,7 @@ struct Contract
 {
 	int level;
 	Denomination denomination;
+	int pointMultiplier = 1;
 	Player declarer;
 	bool redeal;
 };
