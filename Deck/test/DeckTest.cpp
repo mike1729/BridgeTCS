@@ -15,7 +15,7 @@ bool containsEach(std::vector<Card> cards)
 	for (int r = (int) Rank::TWO; r <= (int) Rank::ACE; ++r)
 	{
 		bool contained = false;
-		for (int i = 0; i < cards.size(); ++i)
+		for (size_t i = 0; i < cards.size(); ++i)
 			if (((int) cards[i].rank == r) && ((int) cards[i].suit == s)) contained = true;
 		if(!contained) ok = false; 
 	}

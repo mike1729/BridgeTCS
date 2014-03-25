@@ -21,34 +21,10 @@ private:
 	std::vector<Card> allCards;
 
 public:
-	Standard52Deck()
-	{
-		for (int s = (int) Suit::CLUBS; s <= (int) Suit::SPADES; ++s)
-		for (int r = (int) Rank::TWO; r <= (int) Rank::ACE; ++r)
-			allCards.push_back(Card((Rank) r, (Suit) s));
-		for (int i = 0; i < allCards.size(); ++i)
-			deck.push_back(&allCards[i]);
-	}
+	Standard52Deck();
 
-	virtual void shuffle()
-	{
-		std::random_shuffle(deck.begin(), deck.end());
-	}
-	
-	virtual Card dealCard()
-	{
-		Card card = *deck.back();
-		deck.pop_back();
-		return card;
-	}
-
-	virtual int cardsLeft()
-	{
-		return deck.size();
-	}
-
-	virtual bool empty()
-	{
-		return deck.size() == 0;
-	}
+	virtual void shuffle();
+	virtual Card dealCard();
+	virtual int cardsLeft();
+	virtual bool empty();
 };
