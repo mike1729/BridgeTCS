@@ -1,21 +1,16 @@
 #include "Player.hpp"
 
-int Player::getId()
+int Player::chooseCard()
 {
-    return id;
+    return 0;
 }
 
-void Player::addCard(Card c)
+Call Player::makeCall()
 {
-    //if ( (int) hand.size() >= 13) throw 0;
-    hand.push_back(c);
-}
-
-Card Player::getCard(int index)
-{ 
-    
-    if( index >= (int) hand.size() ) 
-	throw 0;
-    return hand[index];
-    
+    //random values
+    Call call;
+    call.type = CallType::Bid;
+    call.level = 1;
+    call.denomination = Denomination::Clubs;
+    return call;
 }

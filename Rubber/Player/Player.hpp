@@ -1,19 +1,19 @@
 #ifndef  _PLAYER_HPP
 #define _PLAYER_HPP
-#include "../../Deck/Card.hpp"
-#include <iostream>
-#include <vector>
-class Player
+
+#include "../../Bidding/Call.hpp"
+
+class IPlayer
 {
-private:
-    int id;
-    std::vector<Card> hand;
 public:
-    Player(int _id): id(_id) {}
-    int getId();
-    void addCard(Card c);
-//    Card getCard(Card *c);
-    Card getCard(int index);
+    virtual int chooseCard() = 0;
+    virtual Call makeCall() = 0;
+};
+
+class Player : public IPlayer
+{
+    int chooseCard();
+    Call makeCall();
 };
 
 #endif

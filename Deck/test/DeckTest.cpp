@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <vector>
+#include <utility>
 #include "../Deck.hpp"
 
 TEST(DeckTest, cardsLeftAll)
@@ -8,15 +9,15 @@ TEST(DeckTest, cardsLeftAll)
 	ASSERT_EQ(deck.cardsLeft(), 52);
 }
 
-bool containsEach(std::vector<Card> cards)
+bool containsEach(std::vector<std::pair<Suit, Rank> > cards)
 {
 	bool ok = true;
 	for (int s = (int) Suit::CLUBS; s <= (int) Suit::SPADES; ++s)
 	for (int r = (int) Rank::TWO; r <= (int) Rank::ACE; ++r)
 	{
 		bool contained = false;
-		for (int i = 0; i < cards.size(); ++i)
-			if (((int) cards[i].rank == r) && ((int) cards[i].suit == s)) contained = true;
+		for (size_t i = 0; i < cards.size(); ++i)
+			if (((int) cards[i].second == r) && ((int) cards[i].first == s)) contained = true;
 		if(!contained) ok = false; 
 	}
 	return ok;
@@ -25,9 +26,12 @@ bool containsEach(std::vector<Card> cards)
 TEST(DeckTest, containsEachCard)
 {
 	Standard52Deck deck = Standard52Deck();
-	std::vector<Card> cards;
+	std::vector<std::pair<Suit, Rank> > cards;
 	while(!deck.empty())
-		cards.push_back(deck.dealCard());
+	{
+		Card&& card = deck.dealCard();
+		cards.push_back(std::make_pair(card.suit, card.rank));
+	}
 
 	ASSERT_EQ(containsEach(cards), true);
 }
@@ -36,9 +40,12 @@ TEST(DeckTest, shuffledContainsEachCard)
 {
 	Standard52Deck deck = Standard52Deck();
 	deck.shuffle();
-	std::vector<Card> cards;
+	std::vector<std::pair<Suit, Rank> > cards;
 	while(!deck.empty())
-		cards.push_back(deck.dealCard());
+	{
+		Card&& card = deck.dealCard();
+		cards.push_back(std::make_pair(card.suit, card.rank));
+	}
 
 	ASSERT_EQ(containsEach(cards), true);
 }
