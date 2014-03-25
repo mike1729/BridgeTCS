@@ -1,4 +1,4 @@
-CC=clang++
+CC=g++
 CFLAGS=-std=c++11 -c -Wall -O2
 TESTFLAGS=-lgtest -lgtest_main -pthread
 LDFLAGS=
@@ -14,13 +14,13 @@ test : $(TESTEXECUTABLE)
 	./$(TESTEXECUTABLE)
 
 $(TESTEXECUTABLE) : $(OBJECTS) $(TESTOBJECT)
-	$(CC) $(LDFLAGS) $(TESTFLAGS) $^ -o $@ 
+	$(CC) $^ $(LDFLAGS) $(TESTFLAGS) -o $@ 
 
 %.o : %.cpp $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
 $(TESTOBJECT) : test/$(TESTSOURCE)
-	$(CC) $(CFLAGS) $(TESTFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ $(TESTFLAGS) -o $@
 
 clean :
 	rm -f Bidding.o BiddingTest.o BiddingTest

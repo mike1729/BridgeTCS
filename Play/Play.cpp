@@ -43,7 +43,7 @@ int Play::Trick::getWinner(){
 int Play::doPlay (Arbiter arbiters[], Contract contract)
 {
 	int tricksTaken = 0;
-	Denomination trump = contract.trump;
+	Denomination trump = contract.denomination;
     int declarer = contract.declarer;
     int lastRoundWinner = declarer;
 
