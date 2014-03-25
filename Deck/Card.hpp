@@ -1,3 +1,6 @@
+#ifndef Card_hpp
+#define Card_hpp
+
 enum class Rank 
 {
 	TWO,
@@ -25,10 +28,23 @@ enum class Suit
 
 struct Card
 {
-	Rank const rank;
-	Suit const suit;
 
+	friend class Standard52Deck;
+
+	mutable Rank rank;
+	mutable Suit suit;
+
+private:
 	Card(Rank r, Suit s) : rank(r), suit(s)
 	{
 	}
+
+public:	
+	Card(Card&& c) : rank(std::move(c.rank)), suit(std::move(c.suit))
+	{
+	} 
+
+	Card(Card const& card) = delete;
 };
+
+#endif

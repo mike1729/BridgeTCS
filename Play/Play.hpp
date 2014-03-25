@@ -5,7 +5,7 @@
 
 #include "../Deck/Card.hpp"
 #include "../Bidding/Contract.hpp"
-#include "../Rubber/Arbiter.hpp"
+#include "../Rubber/Arbiter/Arbiter.hpp"
 
 
 
