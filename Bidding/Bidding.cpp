@@ -6,7 +6,7 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 	{
 		return true;
 	}
-	if ( d2 == Denomination::Spade )
+	if ( d2 == Denomination::SPADE )
 	{
 		if ( d1 == Denomination::NT )
 		{
@@ -14,23 +14,23 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 		}
 		return true;
 	}
-	if ( d2 == Denomination::Heart )
+	if ( d2 == Denomination::HEART )
 	{
-		if ( d1 == Denomination::NT || d1 == Denomination::Spade )
+		if ( d1 == Denomination::NT || d1 == Denomination::SPADE )
 		{
 			return false;
 		}
 		return true;
 	}
-	if ( d2 == Denomination::Diamond )
+	if ( d2 == Denomination::DIAMOND )
 	{
-		if ( d1 == Denomination::NT || d1 == Denomination::Spade || d1 == Denomination::Heart )
+		if ( d1 == Denomination::NT || d1 == Denomination::SPADE || d1 == Denomination::HEART )
 		{
 			return false;
 		}
 		return true;
 	}
-	if ( d1 != Denomination::Clubs )
+	if ( d1 != Denomination::CLUBS )
 	{
 		return false;
 	}
@@ -54,7 +54,7 @@ bool Bidding::makeCall(Call call)
 	}
 	switch ( call.type )
 	{
-		case CallType::Bid :
+		case CallType::BID :
 			consectutivePasses = 0;
 			if ( call <= currentContract ) 
 			{
@@ -65,7 +65,7 @@ bool Bidding::makeCall(Call call)
 			currentContract.pointMultiplier = 1;
 			currentContract.declarer = callNumber; //TODO: This is wrong, the first person should be a declarer.
 		break;
-		case CallType::Double :
+		case CallType::DOUBLE :
 			consectutivePasses = 0;
 			if ( currentContract.level == 0 || currentContract.pointMultiplier != 1 || currentContract.declarer%2 == callNumber%2 ) 
 			{
@@ -75,7 +75,7 @@ bool Bidding::makeCall(Call call)
 				currentContract.pointMultiplier = 2;
 			}
 		break;
-		case CallType::Redouble :
+		case CallType::REDOUBLE :
 			consectutivePasses = 0;
 			if ( currentContract.level == 0 || currentContract.pointMultiplier != 2 || currentContract.declarer%2 != callNumber%2 ) 
 			{
@@ -85,7 +85,7 @@ bool Bidding::makeCall(Call call)
 				currentContract.pointMultiplier = 4;
 			}
 		break;
-		case CallType::Pass :
+		case CallType::PASS :
 			consectutivePasses++;
 			if ( currentContract.level != 0 && consectutivePasses >= 3 )
 			{

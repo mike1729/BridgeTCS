@@ -1,8 +1,11 @@
 #ifndef CONTRACT_HPP
 #define CONTRACT_HPP
-#include "Denomination.hpp"
 
 using Player = int;
+
+enum class Denomination {
+	CLUBS, DIAMOND, HEART, SPADE, NT
+};
 
 struct Contract
 {
