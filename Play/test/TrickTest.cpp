@@ -1,7 +1,7 @@
-//#include <gtest/gtest.h>
+#include <gtest/gtest.h>
 #include "../Play.hpp"
 
-/*class TrickTest : public ::testing::Test{
+class TrickTest : public ::testing::Test{
 public:
 	Player player1 = 1;
 	Player player2 = 2;
@@ -10,7 +10,7 @@ public:
 	Denomination trump;
 };
 
-/*TEST_F(TrickTest, Adding){
+TEST_F(TrickTest, Adding){
 	trump = Denomination::Clubs;
 	Play::Trick trick(trump);
 	trick.add(player1, Card(Rank::ACE, Suit::CLUBS));
@@ -18,7 +18,7 @@ public:
 	ASSERT_EQ(winner, player1);
 }
 
-/*TEST_F(TrickTest, NoTrump1){
+TEST_F(TrickTest, NoTrump1){
 	trump = Denomination::NT;
 	Play::Trick trick(trump);
 
@@ -52,4 +52,4 @@ TEST_F(TrickTest, NoTrump2){
 	Player const& winner = trick.getWinner();
 	ASSERT_EQ(winner, player4);
 }
-*/
+

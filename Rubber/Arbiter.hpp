@@ -5,6 +5,6 @@
 
 class Arbiter {
 public:
-    Card getCard();
+    Card getCard() {}
 };
 #endif
