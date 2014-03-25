@@ -1,8 +1,8 @@
 #include "Play.hpp"
 
 //TODO These two are temporary
-bool operator ==(Card card,Denomination trump){
-    return static_cast<int> (trump)==static_cast<int> (card.suit);
+bool operator ==(Suit suit,Denomination trump){
+    return static_cast<int> (trump)==static_cast<int> (suit);
 }
 bool operator ==(Suit suit1,Suit suit2){
     return suit1==suit2;
@@ -20,7 +20,7 @@ inline bool Play::Trick::defeat(const Card& winnerCard, const Card& attempterCar
 {
     if(winnerCard.suit == attempterCard.suit  &&  winnerCard.rank < attempterCard.rank)
         return true;
-    if(attempterCard == trump  &&  !(winnerCard == trump) )
+    if(attempterCard.suit == trump  &&  !(winnerCard.suit == trump) )
         return true;
     return false;
 }
