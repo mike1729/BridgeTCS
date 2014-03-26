@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-std=c++11 -c -Wall -O2
-TESTFLAGS=-lgtest -lgtest_main -pthread
+LDESTFLAGS=-lgtest -lgtest_main -pthread
 LDFLAGS=
 SOURCES=Play.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
@@ -8,20 +8,21 @@ TESTSOURCE=TrickTest.cpp
 TESTOBJECT=$(TESTSOURCE:.cpp=.o)
 TESTEXECUTABLE=TrickTest
 
+HEADERS=*.hpp
+
 test : $(TESTEXECUTABLE)
 	./$(TESTEXECUTABLE)
 
 $(TESTEXECUTABLE) : $(OBJECTS) $(TESTOBJECT)
-	$(CC) $(LDFLAGS) $(TESTFLAGS) $^ -o $@
+	$(CC) $^ $(LDFLAGS) $(LDESTFLAGS) -o $@ 
 
-%.o : %.cpp
-	$(CC) $(CFLAGS) $^ -o $@
+%.o : %.cpp $(HEADERS)
+	$(CC) $(CFLAGS) $< -o $@
 
 $(TESTOBJECT) : test/$(TESTSOURCE)
-	$(CC) $(CFLAGS) $(TESTFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ $(LDESTFLAGS) -o $@
 
 clean :
-	rm -f Bidding.o BiddingTest.o BiddingTest
+	rm -f $(OBJECTS) $(TESTEXECUTABLE) $(TESTOBJECT)
 
 .PHONY : test clean
-

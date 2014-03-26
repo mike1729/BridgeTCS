@@ -1,22 +1,11 @@
 #include "Play.hpp"
 
-//TODO These two are temporary
-bool operator ==(Suit suit,Denomination trump){
-    return static_cast<int> (trump)==static_cast<int> (suit);
-}
-bool operator ==(Suit suit1,Suit suit2){
-    return suit1==suit2;
-}
 
 
-inline bool arePartners(int player1, int player2)
-{
-    return player1%2 == player2%2;
-}
 
 
 /***************************************************************/
-inline bool Play::Trick::defeat(const Card& winnerCard, const Card& attempterCard)
+bool Play::Trick::defeat(const Card& winnerCard, const Card& attempterCard)
 {
     if(winnerCard.suit == attempterCard.suit  &&  winnerCard.rank < attempterCard.rank)
         return true;
@@ -26,9 +15,10 @@ inline bool Play::Trick::defeat(const Card& winnerCard, const Card& attempterCar
 }
 
 
-int Play::Trick::getWinner(){
+int Play::Trick::getWinner()
+{
 
-    std::vector<PlayerAndCard>::iterator actualWinner = cards.begin(); //iterator tu to rozwiązanie tymczasowe z braku lepszego na ten moment
+    std::vector<PlayerAndCard>::iterator actualWinner = cards.begin();
 
     for(std::vector<PlayerAndCard>::iterator it = cards.begin()+1; it != cards.end(); it++)
         if( defeat( actualWinner->card, it->card ))
@@ -40,10 +30,10 @@ int Play::Trick::getWinner(){
 
 
 /* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-int Play::doPlay (Arbiter arbiters[], Contract contract)
+int Play::doPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
 {
 	int tricksTaken = 0;
-	Denomination trump = contract.trump;
+	Denomination trump = contract.denomination;
     int declarer = contract.declarer;
     int lastRoundWinner = declarer;
 
@@ -53,7 +43,7 @@ int Play::doPlay (Arbiter arbiters[], Contract contract)
 
 		for (int i=0, playerInd = lastRoundWinner; i < 4; i++, playerInd = (playerInd + 1)%4 )
 		{
-			Card actCard = arbiters[playerInd].getCard();
+			Card actCard = arbiters.at(playerInd).getCard();
 			trick.add(playerInd, actCard);
 		}
 
@@ -63,3 +53,4 @@ int Play::doPlay (Arbiter arbiters[], Contract contract)
 	}
 	return tricksTaken;
 }
+

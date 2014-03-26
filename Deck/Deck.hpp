@@ -1,3 +1,6 @@
+#ifndef Deck_hpp
+#define Deck_hpp
+
 #include <algorithm>    // std::random_shuffle
 #include <vector>       // std::vector
 #include <ctime>        // std::time
@@ -28,3 +31,5 @@ public:
 	virtual int cardsLeft();
 	virtual bool empty();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef Card_hpp
+#define Card_hpp
+
 enum class Rank 
 {
 	TWO,
@@ -43,3 +46,5 @@ public:
 
 	Card(Card const& card) = delete;
 };
+
+#endif
