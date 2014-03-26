@@ -2,6 +2,7 @@
 #define Play_hpp
 
 #include <vector>
+#include <array>
 
 #include "../Deck/Card.hpp"
 #include "../Bidding/Contract.hpp"
@@ -23,7 +24,7 @@ class Play
 /***************************************************************/
 public:
 	/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-	int doPlay (Arbiter arbiters[], Contract contract);
+	int doPlay (std::array <Arbiter, 4> & arbiters, Contract contract);
 
     class Trick
     {

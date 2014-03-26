@@ -30,7 +30,7 @@ int Play::Trick::getWinner()
 
 
 /* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-int Play::doPlay (Arbiter arbiters[], Contract contract)
+int Play::doPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
 {
 	int tricksTaken = 0;
 	Denomination trump = contract.denomination;
