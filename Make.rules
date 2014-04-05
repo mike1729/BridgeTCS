@@ -1,0 +1,38 @@
+CXX?=g++
+CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2 -pthread
+TESTLDFLAGS+=-lgtest -lgtest_main
+LDFLAGS+=
+OBJECTS=$(SOURCES:.cpp=.o)
+TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
+TESTEXECUTABLES=$(TESTSOURCES:.cpp=)
+TESTTARGETS=$(TESTSOURCES:.cpp=.run)
+
+test: $(TESTTARGETS)
+
+$(TESTTARGETS): %.run: %
+	./$<
+
+clean :
+	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(SOURCES:.cpp=.d) $(TESTSOURCES:.cpp=.d)
+
+.PHONY : test clean $(TESTTARGETS)
+
+-include $(SOURCES:.cpp=.d)
+-include $(TESTSOURCE:.cpp=.d)
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -MMD $< -o $@
+
+$(TESTEXECUTABLES) : % : %.o $(LIBRARY) $(TESTDEPLIBS)
+	$(CXX) $(LDFLAGS) $(TESTLDFLAGS) $^ -o $@ 
+
+$(LIBRARY) : $(OBJECTS) $(LIBDEPLIBS)
+	rm -f $@
+	ar crsT $@ $^
+
+$(TESTDEPLIBS) $(LIBDEPLIBS) : % :
+	make -C $(@D) $(@F)
+
+.PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS)
+
+# vim: set filetype=make:
