@@ -8,9 +8,5 @@ int Player::chooseCard()
 Call Player::makeCall()
 {
     //random values
-    Call call;
-    call.type = CallType::Bid;
-    call.level = 1;
-    call.denomination = Denomination::Clubs;
-    return call;
+    return Call::BID(1,Denomination::CLUBS);
 }
