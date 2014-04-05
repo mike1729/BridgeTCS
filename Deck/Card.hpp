@@ -40,11 +40,12 @@ private:
 	}
 
 public:	
-	Card(Card&& c) : rank(std::move(c.rank)), suit(std::move(c.suit))
+//Removed to make stuff compile. FIXME in a better way.
+/*	Card(Card&& c) : rank(std::move(c.rank)), suit(std::move(c.suit))
 	{
 	} 
 
-	Card(Card const& card) = delete;
+	Card(Card const& card) = delete;*/
 };
 
 #endif
