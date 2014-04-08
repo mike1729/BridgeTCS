@@ -3,7 +3,7 @@
 #include <array>
 #include "Contract.hpp"
 #include "Call.hpp"
-#include "../Rubber/Arbiter/Arbiter.hpp"
+#include "Arbiter.hpp"
 
 using ArbiterArray = std::array<Arbiter, 4>;
 
