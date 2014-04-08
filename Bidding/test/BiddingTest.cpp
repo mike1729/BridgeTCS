@@ -4,7 +4,7 @@
 class BiddingTest: public ::testing::Test
 {
 public:
-	Bidding *bidding;
+	BiddingState *bidding;
 	Call pass = Call::PASS();
 	Call oneClub = Call::BID(1, Denomination::CLUBS);
 	Call oneHeart = Call::BID(1, Denomination::HEART);
@@ -15,9 +15,9 @@ public:
 	Call doubleCall = Call::DOUBLE();
 	void SetUp()
 	{
+		bidding = new BiddingState(0);
 		Player player;
 		ArbiterArray arbiters{ {Arbiter(0, player), Arbiter(1, player), Arbiter(2, player), Arbiter(3, player)} };
-		bidding = new Bidding(arbiters, 0);
 	}
 	void TearDown()
 	{

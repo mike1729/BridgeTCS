@@ -4,6 +4,7 @@
 #include "Contract.hpp"
 #include "Call.hpp"
 #include "../Rubber/Arbiter/Arbiter.hpp"
+#include "BiddingState.hpp"
 
 using ArbiterArray = std::array<Arbiter, 4>;
 
@@ -11,25 +12,20 @@ class Bidding
 {
 public:
 
-	Bidding(ArbiterArray arbiters, int firstCaller) : arbiters(arbiters), firstCaller(firstCaller)
+	Bidding(ArbiterArray arbiters, int firstCaller) : arbiters(arbiters), biddingState(firstCaller), currentCaller(firstCaller)
 	{
 	}
 
 	Contract getContract()
 	{
-		return currentContract;
+		return biddingState.getContract();
 	}
 
 	Contract perform();
 
-	bool makeCall(Call call);
-
 private:
-	int callNumber = 0;
-	Contract currentContract;
-	int consectutivePasses = 0;
-	bool biddingDone = false;
+	BiddingState biddingState;
 	ArbiterArray const & arbiters;
-	int firstCaller;
+	int currentCaller;
 };
 #endif

@@ -7,10 +7,10 @@ enum class Denomination {
 
 struct Contract
 {
-	int level;
+	int level = 0;
 	Denomination denomination;
 	int pointMultiplier = 1;
 	int declarer;
-	bool redeal;
+	bool redeal = false;
 };
 #endif

@@ -13,7 +13,7 @@ Card Arbiter::getCard()
     return hand[index];
 }
 
-Call Arbiter::getCall()
+Call Arbiter::getCall() const
 {
     Call call = player.makeCall();
     return call;

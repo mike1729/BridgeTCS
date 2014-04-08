@@ -11,7 +11,7 @@ public:
     Arbiter(int _id, IPlayer &_player): id_arbiter(_id),player(_player) {}
     Card getCard();
     void addCard(Card c);
-    Call getCall();
+    Call getCall() const;
 private:
     int id_arbiter;
     std::vector<Card> hand;

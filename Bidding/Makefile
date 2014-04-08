@@ -1,4 +1,4 @@
-SOURCES=Bidding.cpp
+SOURCES=Bidding.cpp BiddingState.cpp
 TESTSOURCES=test/BiddingTest.cpp
 LIBRARY=libbidding.a
 TESTDEPLIBS=
