@@ -2,9 +2,9 @@
 #define ARBITER_HPP
 
 #include <vector>
-#include "../../Deck/Deck.hpp"
-#include "../../Bidding/Call.hpp"
-#include "../Player/Player.hpp"
+#include "Deck.hpp"
+#include "Call.hpp"
+#include "Player.hpp"
 
 class Arbiter {
 public:
