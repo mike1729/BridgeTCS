@@ -16,7 +16,8 @@ public:
 	void SetUp()
 	{
 		Player player;
-		ArbiterArray arbiters{ {Arbiter(0, player), Arbiter(1, player), Arbiter(2, player), Arbiter(3, player)} };
+		Hand hand;
+		ArbiterArray arbiters{ {Arbiter(0, hand, player), Arbiter(1, hand, player), Arbiter(2, hand, player), Arbiter(3, hand, player)} };
 		bidding = new Bidding(arbiters, 0);
 	}
 	void TearDown()
