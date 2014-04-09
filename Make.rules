@@ -7,6 +7,8 @@ TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 TESTEXECUTABLES=$(TESTSOURCES:.cpp=)
 TESTTARGETS=$(TESTSOURCES:.cpp=.run)
 
+all: $(LIBRARY)
+
 test: $(TESTTARGETS)
 
 $(TESTTARGETS): %.run: %
@@ -15,7 +17,7 @@ $(TESTTARGETS): %.run: %
 clean :
 	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(SOURCES:.cpp=.d) $(TESTSOURCES:.cpp=.d)
 
-.PHONY : test clean $(TESTTARGETS)
+.PHONY : all test clean $(TESTTARGETS)
 
 -include $(SOURCES:.cpp=.d)
 -include $(TESTSOURCES:.cpp=.d)

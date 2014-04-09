@@ -1,6 +1,6 @@
 SOURCES=$(wildcard src/*.cpp)
 TESTSOURCES=$(wildcard src/test/*.cpp)
-LIBRARY=libbridge.a
+LIBRARY=bin/libbridge.a
 TESTDEPLIBS=
 LIBDEPLIBS=
 
