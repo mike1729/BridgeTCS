@@ -16,8 +16,6 @@ public:
 	void SetUp()
 	{
 		bidding = new BiddingState(0);
-		Player player;
-		ArbiterArray arbiters{ {Arbiter(0, player), Arbiter(1, player), Arbiter(2, player), Arbiter(3, player)} };
 	}
 	void TearDown()
 	{

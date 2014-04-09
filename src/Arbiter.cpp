@@ -1,16 +1,16 @@
 #include "Arbiter.hpp"
 
-void Arbiter::addCard(Card c)
+void Arbiter::addCard(Card&& c)
 {
     //if(hand.size() >= 13) throw 0;
-    hand.push_back(c);
+    hand.insert(std::move(c));
 }
 
-Card Arbiter::getCard()
+Card&& Arbiter::getCard()
 {
     int index = player.chooseCard();
     //TODO index validation
-    return hand[index];
+    return hand.remove(index);
 }
 
 Call Arbiter::getCall() const
