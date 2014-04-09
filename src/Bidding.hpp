@@ -12,7 +12,7 @@ class Bidding
 {
 public:
 
-	Bidding(ArbiterArray arbiters, int firstCaller) : arbiters(arbiters), biddingState(firstCaller), currentCaller(firstCaller)
+	Bidding(ArbiterArray arbiters, int firstCaller) : biddingState(firstCaller), arbiters(arbiters), currentCaller(firstCaller)
 	{
 	}
 
