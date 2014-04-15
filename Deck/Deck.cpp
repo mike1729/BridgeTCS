@@ -4,7 +4,7 @@ Standard52Deck::Standard52Deck()
 {
 	for (int s = (int) Suit::CLUBS; s <= (int) Suit::SPADES; ++s)
 	for (int r = (int) Rank::TWO; r <= (int) Rank::ACE; ++r)
-		allCards.push_back(Card((Rank) r, (Suit) s));
+		allCards.push_back(createCard((Rank) r, (Suit) s));
 	for (size_t i = 0; i < allCards.size(); ++i)
 		deck.push_back(&allCards[i]);
 }

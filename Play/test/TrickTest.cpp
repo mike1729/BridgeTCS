@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../Play.hpp"
+#include "../../Deck/Deck.hpp"
 
 class TrickTest : public ::testing::Test{
 public:
@@ -8,6 +9,7 @@ public:
 	int player3 = 2;
 	int player4 = 3;
 	Denomination trump;
+	Deck deck;
 };
 
 TEST_F(TrickTest, Adding){
@@ -22,15 +24,11 @@ TEST_F(TrickTest, NoTrump1){
 	trump = Denomination::NT;
 	Play::Trick trick(trump);
 
-	Card card1(Rank::ACE, Suit::CLUBS);
-	Card card2(Rank::ACE, Suit::DIAMONDS);
-	Card card3(Rank::ACE, Suit::HEARTS);
-	Card card4(Rank::TWO, Suit::CLUBS);
-
-	trick.add(player1, card1);
-	trick.add(player2, card2);
-	trick.add(player3, card3);
-	trick.add(player4, card4);
+	
+	trick.add(player1, deck.createCard(Rank::ACE, Suit::CLUBS));
+	trick.add(player2, deck.createCard(Rank::ACE, Suit::DIAMONDS));
+	trick.add(player3, deck.createCard(Rank::ACE, Suit::HEARTS));
+	trick.add(player4, deck.createCard(Rank::TWO, Suit::CLUBS));
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player1);
 }
@@ -39,15 +37,10 @@ TEST_F(TrickTest, NoTrump2){
 	trump = Denomination::NT;
 	Play::Trick trick(trump);
 
-	Card card1(Rank::TWO, Suit::CLUBS);
-	Card card2(Rank::ACE, Suit::DIAMONDS);
-	Card card3(Rank::ACE, Suit::HEARTS);
-	Card card4(Rank::THREE, Suit::CLUBS);
-
-	trick.add(player1, card1);
-	trick.add(player2, card2);
-	trick.add(player3, card3);
-	trick.add(player4, card4);
+	trick.add(player1, deck.createCard(Rank::TWO, Suit::CLUBS);
+	trick.add(player2, deck.createCard(Rank::ACE, Suit::DIAMONDS);
+	trick.add(player3, deck.createCard(Rank::ACE, Suit::HEARTS));
+	trick.add(player4, deck.createCard(Rank::THREE, Suit::CLUBS);
 
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player4);

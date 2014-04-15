@@ -29,7 +29,7 @@ enum class Suit
 struct Card
 {
 
-	friend class Standard52Deck;
+	friend class Deck;
 
 	mutable Rank rank;
 	mutable Suit suit;
