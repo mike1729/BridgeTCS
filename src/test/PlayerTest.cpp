@@ -3,8 +3,9 @@
 #include <gtest/gtest.h>
 #include "../Player.hpp"
 
-/*TEST(PlayerTest,GetAddCard) {
-    Player player = new Player();
+TEST(PlayerTest,GetAddCard) {
+}
+/*    Player player = new Player();
     Card card1 = new Card(Rank.TWO,Suit.CLUBS));
     Card card2 = new Card(Rank.TWO,Suit.DIAMONDS));
     player.addCard(card);
