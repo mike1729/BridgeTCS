@@ -12,8 +12,8 @@ public:
 
 class Player : public IPlayer
 {
-    int chooseCard() const;
-    Call makeCall() const;
+    virtual int chooseCard() const;
+    virtual Call makeCall() const;
 };
 
 #endif
