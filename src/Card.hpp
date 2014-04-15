@@ -42,11 +42,7 @@ private:
 	}
 
 public:	
-	Card(Card&& c) : rank(std::move(c.rank)), suit(std::move(c.suit))
-	{
-	} 
-
-	Card(Card const& card) = delete;
+	Card(Card&& c) = default;
 };
 
 #endif
