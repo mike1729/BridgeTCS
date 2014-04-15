@@ -1,7 +1,7 @@
 #ifndef  _PLAYER_HPP
 #define _PLAYER_HPP
 
-#include "../../Bidding/Call.hpp"
+#include "Call.hpp"
 
 class IPlayer
 {

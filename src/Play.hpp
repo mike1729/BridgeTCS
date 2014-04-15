@@ -4,9 +4,9 @@
 #include <vector>
 #include <array>
 
-#include "../Deck/Card.hpp"
-#include "../Bidding/Contract.hpp"
-#include "../Rubber/Arbiter/Arbiter.hpp"
+#include "Card.hpp"
+#include "Contract.hpp"
+#include "Arbiter.hpp"
 
 
 

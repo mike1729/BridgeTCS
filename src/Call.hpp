@@ -13,9 +13,9 @@ class Call
 	{
 	}
 public:
-	CallType const type;
-	int const level;
-	Denomination const denomination;
+	CallType type;
+	int level;
+	Denomination denomination;
 	static Call PASS()
 	{
 		return Call(CallType::PASS);

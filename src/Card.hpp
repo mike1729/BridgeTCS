@@ -1,6 +1,8 @@
 #ifndef Card_hpp
 #define Card_hpp
 
+#include <utility>
+
 enum class Rank 
 {
 	TWO,
