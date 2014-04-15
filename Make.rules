@@ -1,6 +1,6 @@
 CXX?=g++
-CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2 -pthread
-TESTLDFLAGS+=-lgtest -lgtest_main
+CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2
+TESTLDFLAGS+=-lgtest -lgtest_main -pthread
 LDFLAGS+=
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)

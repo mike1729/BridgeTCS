@@ -13,8 +13,8 @@ namespace ui
         public:
             Hand(const ::Hand & hand) : hand(hand) {}    
         };
-    };
-};
+    }
+}
 
 
 #endif
