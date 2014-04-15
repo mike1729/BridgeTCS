@@ -14,7 +14,7 @@ void Standard52Deck::shuffle()
 	std::random_shuffle(deck.begin(), deck.end());
 }
 
-Card&& Standard52Deck::dealCard()
+Card Standard52Deck::dealCard()
 {
 	Card&& card = std::move(*deck.back());
 	deck.pop_back();
