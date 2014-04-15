@@ -5,7 +5,7 @@ void Hand::insert(Card&& c)
     hand.push_back(std::move(c));
 }
 
-Card&& Hand::remove(int index)
+Card Hand::remove(int index)
 {
     auto it = hand.begin();
     while(index--)
@@ -15,7 +15,7 @@ Card&& Hand::remove(int index)
     return std::move(c);
 }
 
-std::list<Card> const & Hand::getHand()
+std::list<Card> const & Hand::getHand() const
 {
     return hand;
 }
