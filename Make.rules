@@ -32,8 +32,8 @@ $(LIBRARY) : $(OBJECTS) $(LIBDEPLIBS)
 	rm -f $@
 	ar crsT $@ $^
 
-#$(TESTDEPLIBS) $(LIBDEPLIBS) : % :
-#	make -C $(@D) $(@F)
+$(TESTDEPLIBS) $(LIBDEPLIBS) : % :
+	make -C $(@D) $(@F)
 
 .PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS)
 
