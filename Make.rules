@@ -26,7 +26,7 @@ clean :
 	$(CXX) $(CXXFLAGS) -MMD $< -o $@
 
 $(TESTEXECUTABLES) : % : %.o $(LIBRARY) $(TESTDEPLIBS)
-	$(CXX) $(LDFLAGS) $(TESTLDFLAGS) $^ -o $@ 
+	$(CXX) $^ -o $@ $(LDFLAGS) $(TESTLDFLAGS)
 
 $(LIBRARY) : $(OBJECTS) $(LIBDEPLIBS)
 	rm -f $@

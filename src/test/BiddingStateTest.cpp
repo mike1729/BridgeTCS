@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../Bidding.hpp"
 
-class BiddingTest: public ::testing::Test
+class BiddingStateTest: public ::testing::Test
 {
 public:
 	BiddingState *bidding;
@@ -23,7 +23,7 @@ public:
 	}
 };
 
-TEST_F(BiddingTest, FourPasses) 
+TEST_F(BiddingStateTest, FourPasses) 
 {
 	ASSERT_EQ(bidding->makeCall(pass), true);
 	ASSERT_EQ(bidding->makeCall(pass), true);
@@ -34,7 +34,7 @@ TEST_F(BiddingTest, FourPasses)
 	ASSERT_EQ(bidding->makeCall(oneClub), false);
 }
 
-TEST_F(BiddingTest, SimpleFinish) 
+TEST_F(BiddingStateTest, SimpleFinish) 
 {
 	ASSERT_EQ(bidding->makeCall(oneClub), true);
 	ASSERT_EQ(bidding->makeCall(pass), true);
@@ -49,7 +49,7 @@ TEST_F(BiddingTest, SimpleFinish)
 	ASSERT_EQ(bidding->makeCall(oneClub), false);
 }
 
-TEST_F(BiddingTest, RealFinish)
+TEST_F(BiddingStateTest, RealFinish)
 {
 	ASSERT_EQ(bidding->makeCall(oneClub), true);
 	ASSERT_EQ(bidding->makeCall(pass), true);
@@ -71,7 +71,7 @@ TEST_F(BiddingTest, RealFinish)
 	ASSERT_EQ(bidding->makeCall(oneClub), false);
 }
 
-TEST_F(BiddingTest, WrongDouble)
+TEST_F(BiddingStateTest, WrongDouble)
 {
 	ASSERT_EQ(bidding->makeCall(oneClub), true);
 	ASSERT_EQ(bidding->makeCall(pass), true);
