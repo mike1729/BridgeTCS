@@ -1,3 +1,6 @@
+#ifndef _OBSERVABLE_HPP
+#define _OBSERVABLE_HPP
+
 #include <functional>
 #include <set>
 #include "Observer.hpp"
@@ -14,3 +17,5 @@ public:
 private:
 	std::set<std::reference_wrapper<const Observer>, Compare> observed;
 };
+
+#endif
