@@ -12,8 +12,8 @@ public:
 
 class Player : public IPlayer
 {
-    int chooseCard();
-    Call makeCall();
+    int chooseCard() const;
+    Call makeCall() const;
 };
 
 #endif

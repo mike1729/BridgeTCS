@@ -9,8 +9,7 @@
 class Arbiter {
 public:
     Arbiter(int id, Hand &hand, IPlayer &player): id(id), hand(hand), player(player) {}
-    Card&& getCard();
-    void addCard(Card&& c);
+    Card getCard();
     Call getCall() const;
 private:
     int id;
