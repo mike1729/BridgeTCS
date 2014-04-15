@@ -123,6 +123,6 @@ void BiddingState::findDeclarer()
 		if (history[declarer].denomination == currentContract.denomination)
 			break;
 	 
-	currentContract.declarer = declarer;
+	currentContract.declarer = (declarer+firstCaller)%4;
 }
 
