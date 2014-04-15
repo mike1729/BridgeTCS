@@ -12,7 +12,7 @@ class Bidding
 {
 public:
 
-	Bidding(ArbiterArray arbiters, int firstCaller) : biddingState(firstCaller), arbiters(arbiters), currentCaller(firstCaller)
+	Bidding(ArbiterArray & arbiters, int firstCaller) : biddingState(firstCaller), arbiters(arbiters), currentCaller(firstCaller)
 	{
 	}
 
@@ -25,7 +25,7 @@ public:
 
 private:
 	BiddingState biddingState;
-	ArbiterArray const & arbiters;
+	ArbiterArray & arbiters;
 	int currentCaller;
 };
 #endif
