@@ -6,6 +6,6 @@ namespace ui
     public:
         virtual void notify() const = 0;
     };
-};
+}
 
 #endif

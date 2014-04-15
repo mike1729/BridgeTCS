@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace ui {
-namespace text {
+    namespace text {
 
         void Hand::notify()
         {
@@ -16,5 +16,5 @@ namespace text {
                 std::cout << card.rank << " " << card.suit << "\n";
             std::cout << "\n";
         }
-    };
-};
+    }
+}
