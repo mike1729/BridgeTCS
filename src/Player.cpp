@@ -1,11 +1,11 @@
 #include "Player.hpp"
 
-int Player::chooseCard() const
+int Player::chooseCard()
 {
     return 0;
 }
 
-Call Player::makeCall() const
+Call Player::makeCall()
 {
     //random values
     return Call::BID(1,Denomination::CLUBS);
