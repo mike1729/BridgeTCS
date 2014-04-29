@@ -4,20 +4,32 @@
 #include <functional>
 #include <set>
 #include "Observer.hpp"
+#include <memory>
 
 namespace ui {
-	struct Compare {
-		inline bool operator() (const std::reference_wrapper<const Observer>& lhs, const std::reference_wrapper<const Observer>& rhs) const;
-	};
 
-	class Observable {
-	public:
-		virtual void subscribe(const Observer & o);
-		virtual void unsubscribe(const Observer & o);
-		virtual void update() const;
-	private:
-		std::set<std::reference_wrapper<const Observer>, Compare> observed;
-	};
+class Observable {
+public:
+	using ObserverPtr = std::weak_ptr<Observer>;
+
+	Observable():observed([](ObserverPtr const & lhs, ObserverPtr const & rhs){return lhs.lock().get() < rhs.lock().get();}) {
+	}
+
+	virtual void subscribe(Observer& o) {
+		observed.insert(ObserverPtr(std::shared_ptr<Observer>(&o)));
+	}
+	virtual void unsubscribe(Observer& o) {
+		observed.erase(ObserverPtr(std::shared_ptr<Observer>(&o)));
+	}
+	virtual void update() const {
+		for (auto i = observed.begin(); i != observed.end(); ++i) {
+			i->lock().get()->notify();
+		}
+	}
+private:
+	std::set<ObserverPtr, std::function<bool (ObserverPtr const &, ObserverPtr const &)>> observed;
+};
+
 }
 
 #endif
