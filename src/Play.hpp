@@ -7,19 +7,24 @@
 #include "Card.hpp"
 #include "Contract.hpp"
 #include "Arbiter.hpp"
-
-
+#include<iostream>
+#include<algorithm>
 
 class Play
 {
 
 	//pair<int, Card>
+ 	#if 0
  	struct PlayerAndCard
     {
         int player;
         const Card & card;
-        PlayerAndCard(int player, const Card & card) : player(player), card(card) {}
+        PlayerAndCard(int player, const Card & card) : player(player), card(card) {
+        std::cout << "aaabbb" << static_cast<int>(card.rank) << " " << static_cast<int>(card.suit) <<"\n";	
+    
+	}
     };
+    #endif
 
 /***************************************************************/
 public:
@@ -30,17 +35,18 @@ public:
     {
     public:
 
-        Trick(Denomination trump) : trump(trump) {}
+        Trick(Denomination trump, int initiator) : trump(trump), initiator(initiator) {}
 
-        void add(int player, const Card & card)
+        void add(const Card & card)
         {
-            cards.push_back(PlayerAndCard(player, card));
+            cards.emplace_back(card);
         }
 
         int getWinner();
     private:
-        std::vector<PlayerAndCard> cards;
-	    Denomination trump;
+        std::vector<Card> cards;
+        Denomination trump;
+	    int initiator;
 	    inline bool defeat(const Card &, const Card &);
 
 	    

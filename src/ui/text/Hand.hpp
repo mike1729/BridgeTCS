@@ -9,7 +9,7 @@ namespace ui
     {
         class Hand : public Observer
         {
-            ::Hand hand;
+            const ::Hand & hand;
         public:
             Hand(const ::Hand & hand) : hand(hand) {}    
         };

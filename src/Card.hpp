@@ -43,6 +43,8 @@ private:
 
 public:	
 	Card(Card&& c) = default;
+
+	Card(Card const& card) = delete;
 };
 
 #endif
