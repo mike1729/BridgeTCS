@@ -11,7 +11,7 @@ using History = std::vector<Call>;
 class BiddingState
 {
 public:
-	BiddingState(int firstCaller) : callNumber(firstCaller) {}
+	BiddingState(int firstCaller) : firstCaller(firstCaller) {}
 
 	bool makeCall(Call call);
 	bool biddingDone()
@@ -28,8 +28,9 @@ private:
 	int consecutivePasses = 0;
 	bool isFinished = false;
 	int lastBidder = 0;
+	int firstCaller;
 	History history;
-	int callNumber;
+	int callNumber = 0;
 
 	void findDeclarer();
 };
