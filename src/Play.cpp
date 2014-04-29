@@ -1,30 +1,39 @@
 #include "Play.hpp"
-
+#include<iostream>
 
 
 
 
 /***************************************************************/
-bool Play::Trick::defeat(const Card& winnerCard, const Card& attempterCard)
+bool Play::Trick::defeat(const Card & winnerCard, const Card & attempterCard)
 {
-    if(winnerCard.suit == attempterCard.suit  &&  winnerCard.rank < attempterCard.rank)
+	if(winnerCard.suit == attempterCard.suit  &&  winnerCard.rank < attempterCard.rank)
+    {
         return true;
-    if(attempterCard.suit == trump  &&  !(winnerCard.suit == trump) )
-        return true;
+    }
+    if(!(winnerCard.suit == trump) && attempterCard.suit == trump)
+    {
+    
+    	return true;
+    }
     return false;
 }
 
 
 int Play::Trick::getWinner()
 {
-
-    std::vector<PlayerAndCard>::iterator actualWinner = cards.begin();
+	auto it = std::max_element(cards, defeat);
+    /*std::vector<Card>::iterator actualWinner = cards.begin();
 
     for(std::vector<PlayerAndCard>::iterator it = cards.begin()+1; it != cards.end(); it++)
+    {
+    std::cout << static_cast<int>(it->card.suit) << " " << static_cast<int>(it->card.rank) <<"\n";
+    
         if( defeat( actualWinner->card, it->card ))
             actualWinner = it;
-
+	}
     return actualWinner->player;
+    */
 }
 /***************************************************************/
 

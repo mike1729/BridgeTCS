@@ -32,35 +32,47 @@ public:
 
 TEST_F(TrickTest, Adding){
 	trump = Denomination::CLUBS;
-	Play::Trick trick(trump);
-	trick.add(player1, deck.createCard(Rank::ACE, Suit::CLUBS));
+	Play::Trick trick(trump, player1);
+	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player1);
 }
 
 TEST_F(TrickTest, NoTrump1){
 	trump = Denomination::NT;
-	Play::Trick trick(trump);
+	Play::Trick trick(trump, player1);
 
-	
-	trick.add(player1, deck.createCard(Rank::ACE, Suit::CLUBS));
-	trick.add(player2, deck.createCard(Rank::ACE, Suit::DIAMONDS));
-	trick.add(player3, deck.createCard(Rank::ACE, Suit::HEARTS));
-	trick.add(player4, deck.createCard(Rank::TWO, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::ACE, Suit::DIAMONDS));
+	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
+	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player1);
 }
 
 TEST_F(TrickTest, NoTrump2){
 	trump = Denomination::NT;
-	Play::Trick trick(trump);
+	Play::Trick trick(trump, player1);
 
-	trick.add(player1, deck.createCard(Rank::TWO, Suit::CLUBS));
-	trick.add(player2, deck.createCard(Rank::ACE, Suit::DIAMONDS));
-	trick.add(player3, deck.createCard(Rank::ACE, Suit::HEARTS));
-	trick.add(player4, deck.createCard(Rank::THREE, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::ACE, Suit::DIAMONDS));
+	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
+	trick.add(deck.createCard(Rank::THREE, Suit::CLUBS));
 
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player4);
+}
+
+TEST_F(TrickTest, NoTrump3){
+	trump = Denomination::NT;
+	Play::Trick trick(trump, player1);
+
+	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
+	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
+	trick.add(deck.createCard(Rank::THREE, Suit::CLUBS));
+
+	int winner = trick.getWinner();
+	ASSERT_EQ(winner, player2);
 }
 
