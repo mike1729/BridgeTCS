@@ -30,22 +30,20 @@ public:
 	MyDeck deck;
 };
 
-TEST_F(TrickTest, Adding){
-	trump = Denomination::CLUBS;
-	Play::Trick trick(trump, player1);
-	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
-	int winner = trick.getWinner();
-	ASSERT_EQ(winner, player1);
-}
 
 TEST_F(TrickTest, NoTrump1){
 	trump = Denomination::NT;
 	Play::Trick trick(trump, player1);
 
-	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
-	trick.add(deck.createCard(Rank::ACE, Suit::DIAMONDS));
-	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
-	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
+	Card card1 = deck.createCard(Rank::ACE, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::DIAMONDS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player1);
 }
@@ -54,25 +52,90 @@ TEST_F(TrickTest, NoTrump2){
 	trump = Denomination::NT;
 	Play::Trick trick(trump, player1);
 
-	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
-	trick.add(deck.createCard(Rank::ACE, Suit::DIAMONDS));
-	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
-	trick.add(deck.createCard(Rank::THREE, Suit::CLUBS));
+	Card card1 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::DIAMONDS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::THREE, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
+	
+	int winner = trick.getWinner();
+	ASSERT_EQ(winner, player4);
+}
+
+TEST_F(TrickTest, NoTrump3a){
+	trump = Denomination::NT;
+	Play::Trick trick(trump, player1);
+
+	Card card1 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::CLUBS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
+
+	int winner = trick.getWinner();
+	ASSERT_EQ(winner, player2);
+}
+
+
+TEST_F(TrickTest, NoTrump3b_player2starts){
+	trump = Denomination::NT;
+	Play::Trick trick(trump, player2);
+
+	Card card1 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::CLUBS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
+
+	int winner = trick.getWinner();
+	ASSERT_EQ(winner, player3);
+}
+
+TEST_F(TrickTest, NoTrump3c_player3starts){
+	trump = Denomination::NT;
+	Play::Trick trick(trump, player3);
+
+	Card card1 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::CLUBS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
 
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, player4);
 }
 
-TEST_F(TrickTest, NoTrump3){
+TEST_F(TrickTest, NoTrump3d_player4starts){
 	trump = Denomination::NT;
-	Play::Trick trick(trump, player1);
+	Play::Trick trick(trump, player4);
 
-	trick.add(deck.createCard(Rank::TWO, Suit::CLUBS));
-	trick.add(deck.createCard(Rank::ACE, Suit::CLUBS));
-	trick.add(deck.createCard(Rank::ACE, Suit::HEARTS));
-	trick.add(deck.createCard(Rank::THREE, Suit::CLUBS));
+	Card card1 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	Card card2 = deck.createCard(Rank::ACE, Suit::CLUBS);
+	Card card3 = deck.createCard(Rank::ACE, Suit::HEARTS);
+	Card card4 = deck.createCard(Rank::TWO, Suit::CLUBS);
+	
+	trick.add(card1);
+	trick.add(card2);
+	trick.add(card3);
+	trick.add(card4);
 
 	int winner = trick.getWinner();
-	ASSERT_EQ(winner, player2);
+	ASSERT_EQ(winner, player1);
 }
 

@@ -1,45 +1,35 @@
 #include "Play.hpp"
-#include<iostream>
-
-
-
 
 /***************************************************************/
-bool Play::Trick::defeat(const Card & winnerCard, const Card & attempterCard)
+
+/* true if attempterCard beats the winningCard */
+bool Play::Trick::defeat(const Card& winningCard, const Card& attempterCard)
 {
-	if(winnerCard.suit == attempterCard.suit  &&  winnerCard.rank < attempterCard.rank)
-    {
+    if(winningCard.suit == attempterCard.suit  &&  winningCard.rank < attempterCard.rank)
         return true;
-    }
-    if(!(winnerCard.suit == trump) && attempterCard.suit == trump)
-    {
-    
-    	return true;
-    }
+    if(attempterCard.suit == trump  &&  !(winningCard.suit == trump) )
+        return true;
     return false;
 }
 
 
-int Play::Trick::getWinner()
+void Play::Trick::add(const Card & presentCard)
 {
-	auto it = std::max_element(cards, defeat);
-    /*std::vector<Card>::iterator actualWinner = cards.begin();
-
-    for(std::vector<PlayerAndCard>::iterator it = cards.begin()+1; it != cards.end(); it++)
-    {
-    std::cout << static_cast<int>(it->card.suit) << " " << static_cast<int>(it->card.rank) <<"\n";
-    
-        if( defeat( actualWinner->card, it->card ))
-            actualWinner = it;
-	}
-    return actualWinner->player;
-    */
+	
+	cards[ presentPlayer ] = &presentCard;
+	
+	/* check whether this card wins the trick so far i.e. whether it beats the presently winnig one */
+	if(presentPlayer == initiator || defeat( *cards[presentWinner], presentCard))
+		presentWinner = presentPlayer;
+	
+	presentPlayer = (presentPlayer + 1)%4;	
+	 
 }
 /***************************************************************/
 
 
 /* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-int Play::doPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
+int Play::performPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
 {
 	int tricksTaken = 0;
 	Denomination trump = contract.denomination;
@@ -48,13 +38,10 @@ int Play::doPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
 
 	for (int trickNr = 0; trickNr < 13; trickNr++)
 	{
-        Trick trick(trump);
+        Trick trick(trump, lastRoundWinner);
 
 		for (int i=0, playerInd = lastRoundWinner; i < 4; i++, playerInd = (playerInd + 1)%4 )
-		{
-			Card actCard = arbiters[playerInd].getCard();
-			trick.add(playerInd, actCard);
-		}
+			trick.add( arbiters[playerInd].getCard() );
 
 		lastRoundWinner = trick.getWinner();
         if(arePartners(lastRoundWinner, declarer))
