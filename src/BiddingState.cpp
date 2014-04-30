@@ -9,7 +9,7 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 	{
 		return true;
 	}
-	if ( d2 == Denomination::SPADE )
+	if ( d2 == Denomination::SPADES )
 	{
 		if ( d1 == Denomination::NT )
 		{
@@ -17,17 +17,17 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 		}
 		return true;
 	}
-	if ( d2 == Denomination::HEART )
+	if ( d2 == Denomination::HEARTS )
 	{
-		if ( d1 == Denomination::NT || d1 == Denomination::SPADE )
+		if ( d1 == Denomination::NT || d1 == Denomination::SPADES )
 		{
 			return false;
 		}
 		return true;
 	}
-	if ( d2 == Denomination::DIAMOND )
+	if ( d2 == Denomination::DIAMONDS )
 	{
-		if ( d1 == Denomination::NT || d1 == Denomination::SPADE || d1 == Denomination::HEART )
+		if ( d1 == Denomination::NT || d1 == Denomination::SPADES || d1 == Denomination::HEARTS )
 		{
 			return false;
 		}
