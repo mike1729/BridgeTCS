@@ -2,7 +2,7 @@
 #define CONTRACT_HPP
 
 enum class Denomination {
-	CLUBS, DIAMOND, HEART, SPADE, NT
+	CLUBS, DIAMONDS, HEARTS, SPADES, NT
 };
 
 struct Contract
