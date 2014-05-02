@@ -33,11 +33,11 @@ public:
  Hand hand;
 	Call pass = Call::PASS();
 	Call oneClub = Call::BID(1, Denomination::CLUBS);
-	Call oneHeart = Call::BID(1, Denomination::HEART);
-	Call twoHearts = Call::BID(2, Denomination::HEART);
-	Call threeDiamonds = Call::BID(3, Denomination::DIAMOND);
-	Call threeSpades = Call::BID(3, Denomination::SPADE);
-	Call fiveDiamonds = Call::BID(5, Denomination::DIAMOND);
+	Call oneHeart = Call::BID(1, Denomination::HEARTS);
+	Call twoHearts = Call::BID(2, Denomination::HEARTS);
+	Call threeDiamonds = Call::BID(3, Denomination::DIAMONDS);
+	Call threeSpades = Call::BID(3, Denomination::SPADES);
+	Call fiveDiamonds = Call::BID(5, Denomination::DIAMONDS);
 	Call doubleCall = Call::DOUBLE();
 	void SetUp()
 	{
@@ -84,7 +84,7 @@ TEST_F(BiddingTest, RealFinish)
 	Bidding bidding(arbiters, 0);
 	Contract res = bidding.perform();
 	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::DIAMOND);
+	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
 	ASSERT_EQ(res.level, 5);
 	ASSERT_EQ(res.declarer, 1);
 }
@@ -119,7 +119,7 @@ TEST_F(BiddingTest, RealFinishOtherStart)
 	Bidding bidding(arbiters, 1);
 	Contract res = bidding.perform();
 	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::DIAMOND);
+	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
 	ASSERT_EQ(res.level, 5);
 	ASSERT_EQ(res.declarer, 2);
 }
