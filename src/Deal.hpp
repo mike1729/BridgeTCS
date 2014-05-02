@@ -26,7 +26,7 @@ public:
 	}
 
 	void dealCards();
-	void performBidding();
+	Contract performBidding();
 	dealResult performPlay();
 
 private:

@@ -1,11 +1,18 @@
 #include "Deal.hpp"
+#include "Deck.hpp"
 
-void dealCards()
+void Deal::dealCards()
 {
-	//TODO
+	Standard52Deck deck;
+	int currentPlayer = firstCaller;
+	while (deck.cardsLeft())
+	{
+		hands[currentPlayer].insert(deck.dealCard());
+		currentPlayer = (currentPlayer+1) % 4;
+	}
 }
 
-void Deal::performBidding() 
+Contract Deal::performBidding() 
 {
 	while (!bidding.biddingDone())
 	{
@@ -19,10 +26,11 @@ void Deal::performBidding()
 		currentCaller = (currentCaller+1)%4;
 	}
 	contract = bidding.getContract();
+	return contract;
 }
 
 dealResult Deal::performPlay()
 {
-	//tymorl napisz mnie, pliz
+	//write me tymorl!
 	return dealResult();
 };
