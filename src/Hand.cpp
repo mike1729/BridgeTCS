@@ -17,6 +17,11 @@ Card Hand::remove(int index)
 	return std::move(c);
 }
 
+void Hand::removeAll()
+{
+    hand.clear();
+}
+
 std::list<Card> const & Hand::getHand() const
 {
 	return hand;

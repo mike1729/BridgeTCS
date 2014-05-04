@@ -29,3 +29,14 @@ TEST_F(HandTest, SimpleInsertRemove)
 	ASSERT_EQ(c1.suit, s);
 	ASSERT_EQ(c1.rank, r);
 }
+
+
+TEST_F(HandTest, SimpleInsertRemoveAll)
+{
+    hand->insert(deck->dealCard());
+    hand->insert(deck->dealCard());
+    hand->insert(deck->dealCard());
+    hand->insert(deck->dealCard());
+    hand->removeAll();
+	ASSERT_EQ(0, hand->getHand().size());
+}
