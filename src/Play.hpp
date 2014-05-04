@@ -1,13 +1,11 @@
 #ifndef Play_hpp
 #define Play_hpp
 
-#include <vector>
 #include <array>
 #include <list>
 #include <utility>
 
 #include "Card.hpp"
-#include "Contract.hpp"
 
 class Play
 {
