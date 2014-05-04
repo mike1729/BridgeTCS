@@ -36,12 +36,12 @@ struct Card
 	mutable Rank rank;
 	mutable Suit suit;
 
-private:
+	private:
 	Card(Rank r, Suit s) : rank(r), suit(s)
 	{
 	}
 
-public:	
+	public:
 	Card(Card&& c) = default;
 
 	Card(Card const& card) = delete;

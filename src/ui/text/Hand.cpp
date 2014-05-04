@@ -3,18 +3,18 @@
 #include <iostream>
 
 namespace ui {
-    namespace text {
+	namespace text {
 
-        void Hand::notify()
-        {
-            printHand();
-        }
-        void Hand::printHand()
-        {
-            std::cout << "Your cards:\n";
-            for(auto & card : hand.getList())
-                std::cout << card.rank << " " << card.suit << "\n";
-            std::cout << "\n";
-        }
-    }
+		void Hand::notify()
+		{
+			printHand();
+		}
+		void Hand::printHand()
+		{
+			std::cout << "Your cards:\n";
+			for(auto & card : hand.getList())
+				std::cout << card.rank << " " << card.suit << "\n";
+			std::cout << "\n";
+		}
+	}
 }

@@ -5,15 +5,15 @@
 
 namespace ui
 {
-    namespace text
-    {
-        class Hand : public Observer
-        {
-            ::Hand hand;
-        public:
-            Hand(const ::Hand & hand) : hand(hand) {}    
-        };
-    }
+	namespace text
+	{
+		class Hand : public Observer
+		{
+			::Hand hand;
+			public:
+			Hand(const ::Hand & hand) : hand(hand) {}
+		};
+	}
 }
 
 

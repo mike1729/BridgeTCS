@@ -12,7 +12,7 @@ class Call
 	Call(CallType type, int level = 0, Denomination denomination = Denomination::NT ) : type(type), level(level), denomination(denomination) 
 	{
 	}
-public:
+	public:
 	CallType type;
 	int level;
 	Denomination denomination;

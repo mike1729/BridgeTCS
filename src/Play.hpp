@@ -12,41 +12,41 @@
 class Play
 {
 
-/***************************************************************/
-public:
-	/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-	int performPlay (std::array <Arbiter, 4> & arbiters, Contract contract);
+	/***************************************************************/
+	public:
+		/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
+		int performPlay (std::array <Arbiter, 4> & arbiters, Contract contract);
 
-    class Trick
-    {
-    public:
+		class Trick
+		{
+			public:
 
-        Trick(Denomination trump, int initiator) : trump(trump), initiator(initiator) {
-        	presentPlayer = initiator;
-        }
+				Trick(Denomination trump, int initiator) : trump(trump), initiator(initiator) {
+					presentPlayer = initiator;
+				}
 
-        void add(const Card & card);
-        
-        int getWinner() {
-		
-       		return presentWinner;
-        }
-    private:
-        std::array<const Card *, 4> cards;
-        Denomination trump;
-	    int initiator, presentPlayer, presentWinner;
-	    inline bool defeat(const Card &, const Card &);
+				void add(const Card & card);
 
-    };
+				int getWinner() {
 
-/***************************************************************/
+					return presentWinner;
+				}
+			private:
+				std::array<const Card *, 4> cards;
+				Denomination trump;
+				int initiator, presentPlayer, presentWinner;
+				inline bool defeat(const Card &, const Card &);
 
-private:
+		};
 
-	bool arePartners(int player1, int player2) {
-		return player1%2 == player2%2;
-	}
-	
+		/***************************************************************/
+
+	private:
+
+		bool arePartners(int player1, int player2) {
+			return player1%2 == player2%2;
+		}
+
 };
 
 

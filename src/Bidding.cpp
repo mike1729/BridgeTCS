@@ -1,8 +1,8 @@
 #include "Bidding.hpp"
 
 /* ------------------------------------------------------------------------------------------------------------------------*
- *                             operator <=( const Denomination &d1, const Denomination &d2 )                               *
- * ------------------------------------------------------------------------------------------------------------------------*/
+**                             operator <=( const Denomination &d1, const Denomination &d2 )                               *
+** ------------------------------------------------------------------------------------------------------------------------*/
 bool operator <=( const Denomination &d1, const Denomination &d2 )
 {
 	if ( d2 == Denomination::NT )
@@ -41,9 +41,9 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------*
- *                             operator <=( const Call &call, const Contract &contract)                                    *
- * ------------------------------------------------------------------------------------------------------------------------*/
- 
+**                             operator <=( const Call &call, const Contract &contract)                                    *
+** ------------------------------------------------------------------------------------------------------------------------*/
+
 bool operator <=( const Call &call, const Contract &contract )
 {
 	if ( call.level > contract.level || ( call.level == contract.level && call.denomination >= contract.denomination ) ) 
@@ -54,8 +54,8 @@ bool operator <=( const Call &call, const Contract &contract )
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------*
- *                                            Bidding::makeCall(Call call)                                            *
- * ------------------------------------------------------------------------------------------------------------------------*/
+**                                            Bidding::makeCall(Call call)                                            *
+** ------------------------------------------------------------------------------------------------------------------------*/
 bool Bidding::makeCall(Call call)
 {
 	if ( isFinished )
@@ -74,7 +74,7 @@ bool Bidding::makeCall(Call call)
 			currentContract.denomination = call.denomination;
 			currentContract.pointMultiplier = 1;
 			lastBidder = callNumber;
-		break;
+			break;
 		case CallType::DOUBLE :
 			consecutivePasses = 0;
 			if ( currentContract.level == 0 || currentContract.pointMultiplier != 1 || lastBidder%2 == callNumber%2 ) 
@@ -84,7 +84,7 @@ bool Bidding::makeCall(Call call)
 			{
 				currentContract.pointMultiplier = 2;
 			}
-		break;
+			break;
 		case CallType::REDOUBLE :
 			consecutivePasses = 0;
 			if ( currentContract.level == 0 || currentContract.pointMultiplier != 2 || lastBidder%2 != callNumber%2 ) 
@@ -94,7 +94,7 @@ bool Bidding::makeCall(Call call)
 			{
 				currentContract.pointMultiplier = 4;
 			}
-		break;
+			break;
 		case CallType::PASS :
 			consecutivePasses++;
 			if ( currentContract.level != 0 && consecutivePasses >= 3 )
@@ -106,7 +106,7 @@ bool Bidding::makeCall(Call call)
 				currentContract.redeal = true;
 				isFinished = true;
 			}
-		break;
+			break;
 	}
 	history.push_back(call);
 	callNumber++;
@@ -114,15 +114,15 @@ bool Bidding::makeCall(Call call)
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------*
- *                                            Bidding::findDeclarer                                                   *
- * ------------------------------------------------------------------------------------------------------------------------*/
+**                                            Bidding::findDeclarer                                                   *
+** ------------------------------------------------------------------------------------------------------------------------*/
 void Bidding::findDeclarer() 
 {
 	int declarer;
 	for (declarer = lastBidder%2 ; declarer<callNumber ; declarer += 2) 
 		if (history[declarer].denomination == currentContract.denomination)
 			break;
-	 
+
 	currentContract.declarer = (declarer+firstCaller)%4;
 }
 
