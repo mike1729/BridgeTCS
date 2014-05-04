@@ -11,7 +11,7 @@
 using Arbiters = std::array<Arbiter, 4>;
 using Hands = std::array<Hand, 4>;
 
-class dealResult
+class DealResult
 {
 	//TODO
 };
@@ -27,7 +27,7 @@ public:
 
 	void dealCards();
 	Contract performBidding();
-	dealResult performPlay();
+	DealResult performPlay();
 
 private:
 	Contract contract;

@@ -29,8 +29,8 @@ Contract Deal::performBidding()
 	return contract;
 }
 
-dealResult Deal::performPlay()
+DealResult Deal::performPlay()
 {
 	//write me tymorl!
-	return dealResult();
+	return DealResult();
 };
