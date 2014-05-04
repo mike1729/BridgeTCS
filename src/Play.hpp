@@ -6,6 +6,7 @@
 #include <utility>
 
 #include "Card.hpp"
+#include "Contract.hpp"
 
 class Play
 {
