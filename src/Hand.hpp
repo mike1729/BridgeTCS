@@ -4,8 +4,10 @@
 #include "Card.hpp"
 #include <list>
 #include <utility>
+#include "ui/Observable.hpp"
 
-class Hand {
+class Hand: public ui::Observable
+{
 	public:
 		void insert(Card&& c);
 		Card remove(int index);

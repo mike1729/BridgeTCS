@@ -7,15 +7,16 @@
 
 #include "Card.hpp"
 #include "Contract.hpp"
+#include "ui/Observable.hpp"
 
-class Play
+class Play: public ui::Observable
 {
 	public:
 		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick(trump, declarer)
 		{
 		}
 
-		class Trick
+		class Trick: public ui::Observable
 		{
 			public:
 				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) 

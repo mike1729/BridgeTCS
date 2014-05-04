@@ -3,6 +3,7 @@
 void Hand::insert(Card&& c)
 {
 	hand.push_back(std::move(c));
+	update();
 }
 
 Card Hand::remove(int index)
@@ -12,6 +13,7 @@ Card Hand::remove(int index)
 		it++;
 	Card&& c = std::move(*it);
 	hand.erase(it);
+	update();
 	return std::move(c);
 }
 
