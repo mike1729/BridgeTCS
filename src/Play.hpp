@@ -3,55 +3,73 @@
 
 #include <vector>
 #include <array>
-#include <functional>
+#include <list>
+#include <utility>
 
 #include "Card.hpp"
 #include "Contract.hpp"
-#include "Arbiter.hpp"
 
 class Play
 {
-
-	/***************************************************************/
 	public:
-		/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-		int performPlay (std::array <Arbiter, 4> & arbiters, Contract contract);
+		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick(trump, declarer)
+		{
+		}
 
 		class Trick
 		{
 			public:
-
-				Trick(Denomination trump, int initiator) : trump(trump), initiator(initiator) {
-					presentPlayer = initiator;
+				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) 
+				{
 				}
 
-				void add(const Card & card);
+				Trick(Trick && t) = default;
 
-				int getWinner() {
+				Trick(Trick const & trick) = delete;
 
+				Trick & operator=(Trick && other) = default;
+
+				void add(Card && card);
+
+				bool full()
+				{
+					return (cards.size() == 4);
+				}
+
+				int getWinner()
+				{
 					return presentWinner;
 				}
 			private:
-				std::array<const Card *, 4> cards;
+				std::list<Card> cards;
 				Denomination trump;
-				int initiator, presentPlayer, presentWinner;
-				inline bool defeat(const Card &, const Card &);
+				int presentPlayer, presentWinner;
+				Card * presentWinningCard;
 
+				bool defeat(const Card& winningCard, const Card& attempterCard);
 		};
 
-		/***************************************************************/
+		using History = std::list<Trick>;
 
-	private:
-
-		bool arePartners(int player1, int player2) {
-			return player1%2 == player2%2;
+		int getLastTrickWinner()
+		{
+			return history.back().getWinner();
 		}
 
+		int getTricksTaken()
+		{
+			return tricksTaken;
+		}
+
+		// The card given gets played. No validation -- validating is almost
+		// impossible with non-copyable cards.
+		void add(Card && card);
+
+	private:
+		Denomination trump;
+		int declarer;
+		Trick currentTrick;
+		int tricksTaken = 0;
+		History history;
 };
-
-
-inline bool operator ==(Suit suit, Denomination trump) {
-	return static_cast<int> (trump)==static_cast<int> (suit);
-}
-
 #endif

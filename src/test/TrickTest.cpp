@@ -47,10 +47,10 @@ void trickTestCommon (
 	Card card3 = deck.createCard(rank3, suit3);
 	Card card4 = deck.createCard(rank4, suit4);
 	
-	trick.add(card1);
-	trick.add(card2);
-	trick.add(card3);
-	trick.add(card4);
+	trick.add(std::move(card1));
+	trick.add(std::move(card2));
+	trick.add(std::move(card3));
+	trick.add(std::move(card4));
 	
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, anticipatedWinner);

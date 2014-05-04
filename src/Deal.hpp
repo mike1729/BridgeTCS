@@ -1,19 +1,22 @@
 #ifndef DEAL_HPP
 #define DEAL_HPP
 #include <array>
+#include <memory>
 
 #include "Hand.hpp"
 #include "Contract.hpp"
 #include "Arbiter.hpp"
 #include "Bidding.hpp"
+#include "Play.hpp"
 #include "ui/Observable.hpp"
 
 using Arbiters = std::array<Arbiter, 4>;
 using Hands = std::array<Hand, 4>;
 
-class DealResult
+struct DealResult
 {
-	//TODO
+	Contract contract;
+	int declarerTakenTricks;
 };
 
 
@@ -21,7 +24,7 @@ class Deal: public ui::Observable
 {
 public:
 
-	Deal(Arbiters & arbiters, Hands & hands, int firstCaller) : arbiters(arbiters), hands(hands), firstCaller(firstCaller), currentCaller(firstCaller), bidding(firstCaller)
+	Deal(Arbiters & arbiters, Hands & hands, int firstCaller) : arbiters(arbiters), hands(hands), firstCaller(firstCaller)
 	{
 	}
 
@@ -34,7 +37,8 @@ private:
 	Arbiters & arbiters;
 	Hands & hands;
 	int firstCaller;
-	int currentCaller;
-	Bidding bidding;
+	std::unique_ptr<Bidding> bidding;
+	std::unique_ptr<Play> play;
+	DealResult result;
 };
 #endif

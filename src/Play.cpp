@@ -1,6 +1,9 @@
 #include "Play.hpp"
 
-/***************************************************************/
+bool operator==(Suit suit, Denomination denomination)
+{
+	return static_cast<int> (denomination)==static_cast<int> (suit);
+}
 
 /* true if attempterCard beats the winningCard */
 bool Play::Trick::defeat(const Card& winningCard, const Card& attempterCard)
@@ -12,41 +15,31 @@ bool Play::Trick::defeat(const Card& winningCard, const Card& attempterCard)
 	return false;
 }
 
-
-void Play::Trick::add(const Card & presentCard)
+bool arePartners(int player1, int player2)
 {
+	return player1%2 == player2%2;
+}
 
-	cards[ presentPlayer ] = &presentCard;
-
+void Play::Trick::add(Card && presentCard)
+{
+	cards.push_back(std::move(presentCard));
 	/* check whether this card wins the trick so far i.e. whether it beats the presently winnig one */
-	if(presentPlayer == initiator || defeat( *cards[presentWinner], presentCard))
-		presentWinner = presentPlayer;
-
-	presentPlayer = (presentPlayer + 1)%4;	
-
-}
-/***************************************************************/
-
-
-/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-int Play::performPlay (std::array <Arbiter, 4> & arbiters, Contract contract)
-{
-	int tricksTaken = 0;
-	Denomination trump = contract.denomination;
-	int declarer = contract.declarer;
-	int lastRoundWinner = declarer;
-
-	for (int trickNr = 0; trickNr < 13; trickNr++)
+	if(cards.size() == 1 || defeat( *presentWinningCard, presentCard))
 	{
-		Trick trick(trump, lastRoundWinner);
-
-		for (int i=0, playerInd = lastRoundWinner; i < 4; i++, playerInd = (playerInd + 1)%4 )
-			trick.add( arbiters[playerInd].getCard() );
-
-		lastRoundWinner = trick.getWinner();
-		if(arePartners(lastRoundWinner, declarer))
-			tricksTaken++;
+		presentWinner = presentPlayer;
+		presentWinningCard = &(cards.back());
 	}
-	return tricksTaken;
+	presentPlayer = (presentPlayer + 1)%4;	
 }
 
+void Play::add(Card && card)
+{
+	currentTrick.add(std::move(card));
+	if (currentTrick.full())
+	{
+		if(arePartners(currentTrick.getWinner(), declarer))
+			tricksTaken++;
+		history.push_back(std::move(currentTrick));
+		currentTrick = std::move(Trick(trump, getLastTrickWinner()));
+	}
+}
