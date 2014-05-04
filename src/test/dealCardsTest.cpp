@@ -18,7 +18,7 @@ public:
 	using mcard = std::pair<Suit, Rank>;
 	std::map<mcard, bool> noticed;
 	std::array<DealPlayer, 4> players;
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Standard52Deck auxilaryDeck;
 	void SetUp()
 	{

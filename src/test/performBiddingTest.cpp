@@ -50,7 +50,7 @@ public:
 TEST_F(performBiddingTest, FourPasses) 
 {
 	std::array<BiddingPlayer, 4> players;
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Deal deal(arbiters, hands, 0);
 	ASSERT_EQ(deal.performBidding().redeal, true);
 }
@@ -59,7 +59,7 @@ TEST_F(performBiddingTest, SimpleFinish)
 {
 	std::array<BiddingPlayer, 4> players;
 	players[0].addCall(oneClub);
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Deal deal(arbiters, hands, 0);
 	Contract res = deal.performBidding();
 	ASSERT_EQ(res.redeal, false);
@@ -79,7 +79,7 @@ TEST_F(performBiddingTest, RealFinish)
 	players[1].addCall(threeDiamonds);
 	players[2].addCall(threeSpades);
 	players[3].addCall(fiveDiamonds);
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Deal deal(arbiters, hands, 0);
 	Contract res = deal.performBidding();
 	ASSERT_EQ(res.redeal, false);
@@ -94,7 +94,7 @@ TEST_F(performBiddingTest, WrongDouble)
 	players[0].addCall(oneClub);
 	players[1].addCall(pass);
 	players[2].addCall(doubleCall);
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Deal deal(arbiters, hands, 0);
 	Contract res = deal.performBidding();
 	ASSERT_EQ(res.redeal, false);
@@ -114,7 +114,7 @@ TEST_F(performBiddingTest, RealFinishOtherStart)
 	players[2].addCall(threeDiamonds);
 	players[3].addCall(threeSpades);
 	players[0].addCall(fiveDiamonds);
-	Arbiters arbiters{ { {0, hands[0], players[0]}, {1, hands[1], players[1]}, {2, hands[2], players[2]}, {3, hands[3], players[3]} } };
+	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
 	Deal deal(arbiters, hands, 1);
 	Contract res = deal.performBidding();
 	ASSERT_EQ(res.redeal, false);
