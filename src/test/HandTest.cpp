@@ -33,10 +33,10 @@ TEST_F(HandTest, SimpleInsertRemove)
 
 TEST_F(HandTest, SimpleInsertRemoveAll)
 {
-    hand->insert(deck->dealCard());
-    hand->insert(deck->dealCard());
-    hand->insert(deck->dealCard());
-    hand->insert(deck->dealCard());
-    hand->removeAll();
+	hand->insert(deck->dealCard());
+	hand->insert(deck->dealCard());
+	hand->insert(deck->dealCard());
+	hand->insert(deck->dealCard());
+	hand->removeAll();
 	ASSERT_EQ(0, hand->getHand().size());
 }

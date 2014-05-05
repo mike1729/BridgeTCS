@@ -8,11 +8,11 @@
 
 class Arbiter {
 public:
- Arbiter(Hand &hand, IPlayer &player): hand(hand), player(player) {}
- Card getCard();
- Call getCall();
+	Arbiter(Hand &hand, IPlayer &player): hand(hand), player(player) {}
+	Card getCard();
+	Call getCall();
 private:
- Hand &hand;
- IPlayer &player;
+	Hand &hand;
+	IPlayer &player;
 };
 #endif

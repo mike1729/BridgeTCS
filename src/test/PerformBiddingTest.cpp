@@ -27,7 +27,7 @@ public:
 	}
 };
 
-class performBiddingTest: public ::testing::Test
+class PerformBiddingTest: public ::testing::Test
 {
 public:
 	Hands hands;
@@ -47,7 +47,7 @@ public:
 	}
 };
 
-TEST_F(performBiddingTest, FourPasses) 
+TEST_F(PerformBiddingTest, FourPasses) 
 {
 	std::array<BiddingPlayer, 4> players;
 	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
@@ -55,7 +55,7 @@ TEST_F(performBiddingTest, FourPasses)
 	ASSERT_EQ(deal.performBidding().redeal, true);
 }
 
-TEST_F(performBiddingTest, SimpleFinish) 
+TEST_F(PerformBiddingTest, SimpleFinish) 
 {
 	std::array<BiddingPlayer, 4> players;
 	players[0].addCall(oneClub);
@@ -68,7 +68,7 @@ TEST_F(performBiddingTest, SimpleFinish)
 	ASSERT_EQ(res.declarer, 0);
 }
 
-TEST_F(performBiddingTest, RealFinish)
+TEST_F(PerformBiddingTest, RealFinish)
 {
 	std::array<BiddingPlayer, 4> players;
 	players[0].addCall(oneClub);
@@ -88,7 +88,7 @@ TEST_F(performBiddingTest, RealFinish)
 	ASSERT_EQ(res.declarer, 1);
 }
 
-TEST_F(performBiddingTest, WrongDouble)
+TEST_F(PerformBiddingTest, WrongDouble)
 {
 	std::array<BiddingPlayer, 4> players;
 	players[0].addCall(oneClub);
@@ -103,7 +103,7 @@ TEST_F(performBiddingTest, WrongDouble)
 	ASSERT_EQ(res.declarer, 0);
 }
 
-TEST_F(performBiddingTest, RealFinishOtherStart)
+TEST_F(PerformBiddingTest, RealFinishOtherStart)
 {
 	std::array<BiddingPlayer, 4> players;
 	players[1].addCall(oneClub);

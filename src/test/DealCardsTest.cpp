@@ -11,7 +11,7 @@ public:
 };
 
 
-class dealCardsTest: public ::testing::Test
+class DealCardsTest: public ::testing::Test
 {
 public:
 	Hands hands;
@@ -28,7 +28,7 @@ public:
 	}
 };
 
-TEST_F(dealCardsTest, StartFrom0) 
+TEST_F(DealCardsTest, StartFrom0) 
 {
 	Deal deal(arbiters, hands, 0);
 	deal.dealCards();
@@ -48,13 +48,13 @@ TEST_F(dealCardsTest, StartFrom0)
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false); 	
+			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}	
 }
 
-TEST_F(dealCardsTest, StartFrom1) 
+TEST_F(DealCardsTest, StartFrom1) 
 {
 	Deal deal(arbiters, hands, 1);
 	deal.dealCards();
@@ -74,13 +74,13 @@ TEST_F(dealCardsTest, StartFrom1)
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false); 	
+			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
-	}	
+	}
 }
 
-TEST_F(dealCardsTest, StartFrom2) 
+TEST_F(DealCardsTest, StartFrom2) 
 {
 	Deal deal(arbiters, hands, 2);
 	deal.dealCards();
@@ -100,13 +100,13 @@ TEST_F(dealCardsTest, StartFrom2)
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false); 	
+			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
-	}	
+	}
 }
 
-TEST_F(dealCardsTest, StartFrom3) 
+TEST_F(DealCardsTest, StartFrom3) 
 {
 	Deal deal(arbiters, hands, 3);
 	deal.dealCards();
@@ -126,8 +126,8 @@ TEST_F(dealCardsTest, StartFrom3)
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false); 	
+			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
-	}	
+	}
 }
