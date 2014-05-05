@@ -2,6 +2,7 @@
 #define Card_hpp
 
 #include <utility>
+#include <iostream>
 
 enum class Rank 
 {
