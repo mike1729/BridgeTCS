@@ -1,31 +1,38 @@
 #ifndef BIDDING_HPP
 #define BIDDING_HPP
-#include <array>
-#include "Contract.hpp"
+
+#include <vector>
+
 #include "Call.hpp"
-#include "Arbiter.hpp"
-#include "BiddingState.hpp"
+#include "Contract.hpp"
+#include "ui/Observable.hpp"
 
-using ArbiterArray = std::array<Arbiter, 4>;
-
-class Bidding 
+class Bidding: public ui::Observable
 {
-public:
+	public:
+		using History = std::vector<Call>;
 
-	Bidding(ArbiterArray & arbiters, int firstCaller) : biddingState(firstCaller), arbiters(arbiters), currentCaller(firstCaller)
-	{
-	}
+		Bidding(int firstCaller) : firstCaller(firstCaller) {}
 
-	Contract getContract()
-	{
-		return biddingState.getContract();
-	}
+		bool makeCall(Call call);
+		bool biddingDone()
+		{
+			return isFinished;
+		}
+		Contract getContract()
+		{
+			findDeclarer();
+			return currentContract;
+		}
+	private:
+		Contract currentContract;
+		int consecutivePasses = 0;
+		bool isFinished = false;
+		int lastBidder = 0;
+		int firstCaller;
+		History history;
+		int callNumber = 0;
 
-	Contract perform();
-
-private:
-	BiddingState biddingState;
-	ArbiterArray & arbiters;
-	int currentCaller;
+		void findDeclarer();
 };
 #endif

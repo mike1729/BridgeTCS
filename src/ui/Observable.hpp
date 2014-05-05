@@ -26,6 +26,7 @@ public:
 			i->lock().get()->notify();
 		}
 	}
+	virtual ~Observable() = default;
 private:
 	std::set<ObserverPtr, std::function<bool (ObserverPtr const &, ObserverPtr const &)>> observed;
 };

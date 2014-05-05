@@ -1,57 +1,75 @@
 #ifndef Play_hpp
 #define Play_hpp
 
-#include <vector>
 #include <array>
-#include <functional>
+#include <list>
+#include <utility>
 
 #include "Card.hpp"
 #include "Contract.hpp"
-#include "Arbiter.hpp"
+#include "ui/Observable.hpp"
 
-class Play
+class Play: public ui::Observable
 {
+	public:
+		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick(trump, declarer)
+		{
+		}
 
-/***************************************************************/
-public:
-	/* Returns the number of tricks taken. It's up to the caller to convert it into points result. */
-	int performPlay (std::array <Arbiter, 4> & arbiters, Contract contract);
+		class Trick: public ui::Observable
+		{
+			public:
+				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) 
+				{
+				}
 
-    class Trick
-    {
-    public:
+				Trick(Trick && t) = default;
 
-        Trick(Denomination trump, int initiator) : trump(trump), initiator(initiator) {
-        	presentPlayer = initiator;
-        }
+				Trick(Trick const & trick) = delete;
 
-        void add(const Card & card);
-        
-        int getWinner() {
-		
-       		return presentWinner;
-        }
-    private:
-        std::array<const Card *, 4> cards;
-        Denomination trump;
-	    int initiator, presentPlayer, presentWinner;
-	    inline bool defeat(const Card &, const Card &);
+				Trick & operator=(Trick && other) = default;
 
-    };
+				void add(Card && card);
 
-/***************************************************************/
+				bool full()
+				{
+					return (cards.size() == 4);
+				}
 
-private:
+				int getWinner()
+				{
+					return presentWinner;
+				}
+			private:
+				std::list<Card> cards;
+				Denomination trump;
+				int presentPlayer, presentWinner;
+				Card * presentWinningCard;
 
-	bool arePartners(int player1, int player2) {
-		return player1%2 == player2%2;
-	}
-	
+				bool defeat(const Card& winningCard, const Card& attempterCard);
+		};
+
+		using History = std::list<Trick>;
+
+		int getLastTrickWinner()
+		{
+			return history.back().getWinner();
+		}
+
+		int getTricksTaken()
+		{
+			return tricksTaken;
+		}
+
+		// The card given gets played. No validation -- validating is almost
+		// impossible with non-copyable cards.
+		void add(Card && card);
+
+	private:
+		Denomination trump;
+		int declarer;
+		Trick currentTrick;
+		int tricksTaken = 0;
+		History history;
 };
-
-
-inline bool operator ==(Suit suit, Denomination trump) {
-	return static_cast<int> (trump)==static_cast<int> (suit);
-}
-
 #endif

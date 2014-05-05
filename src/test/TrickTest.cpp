@@ -10,34 +10,34 @@ class MyDeck : public Deck
 	}
 	virtual int cardsLeft(){return 0;}
 	virtual bool empty(){return 0;}
-	
-public:
+
+	public:
 	Card createCard(Rank rank, Suit suit)
 	{
 		return Deck::createCard(rank, suit);
 	}
-	
+
 };
 
 
 class TrickTest : public ::testing::Test{
-public:
-	int player1 = 0;
-	int player2 = 1;
-	int player3 = 2;
-	int player4 = 3;
+	public:
+		int player1 = 0;
+		int player2 = 1;
+		int player3 = 2;
+		int player4 = 3;
 };
 
 
 void trickTestCommon (
-			Denomination trump,
-			int initiator,
-			Rank rank1, Suit suit1,
-			Rank rank2, Suit suit2,
-			Rank rank3, Suit suit3,
-			Rank rank4, Suit suit4,
-			int anticipatedWinner)	{
-	
+		Denomination trump,
+		int initiator,
+		Rank rank1, Suit suit1,
+		Rank rank2, Suit suit2,
+		Rank rank3, Suit suit3,
+		Rank rank4, Suit suit4,
+		int anticipatedWinner)	{
+
 	MyDeck deck;
 
 	Play::Trick trick(trump, initiator);
@@ -47,10 +47,10 @@ void trickTestCommon (
 	Card card3 = deck.createCard(rank3, suit3);
 	Card card4 = deck.createCard(rank4, suit4);
 	
-	trick.add(card1);
-	trick.add(card2);
-	trick.add(card3);
-	trick.add(card4);
+	trick.add(std::move(card1));
+	trick.add(std::move(card2));
+	trick.add(std::move(card3));
+	trick.add(std::move(card4));
 	
 	int winner = trick.getWinner();
 	ASSERT_EQ(winner, anticipatedWinner);
