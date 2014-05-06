@@ -1,5 +1,5 @@
-#ifndef Card_hpp
-#define Card_hpp
+#ifndef MODEL_CARD_HPP
+#define MODEL_CARD_HPP
 
 #include <utility>
 #include <iostream>

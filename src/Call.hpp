@@ -1,5 +1,5 @@
-#ifndef CALL_HPP
-#define CALL_HPP
+#ifndef MODEL_CALL_HPP
+#define MODEL_CALL_HPP
 #include "Contract.hpp"
 
 enum class CallType

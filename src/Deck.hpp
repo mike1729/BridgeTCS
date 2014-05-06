@@ -1,5 +1,5 @@
-#ifndef Deck_hpp
-#define Deck_hpp
+#ifndef MODEL_DECK_HPP
+#define MODEL_DECK_HPP
 
 #include <algorithm>    // std::random_shuffle
 #include <vector>       // std::vector
@@ -20,10 +20,10 @@ public:
 class Deck : public IDeck
 {
 protected:
-    Card createCard(Rank rank, Suit suit) 
-    {
-        return Card(rank, suit);
-    }
+	Card createCard(Rank rank, Suit suit) 
+	{
+		return Card(rank, suit);
+	}
 };
 
 class Standard52Deck : public Deck

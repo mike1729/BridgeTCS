@@ -194,4 +194,26 @@ TEST_F(TrickTest, Trump4){
 		player4);
 }
 
+TEST_F(TrickTest, Trump5){
+	trickTestCommon (
+		Denomination::HEARTS,
+		player1,
+		Rank::QUEEN, Suit::CLUBS,
+		Rank::THREE, Suit::CLUBS,
+		Rank::KING, Suit::CLUBS,
+		Rank::ACE, Suit::CLUBS,
+		player4);
+}
+
+TEST_F(TrickTest, Trump6){
+	trickTestCommon (
+		Denomination::HEARTS,
+		player1,
+		Rank::ACE, Suit::CLUBS,
+		Rank::ACE, Suit::HEARTS,
+		Rank::ACE, Suit::SPADES,
+		Rank::ACE, Suit::DIAMONDS,
+		player2);
+}
+
 

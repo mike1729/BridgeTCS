@@ -1,5 +1,5 @@
-#ifndef  _PLAYER_HPP
-#define _PLAYER_HPP
+#ifndef MODEL_PLAYER_HPP
+#define MODEL_PLAYER_HPP
 
 #include "Call.hpp"
 

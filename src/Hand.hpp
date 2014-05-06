@@ -1,5 +1,5 @@
-#ifndef HAND_HPP
-#define HAND_HPP
+#ifndef MODEL_HAND_HPP
+#define MODEL_HAND_HPP
 
 #include "Card.hpp"
 #include <list>

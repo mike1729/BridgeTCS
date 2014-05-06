@@ -1,5 +1,5 @@
-#ifndef Hand_hpp
-#define Hand_hpp
+#ifndef UI_TEXT_HAND_HPP
+#define UI_TEXT_HAND_HPP
 
 #include "../Observer.hpp"
 

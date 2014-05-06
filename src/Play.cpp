@@ -29,7 +29,7 @@ void Play::Trick::add(Card && presentCard)
 		presentWinner = presentPlayer;
 		presentWinningCard = &(cards.back());
 	}
-	presentPlayer = (presentPlayer + 1)%4;	
+	presentPlayer = (presentPlayer + 1)%4;
 	update();
 }
 

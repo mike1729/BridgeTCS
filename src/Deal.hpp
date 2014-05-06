@@ -1,5 +1,5 @@
-#ifndef DEAL_HPP
-#define DEAL_HPP
+#ifndef MODEL_DEAL_HPP
+#define MODEL_DEAL_HPP
 #include <array>
 #include <memory>
 

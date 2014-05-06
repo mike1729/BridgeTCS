@@ -1,5 +1,5 @@
-#ifndef CONTRACT_HPP
-#define CONTRACT_HPP
+#ifndef MODEL_CONTRACT_HPP
+#define MODEL_CONTRACT_HPP
 
 enum class Denomination {
 	CLUBS, DIAMONDS, HEARTS, SPADES, NT
