@@ -9,9 +9,14 @@ namespace ui
     {
         class Hand : public Observer
         {
-            const ::Hand & hand;
         public:
-            Hand(const ::Hand & hand) : hand(hand) {}    
+            Hand(const ::Hand & hand) {
+            	cards = hand.getHand();
+            }    
+        private:
+        	void printHand()
+            const std::list<Card> & cards;
+        
         };
     }
 }

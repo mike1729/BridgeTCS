@@ -12,7 +12,7 @@ namespace ui {
 		void Hand::printHand()
 		{
 			std::cout << "Your cards:\n";
-			for(auto & card : hand.getList())
+			for(auto & card : cards)
 				std::cout << card.rank << " " << card.suit << "\n";
 			std::cout << "\n";
 		}

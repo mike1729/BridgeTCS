@@ -2,9 +2,10 @@
 #define Observer_hpp
 namespace ui
 {
+	template <typename T>
 	class Observer {
 		public:
-			virtual void notify() const = 0;
+			virtual void notify(const T & observed) const = 0;
 	};
 }
 
