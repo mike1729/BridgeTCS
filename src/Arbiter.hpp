@@ -6,7 +6,8 @@
 #include "Player.hpp"
 #include "Hand.hpp"
 
-class Arbiter {
+class Arbiter 
+{
 public:
 	Arbiter(Hand &hand, IPlayer &player): hand(hand), player(player) {}
 	Card getCard();
