@@ -1,5 +1,5 @@
-#ifndef Play_hpp
-#define Play_hpp
+#ifndef MODEL_PLAY_HPP
+#define MODEL_PLAY_HPP
 
 #include <array>
 #include <list>

@@ -1,5 +1,5 @@
-#ifndef _APPLICATION_HPP
-#define _APPLICATION_HPP
+#ifndef MODEL_APPLICATION_HPP
+#define MODEL_APPLICATION_HPP
 
 #include "ui/Observable.hpp"
 

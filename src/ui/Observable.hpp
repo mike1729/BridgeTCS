@@ -1,5 +1,5 @@
-#ifndef _OBSERVABLE_HPP
-#define _OBSERVABLE_HPP
+#ifndef UI_OBSERVABLE_HPP
+#define UI_OBSERVABLE_HPP
 
 #include <boost/signals2.hpp>
 

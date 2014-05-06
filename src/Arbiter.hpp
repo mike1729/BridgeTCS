@@ -1,5 +1,5 @@
-#ifndef ARBITER_HPP
-#define ARBITER_HPP
+#ifndef MODEL_ARBITER_HPP
+#define MODEL_ARBITER_HPP
 
 #include "Deck.hpp"
 #include "Call.hpp"

@@ -1,5 +1,5 @@
-#ifndef Deck_hpp
-#define Deck_hpp
+#ifndef MODEL_DECK_HPP
+#define MODEL_DECK_HPP
 
 #include <algorithm>    // std::random_shuffle
 #include <vector>       // std::vector

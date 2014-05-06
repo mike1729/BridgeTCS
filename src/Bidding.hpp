@@ -1,5 +1,5 @@
-#ifndef BIDDING_HPP
-#define BIDDING_HPP
+#ifndef MODEL_BIDDING_HPP
+#define MODEL_BIDDING_HPP
 
 #include <vector>
 

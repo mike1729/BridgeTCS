@@ -1,5 +1,5 @@
-#ifndef _APPLICATION_VIEW_HPP
-#define _APPLICATION_VIEW_HPP
+#ifndef UI_TEXT_APPLICATIONVIEW_HPP
+#define UI_TEXT_APPLICATIONVIEW_HPP
 
 #include "../Observer.hpp"
 #include "../../Application.hpp"
