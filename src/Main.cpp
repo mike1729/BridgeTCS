@@ -1,9 +1,12 @@
-#include "Application.cpp"
-
+#include "Application.hpp"
+#include "ui/text/ApplicationView.hpp"
+#include <functional>
 
 int main() {
-	ui::ApplicationView appView = ui::ApplicationView();
-	Application application = Application(appView);
+	Application application;
+	ui::text::ApplicationView appView;
+
+	application.sigModified.connect(std::bind(&ui::text::ApplicationView::notify, &appView, std::placeholders::_1));
 	application.run();
 	return 0;
 }

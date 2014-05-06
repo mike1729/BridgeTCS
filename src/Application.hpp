@@ -1,15 +1,15 @@
 #ifndef _APPLICATION_HPP
 #define _APPLICATION_HPP
 
-#include "ui/ApplicationView.cpp"
 #include "ui/Observable.hpp"
 
-class Application : public ui::Observable{
+class Application : public ui::Observable<Application>
+{
 public:
-	Application(ui::ApplicationView& view) {
-		subscribe(view);
+	void run() 
+	{
+		sigModified(*this);
 	}
-	void run();
 };
 
 #endif
