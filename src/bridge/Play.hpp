@@ -1,5 +1,5 @@
-#ifndef MODEL_PLAY_HPP
-#define MODEL_PLAY_HPP
+#ifndef BRIDGE_PLAY_HPP
+#define BRIDGE_PLAY_HPP
 
 #include <array>
 #include <list>
@@ -9,19 +9,19 @@
 #include "Contract.hpp"
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
-class Play: public ui::Observable
+class Play: public ui::Observable<Play>
 {
 	public:
 		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick(trump, declarer)
 		{
 		}
 
-		class Trick: public ui::Observable
+		class Trick: public ui::Observable<Trick>
 		{
 			public:
-				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) , initiator(initiator)
+				Trick(Denomination trump, int initiator) : presentPlayer(initiator), trump(trump) , initiator(initiator)
 				{
 				}
 
@@ -80,7 +80,11 @@ class Play: public ui::Observable
 		{
 			return tricksTaken;
 		}
-
+		
+		const Trick & getTrick()
+		{
+			return currentTrick;
+		}
 		// The card given gets played. No validation -- validating is almost
 		// impossible with non-copyable cards.
 		void add(Card && card);

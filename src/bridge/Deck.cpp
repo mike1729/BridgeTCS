@@ -1,6 +1,6 @@
 #include "Deck.hpp"
 
-namespace model {
+namespace bridge {
 
 Standard52Deck::Standard52Deck()
 {

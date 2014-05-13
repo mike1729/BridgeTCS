@@ -1,6 +1,6 @@
 #include "Bidding.hpp"
 
-namespace model {
+namespace bridge {
 
 /* ------------------------------------------------------------------------------------------------------------------------*
 **                             operator <=( const Denomination &d1, const Denomination &d2 )                               *
@@ -112,7 +112,7 @@ bool Bidding::makeCall(Call call)
 	}
 	history.push_back(call);
 	callNumber++;
-	update(this);
+	sigModified(*this);
 	return true;
 }
 

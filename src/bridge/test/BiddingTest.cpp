@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../Bidding.hpp"
 
-namespace model {
+namespace bridge {
 
 class BiddingTest: public ::testing::Test
 {

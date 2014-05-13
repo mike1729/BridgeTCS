@@ -1,9 +1,9 @@
-#ifndef MODEL_APPLICATION_HPP
-#define MODEL_APPLICATION_HPP
+#ifndef VIEWMODEL_APPLICATION_HPP
+#define VIEWMODEL_APPLICATION_HPP
 
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace viewmodel {
 
 class Application : public ui::Observable<Application>
 {

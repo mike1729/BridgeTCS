@@ -1,13 +1,11 @@
-#include "ui/Observer.hpp"
-#include "Hand.hpp"
-#include <iostream>
+#include "Trick.hpp"
 
 namespace ui 
 {
 namespace text 
 {
 
-void Trick::notify(const ::Trick & trick)
+void Trick::print(const bridge::Trick & trick)
 {
 	std::cout << "Current Trick:\n";
 	int currentPlayer = trick.getInitiator();

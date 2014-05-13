@@ -1,16 +1,18 @@
 #ifndef Hand_hpp
 #define Hand_hpp
 
-#include "ui/Observer.hpp"
-#include "bridge/model/Contract.hpp"
+#include <iostream>
+#include "bridge/Contract.hpp"
 
 namespace ui
 {
 namespace text
 {
 
-class Trick : public Observer<::Trick>
+class Trick
 {
+public:
+	void notify(const bridge::Trick & trick)
 };
 
 } // namespace text

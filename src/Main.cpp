@@ -6,8 +6,10 @@ int main()
 {
 	Application application;
 	ui::text::ApplicationView appView;
-
-	application.subscribe(appView);
+	
+	application.sigModified.connect([& appView](Application const & app) {
+		appView.notify(app);
+	});
 	application.run();
 	return 0;
 }

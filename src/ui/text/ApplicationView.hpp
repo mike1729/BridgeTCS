@@ -2,7 +2,7 @@
 #define UI_TEXT_APPLICATIONVIEW_HPP
 
 #include "ui/Observer.hpp"
-#include "bridge/model/Application.hpp"
+#include "bridge/Application.hpp"
 
 namespace ui
 {

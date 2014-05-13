@@ -1,12 +1,12 @@
-#ifndef MODEL_HAND_HPP
-#define MODEL_HAND_HPP
+#ifndef BRIDGE_HAND_HPP
+#define BRIDGE_HAND_HPP
 
 #include "Card.hpp"
 #include <list>
 #include <utility>
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
 class Hand: public ui::Observable<Hand>
 {
@@ -14,7 +14,7 @@ class Hand: public ui::Observable<Hand>
 		void insert(Card&& c);
 		Card remove(int index);
 		void removeAll();
-		std::list<Card> const & getHand() const;
+		std::list<Card> const & getCards() const;
 	private:
 		std::list<Card> hand;
 };

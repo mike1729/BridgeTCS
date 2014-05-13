@@ -1,5 +1,5 @@
-#ifndef MODEL_PLAYER_HPP
-#define MODEL_PLAYER_HPP
+#ifndef BRIDGE_PLAYER_HPP
+#define BRIDGE_PLAYER_HPP
 
 #include "Call.hpp"
 #include "Card.hpp"
@@ -7,7 +7,7 @@
 #include "Hand.hpp"
 #include "Bidding.hpp"
 
-namespace model {
+namespace bridge {
 
 class IPlayer
 {

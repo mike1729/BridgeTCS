@@ -1,5 +1,5 @@
-#ifndef MODEL_GAME_HPP
-#define MODEL_GAME_HPP
+#ifndef BRIDGE_GAME_HPP
+#define BRIDGE_GAME_HPP
 
 #include <array>
 #include <memory>
@@ -7,7 +7,7 @@
 #include "Player.hpp"
 #include "Arbiter.hpp"
 
-namespace model {
+namespace bridge {
 
 class Game
 {

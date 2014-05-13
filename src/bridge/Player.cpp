@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-namespace model {
+namespace bridge {
 
 Card Player::chooseCard(Play const & p, Hand const & h)
 {

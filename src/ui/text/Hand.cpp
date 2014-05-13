@@ -1,13 +1,12 @@
-#include "ui/Observer.hpp"
-#include "Hand.hpp"
 #include <iostream>
+#include "Hand.hpp"
 
 namespace ui 
 {
 namespace text 
 {
 
-void Hand::notify(const ::Hand & hand)
+void Hand::print(const bridge::Hand & hand)
 {
 	std::cout << "Your cards:\n";
 	for(auto & card : hand.getList())

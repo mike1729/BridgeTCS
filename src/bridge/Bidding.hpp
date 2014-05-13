@@ -1,5 +1,5 @@
-#ifndef MODEL_BIDDING_HPP
-#define MODEL_BIDDING_HPP
+#ifndef BRIDGE_BIDDING_HPP
+#define BRIDGE_BIDDING_HPP
 
 #include <vector>
 
@@ -7,7 +7,7 @@
 #include "Contract.hpp"
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
 class Bidding: public ui::Observable<Bidding>
 {
