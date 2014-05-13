@@ -1,7 +1,7 @@
 #ifndef VIEWMODEL_APPLICATION_HPP
 #define VIEWMODEL_APPLICATION_HPP
 
-#include "../ui/Observable.hpp"
+#include "ui/Observable.hpp"
 
 namespace viewmodel {
 

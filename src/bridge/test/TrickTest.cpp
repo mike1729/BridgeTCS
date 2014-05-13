@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../Play.hpp"
-#include "../Deck.hpp"
+#include "bridge/Play.hpp"
+#include "bridge/Deck.hpp"
 
 namespace bridge {
 

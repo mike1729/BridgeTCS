@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../Deal.hpp"
+#include "bridge/Deal.hpp"
 #include <queue>
 #include <iostream>
 

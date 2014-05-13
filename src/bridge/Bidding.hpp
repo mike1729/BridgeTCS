@@ -5,7 +5,7 @@
 
 #include "Call.hpp"
 #include "Contract.hpp"
-#include "../ui/Observable.hpp"
+#include "ui/Observable.hpp"
 
 namespace bridge {
 

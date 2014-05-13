@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <utility>
-#include "../Deck.hpp"
+#include "bridge/Deck.hpp"
 
 namespace bridge {
 

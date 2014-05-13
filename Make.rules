@@ -1,13 +1,19 @@
 CXX=clang++
-CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2
+CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2 -I$(SRCDIRECTORY)
 TESTLDFLAGS+=-lgtest -lgtest_main -pthread
 LDFLAGS+=
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 TESTEXECUTABLES=$(TESTSOURCES:.cpp=)
 TESTTARGETS=$(TESTSOURCES:.cpp=.run)
+SRCDIRECTORY=$(PROJECTROOT)/src
+BINDIRECTORY=$(PROJECTROOT)/bin
+MAINDEPLIBS=$(SRCDIRECTORY)/libmain.a
+MAINTARGET=$(BINDIRECTORY)/BridgeTCS
 
-all: $(LIBRARY)
+all: $(MAINTARGET)
+
+library: $(LIBRARY)
 
 test: $(TESTTARGETS)
 
@@ -17,10 +23,13 @@ $(TESTTARGETS): %.run: %
 clean :
 	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(SOURCES:.cpp=.d) $(TESTSOURCES:.cpp=.d)
 
-.PHONY : all test clean $(TESTTARGETS)
+.PHONY : all library test clean $(TESTTARGETS)
 
 -include $(SOURCES:.cpp=.d)
 -include $(TESTSOURCES:.cpp=.d)
+
+$(MAINTARGET) : $(MAINDEPLIBS) $(SRCDIRECTORY)/Main.o
+	$(CXX) $^ -o $@ $(LDFLAGS) $(TESTLDFLAGS)
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -MMD $< -o $@
@@ -32,9 +41,9 @@ $(LIBRARY) : $(OBJECTS) $(LIBDEPLIBS)
 	rm -f $@
 	ar crsT $@ $^
 
-$(TESTDEPLIBS) $(LIBDEPLIBS) : % :
+$(TESTDEPLIBS) $(LIBDEPLIBS) $(MAINDEPLIBS) : % :
 	make -C $(@D) $(@F)
 
-.PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS)
+.PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS) $(MAINDEPLIBS)
 
 # vim: set filetype=make:

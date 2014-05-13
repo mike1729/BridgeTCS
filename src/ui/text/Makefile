@@ -1,7 +1,8 @@
 SOURCES=$(wildcard *.cpp)
 TESTSOURCES=$(wildcard test/*.cpp)
-LIBRARY=libbridgetextui.a
+LIBRARY=libtextui.a
+PROJECTROOT=../../..
 TESTDEPLIBS=
-LIBDEPLIBS=../libbridgeui.a ../../libbridge.a
+LIBDEPLIBS=$(SRCROOT)/bridge/libbridge.a
 
-include ../../../Make.rules
+include $(PROJECTROOT)/Make.rules

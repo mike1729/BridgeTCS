@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "../Hand.hpp"
-#include "../Deck.hpp"
+#include "bridge/Hand.hpp"
+#include "bridge/Deck.hpp"
 
 namespace bridge {
 
