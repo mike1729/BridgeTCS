@@ -44,8 +44,8 @@ void Play::add(Card && card)
 			tricksTaken++;
 		history.push_back(std::move(currentTrick));
 		currentTrick = std::move(Trick(trump, getLastTrickWinner()));
+		sigModified(*this);
 	}
-	sigModified(*this);
 }
 
 }

@@ -1,5 +1,4 @@
-#include "../Observer.hpp"
-#include "Hand.hpp"
+#include "Play.hpp"
 #include <iostream>
 
 namespace ui {
