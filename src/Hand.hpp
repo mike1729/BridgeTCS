@@ -12,7 +12,7 @@ class Hand: public ui::Observable<Hand>
 		void insert(Card&& c);
 		Card remove(int index);
 		void removeAll();
-		std::list<Card> const & getHand() const;
+		std::list<Card> const & getCards() const;
 	private:
 		std::list<Card> hand;
 };

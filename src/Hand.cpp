@@ -3,7 +3,7 @@
 void Hand::insert(Card&& c)
 {
 	hand.push_back(std::move(c));
-	update();
+	sigModified(*this);
 }
 
 Card Hand::remove(int index)
@@ -13,7 +13,7 @@ Card Hand::remove(int index)
 		it++;
 	Card&& c = std::move(*it);
 	hand.erase(it);
-	update();
+	sigModified(*this);
 	return std::move(c);
 }
 
@@ -22,7 +22,7 @@ void Hand::removeAll()
 	hand.clear();
 }
 
-std::list<Card> const & Hand::getHand() const
+std::list<Card> const & Hand::getCards() const
 {
 	return hand;
 }

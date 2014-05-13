@@ -10,13 +10,13 @@ void Deal::dealCards()
 		hands[currentPlayer].insert(deck.dealCard());
 		currentPlayer = (currentPlayer+1) % 4;
 	}
-	update();
+	sigModified(*this);
 }
 
 Contract Deal::performBidding() 
 {
 	bidding.reset(new Bidding(firstCaller));
-	update();
+	sigModified(*this);
 	int currentCaller = firstCaller;
 	while (!bidding->biddingDone())
 	{
@@ -30,7 +30,7 @@ Contract Deal::performBidding()
 		currentCaller = (currentCaller+1)%4;
 	}
 	contract = bidding->getContract();
-	update();
+	sigModified(*this);
 	return contract;
 }
 
@@ -38,7 +38,7 @@ DealResult Deal::performPlay()
 {
 	play.reset(new Play(contract.denomination, contract.declarer));
 	result.contract = contract;
-	update();
+	sigModified(*this);
 	int currentPlayer = contract.declarer;
 	for (int trick = 0; trick < 13; trick++)
 	{
@@ -50,6 +50,6 @@ DealResult Deal::performPlay()
 		currentPlayer = play->getLastTrickWinner();
 	}
 	result.declarerTakenTricks = play->getTricksTaken();
-	update();
+	sigModified(*this);
 	return result;
 };
