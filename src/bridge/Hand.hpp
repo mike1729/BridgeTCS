@@ -1,12 +1,12 @@
-#ifndef MODEL_HAND_HPP
-#define MODEL_HAND_HPP
+#ifndef BRIDGE_HAND_HPP
+#define BRIDGE_HAND_HPP
 
 #include "Card.hpp"
 #include <list>
 #include <utility>
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
 class Hand: public ui::Observable<Hand>
 {

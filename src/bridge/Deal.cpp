@@ -1,7 +1,7 @@
 #include "Deal.hpp"
 #include "Deck.hpp"
 
-namespace model {
+namespace bridge {
 
 void Deal::dealCards()
 {

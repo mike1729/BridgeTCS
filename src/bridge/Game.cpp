@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "Deal.hpp"
 
-namespace model {
+namespace bridge {
 
 void Game::start()
 {

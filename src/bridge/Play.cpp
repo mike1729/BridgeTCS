@@ -1,6 +1,6 @@
 #include "Play.hpp"
 
-namespace model {
+namespace bridge {
 
 bool operator==(Suit suit, Denomination denomination)
 {

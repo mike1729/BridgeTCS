@@ -3,7 +3,7 @@
 #include <utility>
 #include "../Deck.hpp"
 
-namespace model {
+namespace bridge {
 
 TEST(DeckTest, cardsLeftAll)
 {

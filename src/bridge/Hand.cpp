@@ -1,6 +1,6 @@
 #include "Hand.hpp"
 
-namespace model {
+namespace bridge {
 
 void Hand::insert(Card&& c)
 {

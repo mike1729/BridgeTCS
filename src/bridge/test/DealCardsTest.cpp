@@ -3,7 +3,7 @@
 #include <map>
 #include <utility>
 
-namespace model {
+namespace bridge {
 
 class DealPlayer : public IPlayer
 {

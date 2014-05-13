@@ -1,10 +1,10 @@
-#ifndef MODEL_CARD_HPP
-#define MODEL_CARD_HPP
+#ifndef BRIDGE_CARD_HPP
+#define BRIDGE_CARD_HPP
 
 #include <utility>
 #include <iostream>
 
-namespace model {
+namespace bridge {
 
 enum class Rank 
 {

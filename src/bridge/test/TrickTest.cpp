@@ -2,7 +2,7 @@
 #include "../Play.hpp"
 #include "../Deck.hpp"
 
-namespace model {
+namespace bridge {
 
 class MyDeck : public Deck
 {

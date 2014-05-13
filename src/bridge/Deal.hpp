@@ -1,5 +1,5 @@
-#ifndef MODEL_DEAL_HPP
-#define MODEL_DEAL_HPP
+#ifndef BRIDGE_DEAL_HPP
+#define BRIDGE_DEAL_HPP
 #include <array>
 #include <memory>
 
@@ -10,7 +10,7 @@
 #include "Play.hpp"
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
 using Arbiters = std::array<Arbiter, 4>;
 using Hands = std::array<Hand, 4>;

@@ -1,12 +1,12 @@
-#ifndef MODEL_ARBITER_HPP
-#define MODEL_ARBITER_HPP
+#ifndef BRIDGE_ARBITER_HPP
+#define BRIDGE_ARBITER_HPP
 
 #include "Deck.hpp"
 #include "Call.hpp"
 #include "Player.hpp"
 #include "Hand.hpp"
 
-namespace model {
+namespace bridge {
 
 class Arbiter 
 {

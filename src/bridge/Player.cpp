@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-namespace model {
+namespace bridge {
 
 int Player::chooseCard()
 {

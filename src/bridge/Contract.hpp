@@ -1,7 +1,7 @@
-#ifndef MODEL_CONTRACT_HPP
-#define MODEL_CONTRACT_HPP
+#ifndef BRIDGE_CONTRACT_HPP
+#define BRIDGE_CONTRACT_HPP
 
-namespace model {
+namespace bridge {
 
 enum class Denomination {
 	CLUBS, DIAMONDS, HEARTS, SPADES, NT

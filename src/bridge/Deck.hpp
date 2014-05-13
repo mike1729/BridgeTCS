@@ -1,5 +1,5 @@
-#ifndef MODEL_DECK_HPP
-#define MODEL_DECK_HPP
+#ifndef BRIDGE_DECK_HPP
+#define BRIDGE_DECK_HPP
 
 #include <algorithm>    // std::random_shuffle
 #include <vector>       // std::vector
@@ -8,7 +8,7 @@
 
 #include "Card.hpp"
 
-namespace model {
+namespace bridge {
 
 class IDeck
 {
