@@ -8,6 +8,8 @@
 
 #include "Card.hpp"
 
+namespace model {
+
 class IDeck
 {
 public:
@@ -41,4 +43,5 @@ public:
 	virtual bool empty();
 };
 
+}
 #endif

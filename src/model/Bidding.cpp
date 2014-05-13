@@ -1,5 +1,7 @@
 #include "Bidding.hpp"
 
+namespace model {
+
 /* ------------------------------------------------------------------------------------------------------------------------*
 **                             operator <=( const Denomination &d1, const Denomination &d2 )                               *
 ** ------------------------------------------------------------------------------------------------------------------------*/
@@ -127,3 +129,4 @@ void Bidding::findDeclarer()
 	currentContract.declarer = (declarer+firstCaller)%4;
 }
 
+}

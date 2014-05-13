@@ -8,7 +8,9 @@
 #include "Arbiter.hpp"
 #include "Bidding.hpp"
 #include "Play.hpp"
-#include "ui/Observable.hpp"
+#include "../ui/Observable.hpp"
+
+namespace model {
 
 using Arbiters = std::array<Arbiter, 4>;
 using Hands = std::array<Hand, 4>;
@@ -41,4 +43,6 @@ private:
 	std::unique_ptr<Play> play;
 	DealResult result;
 };
+
+}
 #endif

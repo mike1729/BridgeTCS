@@ -2,6 +2,6 @@ SOURCES=$(wildcard ../*.cpp)
 TESTSOURCES=$(wildcard *.cpp)
 LIBRARY=../libbridge.a
 TESTDEPLIBS=
-LIBDEPLIBS=../ui/libbridgeui.a
+LIBDEPLIBS=
 
-include ../../Make.rules
+include ../../../Make.rules

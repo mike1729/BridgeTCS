@@ -7,6 +7,8 @@
 #include "Player.hpp"
 #include "Arbiter.hpp"
 
+namespace model {
+
 class Game
 {
 public:
@@ -19,4 +21,6 @@ private:
 	std::array<Hand,4> hands;
 	std::array<Arbiter,4> arbiters;
 };
+
+}
 #endif

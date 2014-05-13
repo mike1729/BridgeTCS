@@ -2,6 +2,8 @@
 #include "../Hand.hpp"
 #include "../Deck.hpp"
 
+namespace model {
+
 class HandTest: public ::testing::Test
 {
 	public:
@@ -39,4 +41,6 @@ TEST_F(HandTest, SimpleInsertRemoveAll)
 	hand->insert(deck->dealCard());
 	hand->removeAll();
 	ASSERT_EQ(0, hand->getHand().size());
+}
+
 }

@@ -7,7 +7,9 @@
 
 #include "Card.hpp"
 #include "Contract.hpp"
-#include "ui/Observable.hpp"
+#include "../ui/Observable.hpp"
+
+namespace model {
 
 class Play: public ui::Observable
 {
@@ -73,4 +75,5 @@ class Play: public ui::Observable
 		History history;
 };
 
+}
 #endif
