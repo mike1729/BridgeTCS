@@ -15,7 +15,7 @@ public:
 	Bidding(int firstCaller) : firstCaller(firstCaller) {}
 
 	bool makeCall(Call call);
-	bool biddingDone()
+	bool Done()
 	{
 		return isFinished;
 	}

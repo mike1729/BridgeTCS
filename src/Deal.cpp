@@ -4,12 +4,8 @@
 void Deal::dealCards()
 {
 	Standard52Deck deck;
-	int currentPlayer = firstCaller;
-	while (deck.cardsLeft())
-	{
+	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
 		hands[currentPlayer].insert(deck.dealCard());
-		currentPlayer = (currentPlayer+1) % 4;
-	}
 	update();
 }
 
@@ -17,17 +13,10 @@ Contract Deal::performBidding()
 {
 	bidding.reset(new Bidding(firstCaller));
 	update();
-	int currentCaller = firstCaller;
-	while (!bidding->biddingDone())
+	while (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
 	{
-		bool wasSuccessful;
-		do 
-		{
-			Call currentCall = arbiters[currentCaller].getCall();
-			wasSuccessful = bidding->makeCall(currentCall);
-		} 
-		while (!wasSuccessful);
-		currentCaller = (currentCaller+1)%4;
+		Call currentCall = arbiters[currentCaller].getCall();
+		wasSuccessful = bidding->makeCall(currentCall);
 	}
 	contract = bidding->getContract();
 	update();
