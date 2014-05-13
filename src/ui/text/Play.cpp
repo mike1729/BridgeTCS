@@ -1,8 +1,10 @@
 #include "Play.hpp"
 #include <iostream>
 
-namespace ui {
-namespace text {
+namespace ui 
+{
+namespace text 
+{
 
 void Play::notify(const ::Play & play)
 {
@@ -12,5 +14,6 @@ void Play::notify(const ::Play & play)
 	trick.subscribe(trickView);
 	
 }
-}
-}
+
+} // namespace text
+} // namespace ui

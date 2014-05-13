@@ -20,4 +20,5 @@ class Hand: public ui::Observable<Hand>
 };
 
 }
+
 #endif

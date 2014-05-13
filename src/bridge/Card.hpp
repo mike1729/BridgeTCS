@@ -33,21 +33,13 @@ enum class Suit
 
 struct Card
 {
+	Rank rank;
+	Suit suit;
 
-	friend class Deck;
-
-	mutable Rank rank;
-	mutable Suit suit;
-
-private:
+public:
 	Card(Rank r, Suit s) : rank(r), suit(s)
 	{
 	}
-
-public:
-	Card(Card&& c) = default;
-
-	Card(Card const& card) = delete;
 };
 
 }

@@ -7,6 +7,7 @@ namespace ui
 {
 namespace text
 {
+
 class Play : public Observer<::Play>
 {
 public:
@@ -14,8 +15,9 @@ public:
 	{
 	}
 };
-}
-}
+
+} // namespace text
+} // namespace ui
 
 
 #endif

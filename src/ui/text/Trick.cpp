@@ -1,7 +1,9 @@
 #include "Trick.hpp"
 
-namespace ui {
-namespace text {
+namespace ui 
+{
+namespace text 
+{
 
 void Trick::print(const bridge::Trick & trick)
 {
@@ -19,6 +21,5 @@ void Trick::print(const bridge::Trick & trick)
 	std::cout << "\n";
 }
 
-
-}
-}
+} // namespace text
+} // namespace ui
