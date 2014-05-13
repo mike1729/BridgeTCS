@@ -1,7 +1,7 @@
 #ifndef UI_TEXT_HAND_HPP
 #define UI_TEXT_HAND_HPP
 
-#include "../Observer.hpp"
+#include "ui/Observer.hpp"
 
 namespace ui
 {

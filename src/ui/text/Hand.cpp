@@ -1,4 +1,4 @@
-#include "../Observer.hpp"
+#include "ui/Observer.hpp"
 #include "Hand.hpp"
 #include <iostream>
 

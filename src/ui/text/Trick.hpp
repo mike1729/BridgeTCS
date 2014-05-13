@@ -1,8 +1,8 @@
 #ifndef Hand_hpp
 #define Hand_hpp
 
-#include "../Observer.hpp"
-#include "../../Contract.hpp"
+#include "ui/Observer.hpp"
+#include "bridge/model/Contract.hpp"
 
 namespace ui
 {
@@ -13,9 +13,7 @@ class Trick : public Observer<::Trick>
 {
 };
 
-
-}
-}
-
+} // namespace text
+} // namespace ui
 
 #endif

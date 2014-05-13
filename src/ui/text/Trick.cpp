@@ -1,9 +1,11 @@
-#include "../Observer.hpp"
+#include "ui/Observer.hpp"
 #include "Hand.hpp"
 #include <iostream>
 
-namespace ui {
-namespace text {
+namespace ui 
+{
+namespace text 
+{
 
 void Trick::notify(const ::Trick & trick)
 {
@@ -21,6 +23,5 @@ void Trick::notify(const ::Trick & trick)
 	std::cout << "\n";
 }
 
-
-}
-}
+} // namespace text
+} // namespace ui

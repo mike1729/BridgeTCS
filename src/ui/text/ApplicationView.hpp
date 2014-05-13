@@ -1,8 +1,8 @@
 #ifndef UI_TEXT_APPLICATIONVIEW_HPP
 #define UI_TEXT_APPLICATIONVIEW_HPP
 
-#include "../Observer.hpp"
-#include "../../Application.hpp"
+#include "ui/Observer.hpp"
+#include "bridge/model/Application.hpp"
 
 namespace ui
 {
