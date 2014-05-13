@@ -1,8 +1,8 @@
-#ifndef MODEL_CALL_HPP
-#define MODEL_CALL_HPP
+#ifndef BRIDGE_CALL_HPP
+#define BRIDGE_CALL_HPP
 #include "Contract.hpp"
 
-namespace model {
+namespace bridge {
 
 enum class CallType
 {

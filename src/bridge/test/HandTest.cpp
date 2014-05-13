@@ -2,7 +2,7 @@
 #include "../Hand.hpp"
 #include "../Deck.hpp"
 
-namespace model {
+namespace bridge {
 
 class HandTest: public ::testing::Test
 {

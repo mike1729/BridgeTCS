@@ -1,6 +1,6 @@
 #include "Bidding.hpp"
 
-namespace model {
+namespace bridge {
 
 /* ------------------------------------------------------------------------------------------------------------------------*
 **                             operator <=( const Denomination &d1, const Denomination &d2 )                               *

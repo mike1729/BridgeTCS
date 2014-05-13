@@ -3,7 +3,7 @@
 #include <queue>
 #include <iostream>
 
-namespace model {
+namespace bridge {
 
 class BiddingPlayer : public IPlayer 
 {

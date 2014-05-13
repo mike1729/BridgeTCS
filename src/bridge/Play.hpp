@@ -1,5 +1,5 @@
-#ifndef MODEL_PLAY_HPP
-#define MODEL_PLAY_HPP
+#ifndef BRIDGE_PLAY_HPP
+#define BRIDGE_PLAY_HPP
 
 #include <array>
 #include <list>
@@ -9,7 +9,7 @@
 #include "Contract.hpp"
 #include "../ui/Observable.hpp"
 
-namespace model {
+namespace bridge {
 
 class Play: public ui::Observable
 {

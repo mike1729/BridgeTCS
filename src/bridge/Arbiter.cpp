@@ -1,6 +1,6 @@
 #include "Arbiter.hpp"
 
-namespace model {
+namespace bridge {
 
 Card Arbiter::getCard()
 {
