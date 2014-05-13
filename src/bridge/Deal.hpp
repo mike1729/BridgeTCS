@@ -22,7 +22,7 @@ struct DealResult
 };
 
 
-class Deal: public ui::Observable
+class Deal: public ui::Observable<Deal>
 {
 public:
 
