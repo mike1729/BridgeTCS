@@ -90,4 +90,5 @@ class Play: public ui::Observable
 		int tricksTaken = 0;
 		History history;
 };
+
 #endif
