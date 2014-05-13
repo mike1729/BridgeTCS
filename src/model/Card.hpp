@@ -2,6 +2,7 @@
 #define MODEL_CARD_HPP
 
 #include <utility>
+#include <iostream>
 
 namespace model {
 

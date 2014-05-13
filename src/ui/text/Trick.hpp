@@ -1,0 +1,21 @@
+#ifndef Hand_hpp
+#define Hand_hpp
+
+#include "../Observer.hpp"
+#include "../../Contract.hpp"
+
+namespace ui
+{
+namespace text
+{
+
+class Trick : public Observer<::Trick>
+{
+};
+
+
+}
+}
+
+
+#endif

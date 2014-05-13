@@ -7,11 +7,7 @@ namespace ui
 namespace text 
 {
 
-void Hand::notify()
-{
-	printHand();
-}
-void Hand::printHand()
+void Hand::notify(const ::Hand & hand)
 {
 	std::cout << "Your cards:\n";
 	for(auto & card : hand.getList())

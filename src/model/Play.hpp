@@ -21,7 +21,7 @@ class Play: public ui::Observable
 		class Trick: public ui::Observable
 		{
 			public:
-				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) 
+				Trick(Denomination trump, int initiator) : trump(trump), presentPlayer(initiator) , initiator(initiator)
 				{
 				}
 
@@ -42,12 +42,30 @@ class Play: public ui::Observable
 				{
 					return presentWinner;
 				}
+				
+				std::list<Card> const & getCards() const
+				{
+					return cards;
+				}
+				
+				Denomination getTrump() const
+				{
+					return trump;
+				}
+				
+				int getInitiator() const
+				{
+					return initiator;
+				}
+
+				
 			private:
 				std::list<Card> cards;
-				Denomination trump;
 				int presentPlayer, presentWinner;
 				Card * presentWinningCard;
-
+				Denomination trump;
+				int initiator;
+				
 				bool defeat(const Card& winningCard, const Card& attempterCard);
 		};
 

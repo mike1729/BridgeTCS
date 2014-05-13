@@ -7,13 +7,14 @@ namespace ui
 {
 namespace text
 {
-		
-class Hand : public Observer
+
+class Hand : public Observer<::Hand>
 {
-	::Hand hand;
-public:
-	Hand(const ::Hand & hand) : hand(hand) {}
+private:
+    const std::list<Card> & cards;
+
 };
+
 
 } // namespace text
 } // namespace ui

@@ -112,7 +112,7 @@ bool Bidding::makeCall(Call call)
 	}
 	history.push_back(call);
 	callNumber++;
-	update();
+	update(this);
 	return true;
 }
 

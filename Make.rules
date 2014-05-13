@@ -1,4 +1,4 @@
-CXX?=g++
+CXX=clang++
 CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2
 TESTLDFLAGS+=-lgtest -lgtest_main -pthread
 LDFLAGS+=
