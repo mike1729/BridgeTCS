@@ -4,7 +4,9 @@
 #include "Card.hpp"
 #include <list>
 #include <utility>
-#include "ui/Observable.hpp"
+#include "../ui/Observable.hpp"
+
+namespace model {
 
 class Hand: public ui::Observable<Hand>
 {
@@ -17,4 +19,5 @@ class Hand: public ui::Observable<Hand>
 		std::list<Card> hand;
 };
 
+}
 #endif

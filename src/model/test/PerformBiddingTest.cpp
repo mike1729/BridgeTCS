@@ -3,6 +3,8 @@
 #include <queue>
 #include <iostream>
 
+namespace model {
+
 class BiddingPlayer : public IPlayer 
 {
 public:
@@ -121,4 +123,6 @@ TEST_F(PerformBiddingTest, RealFinishOtherStart)
 	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
 	ASSERT_EQ(res.level, 5);
 	ASSERT_EQ(res.declarer, 2);
+}
+
 }

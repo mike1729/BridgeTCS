@@ -3,6 +3,8 @@
 
 #include "Call.hpp"
 
+namespace model {
+
 class IPlayer
 {
 public:
@@ -16,4 +18,5 @@ class Player : public IPlayer
 	virtual Call makeCall();
 };
 
+}
 #endif

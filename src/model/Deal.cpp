@@ -1,6 +1,8 @@
 #include "Deal.hpp"
 #include "Deck.hpp"
 
+namespace model {
+
 void Deal::dealCards()
 {
 	Standard52Deck deck;
@@ -42,3 +44,5 @@ DealResult Deal::performPlay()
 	update();
 	return result;
 };
+
+}

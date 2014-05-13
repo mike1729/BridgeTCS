@@ -2,6 +2,8 @@
 #define MODEL_CALL_HPP
 #include "Contract.hpp"
 
+namespace model {
+
 enum class CallType
 {
 	BID, DOUBLE, REDOUBLE, PASS
@@ -34,4 +36,5 @@ public:
 	}
 };
 
+}
 #endif

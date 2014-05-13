@@ -1,5 +1,7 @@
 #include "Play.hpp"
 
+namespace model {
+
 bool operator==(Suit suit, Denomination denomination)
 {
 	return static_cast<int> (denomination)==static_cast<int> (suit);
@@ -44,4 +46,6 @@ void Play::add(Card && card)
 		currentTrick = std::move(Trick(trump, getLastTrickWinner()));
 	}
 	update();
+}
+
 }

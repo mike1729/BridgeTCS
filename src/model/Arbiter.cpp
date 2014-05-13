@@ -1,5 +1,7 @@
 #include "Arbiter.hpp"
 
+namespace model {
+
 Card Arbiter::getCard()
 {
 	int index = player.chooseCard();
@@ -11,4 +13,6 @@ Call Arbiter::getCall()
 {
 	Call call = player.makeCall();
 	return call;
+}
+
 }

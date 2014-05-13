@@ -2,6 +2,8 @@
 #include "../Play.hpp"
 #include "../Deck.hpp"
 
+namespace model {
+
 class MyDeck : public Deck
 {
 	virtual void shuffle(){}
@@ -216,4 +218,4 @@ TEST_F(TrickTest, Trump6){
 		player2);
 }
 
-
+}

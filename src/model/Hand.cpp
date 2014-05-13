@@ -1,5 +1,7 @@
 #include "Hand.hpp"
 
+namespace model {
+
 void Hand::insert(Card&& c)
 {
 	hand.push_back(std::move(c));
@@ -25,4 +27,6 @@ void Hand::removeAll()
 std::list<Card> const & Hand::getHand() const
 {
 	return hand;
+}
+
 }

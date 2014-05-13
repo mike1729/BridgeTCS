@@ -4,6 +4,8 @@
 #include <utility>
 #include <iostream>
 
+namespace model {
+
 enum class Rank 
 {
 	TWO,
@@ -47,5 +49,7 @@ public:
 
 	Card(Card const& card) = delete;
 };
+
+}
 
 #endif

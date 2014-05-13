@@ -3,6 +3,8 @@
 #include <map>
 #include <utility>
 
+namespace model {
+
 class DealPlayer : public IPlayer
 {
 public:
@@ -130,4 +132,6 @@ TEST_F(DealCardsTest, StartFrom3)
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}
+}
+
 }
