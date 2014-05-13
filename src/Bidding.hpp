@@ -7,7 +7,7 @@
 #include "Contract.hpp"
 #include "ui/Observable.hpp"
 
-class Bidding: public ui::Observable
+class Bidding: public ui::Observable<Bidding>
 {
 	public:
 		using History = std::vector<Call>;

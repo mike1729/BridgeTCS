@@ -6,7 +6,7 @@
 #include <utility>
 #include "ui/Observable.hpp"
 
-class Hand: public ui::Observable
+class Hand: public ui::Observable<Hand>
 {
 	public:
 		void insert(Card&& c);
