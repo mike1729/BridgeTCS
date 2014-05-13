@@ -1,5 +1,7 @@
 #include "Deck.hpp"
 
+namespace model {
+
 Standard52Deck::Standard52Deck()
 {
 	for (int s = (int) Suit::CLUBS; s <= (int) Suit::SPADES; ++s)
@@ -29,4 +31,6 @@ int Standard52Deck::cardsLeft()
 bool Standard52Deck::empty()
 {
 	return deck.size() == 0;
+}
+
 }

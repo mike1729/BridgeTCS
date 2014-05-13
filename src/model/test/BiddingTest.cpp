@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "../Bidding.hpp"
 
+namespace model {
+
 class BiddingTest: public ::testing::Test
 {
 public:
@@ -76,4 +78,6 @@ TEST_F(BiddingTest, WrongDouble)
 	ASSERT_EQ(bidding->makeCall(oneClub), true);
 	ASSERT_EQ(bidding->makeCall(pass), true);
 	ASSERT_EQ(bidding->makeCall(doubleCall), false);
+}
+
 }

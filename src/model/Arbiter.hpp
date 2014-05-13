@@ -6,6 +6,8 @@
 #include "Player.hpp"
 #include "Hand.hpp"
 
+namespace model {
+
 class Arbiter 
 {
 public:
@@ -16,4 +18,6 @@ private:
 	Hand &hand;
 	IPlayer &player;
 };
+
+}
 #endif

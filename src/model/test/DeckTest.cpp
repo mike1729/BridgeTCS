@@ -3,6 +3,8 @@
 #include <utility>
 #include "../Deck.hpp"
 
+namespace model {
+
 TEST(DeckTest, cardsLeftAll)
 {
 	Standard52Deck deck = Standard52Deck();
@@ -48,4 +50,6 @@ TEST(DeckTest, shuffledContainsEachCard)
 	}
 
 	ASSERT_EQ(containsEach(cards), true);
+}
+
 }
