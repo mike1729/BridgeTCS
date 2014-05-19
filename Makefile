@@ -1,8 +1,9 @@
 SOURCES=$(wildcard *.cpp)
 TESTSOURCES=$(wildcard test/*.cpp)
-LIBRARY=
+LOCALLIBRARY=
 PROJECTROOT=.
 TESTDEPLIBS=
 LIBDEPLIBS=
+LOCALDIRECTORY=
 
 include $(PROJECTROOT)/Make.rules

@@ -2,13 +2,15 @@ CXX=clang++
 CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2 -I$(SRCDIRECTORY)
 TESTLDFLAGS+=-lgtest -lgtest_main -pthread
 LDFLAGS+=
-OBJECTS=$(SOURCES:.cpp=.o)
+OBJECTS=$(SOURCES:%.cpp=$(BINDIRECTORY)/$(LOCALDIRECTORY)/%.o)
+OBJECTDEPFILES=$(SOURCES:%.cpp=$(BINDIRECTORY)/$(LOCALDIRECTORY)/%.d)
+LIBRARY=$(LOCALLIBRARY:%=$(BINDIRECTORY)/$(LOCALDIRECTORY)/%)
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 TESTEXECUTABLES=$(TESTSOURCES:.cpp=)
 TESTTARGETS=$(TESTSOURCES:.cpp=.run)
 SRCDIRECTORY=$(PROJECTROOT)/src
 BINDIRECTORY=$(PROJECTROOT)/bin
-MAINDEPLIBS=$(SRCDIRECTORY)/libmain.a
+MAINDEPLIBS=$(BINDIRECTORY)/libmain.a
 MAINTARGET=$(BINDIRECTORY)/BridgeTCS
 
 all: $(MAINTARGET)
@@ -21,17 +23,28 @@ $(TESTTARGETS): %.run: %
 	./$<
 
 clean :
-	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(SOURCES:.cpp=.d) $(TESTSOURCES:.cpp=.d)
+	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(OBJECTDEPFILES) $(TESTSOURCES:.cpp=.d)
 
-.PHONY : all library test clean $(TESTTARGETS)
+fullclean :
+	make clean
+	make -C src clean
+	make -C src/bridge clean
+	make -C src/viewmodel clean
+	make -C src/ui clean
+	make -C src/ui/text clean
 
--include $(SOURCES:.cpp=.d)
+.PHONY : all library test clean fullclean $(TESTTARGETS)
+
+-include $(OBJECTDEPFILES)
 -include $(TESTSOURCES:.cpp=.d)
 
-$(MAINTARGET) : $(MAINDEPLIBS) $(SRCDIRECTORY)/Main.o
+$(MAINTARGET) : $(MAINDEPLIBS)
 	$(CXX) $^ -o $@ $(LDFLAGS) $(TESTLDFLAGS)
 
 %.o : %.cpp
+	$(CXX) $(CXXFLAGS) -MMD $< -o $@
+
+$(BINDIRECTORY)/$(LOCALDIRECTORY)/%.o : %.cpp
 	$(CXX) $(CXXFLAGS) -MMD $< -o $@
 
 $(TESTEXECUTABLES) : % : %.o $(LIBRARY) $(TESTDEPLIBS)
@@ -44,6 +57,9 @@ $(LIBRARY) : $(OBJECTS) $(LIBDEPLIBS)
 $(TESTDEPLIBS) $(LIBDEPLIBS) $(MAINDEPLIBS) : % :
 	make -C $(@D) $(@F)
 
-.PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS) $(MAINDEPLIBS)
+$(LOCALLIBRARY) :
+	make -C $(SRCDIRECTORY)/$(LOCALDIRECTORY)/ library
+
+.PHONY: $(TESTDEPLIBS) $(LIBDEPLIBS) $(MAINDEPLIBS) $(LOCALLIBRARY)
 
 # vim: set filetype=make:
