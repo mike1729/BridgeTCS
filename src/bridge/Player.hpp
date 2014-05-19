@@ -13,14 +13,14 @@ class IPlayer
 {
 public:
 	virtual Card chooseCard(Play const &, Hand const &) = 0;
-	virtual Call makeCall(Bidding const &) = 0;
+	virtual Call makeCall(Bidding const &, Hand const &) = 0;
 };
 
 class Player : public IPlayer
 {
 public:
 	virtual Card chooseCard(Play const &, Hand const &);
-	virtual Call makeCall(Bidding const &);
+	virtual Call makeCall(Bidding const &, Hand const &);
 };
 
 }
