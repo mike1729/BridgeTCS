@@ -26,12 +26,12 @@ clean :
 	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(OBJECTDEPFILES) $(TESTSOURCES:.cpp=.d)
 
 fullclean :
-	make clean
-	make -C src clean
-	make -C src/bridge clean
-	make -C src/viewmodel clean
-	make -C src/ui clean
-	make -C src/ui/text clean
+	make -C $(PROJECTROOT) clean
+	make -C $(PROJECTROOT)/src clean
+	make -C $(PROJECTROOT)/src/bridge clean
+	make -C $(PROJECTROOT)/src/viewmodel clean
+	make -C $(PROJECTROOT)/src/ui clean
+	make -C $(PROJECTROOT)/src/ui/text clean
 
 .PHONY : all library test clean fullclean $(TESTTARGETS)
 
