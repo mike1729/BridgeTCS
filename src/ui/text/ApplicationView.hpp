@@ -1,7 +1,7 @@
 #ifndef UI_TEXT_APPLICATIONVIEW_HPP
 #define UI_TEXT_APPLICATIONVIEW_HPP
 
-#include "../Observer.hpp"
+//#include "../Observer.hpp"
 #include "../../Application.hpp"
 
 namespace ui
@@ -9,7 +9,7 @@ namespace ui
 namespace text 
 {
 
-class ApplicationView : public Observer<Application>
+class ApplicationView
 {
 public:
 	virtual void notify(Application const &) {
