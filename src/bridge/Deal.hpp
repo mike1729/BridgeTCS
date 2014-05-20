@@ -47,6 +47,31 @@ public:
 		return firstCaller;
 	}
 	
+	bool biddingDone()
+	{
+        return bidding->isFinished;
+	}
+
+    int getLastBidder()
+    {
+        return bidding->lastBidder;
+    }
+
+    History getHistory()
+    {
+        return bidding->history;
+    }
+
+    int getCallNumber()
+    {
+        return bidding->callNumber;
+    }
+
+    int getConsecutivePassesNumber()
+    {
+        return bidding->consecutivePasses;
+    }
+
 private:
 	Contract contract;
 	Arbiters & arbiters;

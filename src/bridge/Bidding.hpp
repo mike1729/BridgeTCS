@@ -11,13 +11,14 @@ namespace bridge {
 
 class Bidding: public ui::Observable<Bidding>
 {
+    friend class Deal;
 public:
 	using History = std::vector<Call>;
 
 	Bidding(int firstCaller) : firstCaller(firstCaller) {}
 
 	bool makeCall(Call call);
-	bool biddingDone()
+	bool Done()
 	{
 		return isFinished;
 	}

@@ -33,12 +33,12 @@ class Play: public ui::Observable<Play>
 
 				void add(Card && card);
 
-				bool full()
+				bool full() const
 				{
 					return (cards.size() == 4);
 				}
 
-				int getWinner()
+				int getWinner() const
 				{
 					return presentWinner;
 				}
