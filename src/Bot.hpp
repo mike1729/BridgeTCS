@@ -7,7 +7,7 @@
 class Bot : public bridge::IPlayer
 {
 public:
-    bridge::Card chooseCard(bridge::Play const &, bridge::Hand const &);
+    bridge::Card chooseCard(bridge::Play const &, bridge::Hand const &, BiddingHistory const &, PlayHistory const &, bridge::Hand const &);
     bridge::Call makeCall(bridge::Bidding const &, bridge::Hand const &);
 private:
 	bool madeCall;

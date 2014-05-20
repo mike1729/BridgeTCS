@@ -21,7 +21,7 @@ public:
 class Player : public IPlayer
 {
 public:
-	virtual Card chooseCard(Play const &, Hand const &);
+	virtual Card chooseCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &);
 	virtual Call makeCall(Bidding const &, Hand const &);
 };
 
