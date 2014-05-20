@@ -11,8 +11,9 @@ namespace bridge {
 class Hand: public ui::Observable<Hand>
 {
 	public:
-		void insert(Card&& c);
-		Card remove(int index);
+		void insert(Card&&);
+		Card remove(int);
+		Card remove(Card const &);
 		void removeAll();
 		std::list<Card> const & getCards() const;
 	private:

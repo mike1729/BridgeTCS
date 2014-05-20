@@ -19,6 +19,22 @@ Card Hand::remove(int index)
 	return std::move(c);
 }
 
+Card Hand::remove(Card const & card)
+{
+	for (auto it = hand.begin(); it != hand.end(); it++)
+	{
+		if (*it == card)
+		{
+			Card&& c = std::move(*it);
+			hand.erase(it);
+			sigModified(*this);
+			return std::move(c);
+		}
+	}
+
+	return Card(Rank::ACE, Suit::CLUBS);
+}
+
 void Hand::removeAll()
 {
 	hand.clear();
