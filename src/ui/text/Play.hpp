@@ -12,9 +12,9 @@ class Play
 public:
 	void registerTrick(const bridge::Play & play)
 	{
-		play.getTrick().sigModified.connect([& trickView](Trick const & trick) {
+		/*play.getTrick().sigModified.connect([& trickView](Trick const & trick) {
 			trickView.print(trick);
-		});
+		});*/
 	}
 private:
 	ui::text::Trick trickView;

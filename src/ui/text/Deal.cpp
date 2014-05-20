@@ -7,7 +7,7 @@ namespace ui
 namespace text 
 {
 
-void Deal::notify(const bridge::Deal & deal, bridge::DealEvent event)
+/*void Deal::notify(const bridge::Deal & deal, bridge::DealEvent event)
 {
 	switch(event)
 	{
@@ -34,7 +34,7 @@ void Deal::notify(const bridge::Deal & deal, bridge::DealEvent event)
 			play.sigModified(play);
 			break;
 
-}
+}*/
 
 } // namespace text
 } // namespace ui

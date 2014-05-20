@@ -11,15 +11,16 @@ namespace ui
 namespace text
 {
 
-class Hand
+class Deal
 {
-public:
+/*public:
 	void notify(const bridge::Deal & deal, bridge::DealEvent event);
 private:
 	ui::text::Play playView;
 	ui::text::Bidding biddingView;
 };
-
+*/
+};
 
 } // namespace text
 } // namespace ui

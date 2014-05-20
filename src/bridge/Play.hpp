@@ -81,7 +81,7 @@ class Play: public ui::Observable<Play>
 			return tricksTaken;
 		}
 		
-		const Trick & getTrick()
+		const Trick & getTrick() const
 		{
 			return currentTrick;
 		}

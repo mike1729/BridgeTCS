@@ -34,7 +34,7 @@ public:
 	Contract performBidding();
 	DealResult performPlay();
 	
-	const Play & getPlay() const
+	/*const Play & getPlay() const
 	{
 		return *play;
 	}
@@ -70,7 +70,7 @@ public:
     int getConsecutivePassesNumber()
     {
         return bidding->consecutivePasses;
-    }
+    }*/
 
 private:
 	Contract contract;
@@ -84,7 +84,7 @@ private:
 
 enum class DealEvent
 {	
-	CardsDealt, BiddingStart, BiddingEnd, PlayStart, PlayEnd;
+	CardsDealt, BiddingStart, BiddingEnd, PlayStart, PlayEnd
 };
 
 }
