@@ -4,10 +4,10 @@
 
 int main() 
 {
-	Application application;
+	viewmodel::Application application;
 	ui::text::ApplicationView appView;
 	
-	application.sigModified.connect([& appView](Application const & app) {
+	application.sigModified.connect([& appView](viewmodel::Application const & app) {
 		appView.notify(app);
 	});
 	application.run();
