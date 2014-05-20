@@ -9,8 +9,9 @@ namespace text
 void Hand::print(const bridge::Hand & hand)
 {
 	std::cout << "Your cards:\n";
-	for(auto & card : hand.getList())
-		std::cout << card.rank << " " << card.suit << "\n";
+	for(auto & card : hand.getCards())
+		std::cout << static_cast<int>(card.rank) << " " 
+		          << static_cast<int>(card.suit) << "\n";
 	std::cout << "\n";
 }
 
