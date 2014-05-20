@@ -7,6 +7,7 @@ void Deal::dealCards()
 {
 	Standard52Deck deck;
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
+	{
 		hands[currentPlayer].insert(deck.dealCard());
 		currentPlayer = (currentPlayer+1) % 4;
 	}
