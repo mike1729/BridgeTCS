@@ -10,7 +10,7 @@ void Hand::print(const bridge::Hand & hand)
 {
 	std::cout << "Your cards:\n";
 	for(auto & card : hand.getList())
-		std::cout << card.rank << " " << card.suit << "\n";
+		std::cout << /*card.rank << " " << card.suit <<*/ "\n";
 	std::cout << "\n";
 }
 

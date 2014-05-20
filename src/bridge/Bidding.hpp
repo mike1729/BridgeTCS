@@ -9,7 +9,7 @@
 
 namespace bridge {
 
-class Bidding: public ui::Observable<Bidding>
+class Bidding : public ui::Observable<Bidding>
 {
     friend class Deal;
 public:
@@ -29,7 +29,7 @@ public:
 	}
 	Call getCall()
 	{
-		return currentCall;
+		return history[ history.size() - 1];
 	}
 	int returnCurrentCaller()
 	{
@@ -43,7 +43,7 @@ private:
 	int firstCaller;
 	History history;
 	int callNumber = 0;
-	Call currentCall;
+	//Call currentCall;
 	
 	void findDeclarer();
 };

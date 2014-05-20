@@ -32,7 +32,6 @@ void Bidding::makeCall(Call call)
 			}
 			break;
 	}
-	currentCall = call;
 	sigModified(*this);
 	
 	callNumber++;
