@@ -1,5 +1,5 @@
-#ifndef Hand_hpp
-#define Hand_hpp
+#ifndef UI_TEXT_TRICK_HPP
+#define UI_TEXT_TRICK_HPP
 
 #include <iostream>
 #include "bridge/Contract.hpp"
