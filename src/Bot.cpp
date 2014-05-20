@@ -90,7 +90,7 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit)
     return result;
 }
 
-bool Bot::isOpening(bridge::Bidding const & bidding) 
+bool Bot::isOpening(bridge::Bidding const &) 
 {
     return true;
 }
@@ -127,7 +127,7 @@ bool Bot::isBalanced(bridge::Hand const & hand)
     return true;
 }
 
-bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding)
+bridge::Call Bot::getPartnerCall(bridge::Bidding const &)
 {
     return bridge::Call::PASS();
 }
