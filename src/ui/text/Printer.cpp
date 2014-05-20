@@ -26,7 +26,6 @@ inline void Printer::print(bridge::Hand const & hand)
 	for(auto & card : hand.getCards())
 	{
 		Printer::print(card.rank);
-		std::cout << " ";
 		Printer::print(card.suit);
 		std::cout << "\n";
 	}
@@ -41,10 +40,12 @@ inline void Printer::print(bridge::Play::Trick const & trick)
 	for(auto & card : trick.getCards())
 	{
 		std::cout << "\tPlayer " << currentPlayer + 1 << ":";
+
 		Printer::print(card.rank);
-		std::cout << " ";
 		Printer::print(card.suit);
+		
 		std::cout << std::endl;
+		
 		currentPlayer = (currentPlayer + 1)%4;
 	}
 	if(trick.full())
