@@ -9,7 +9,7 @@
 
 namespace bridge {
 
-class Bidding: public ui::Observable<Bidding>
+class Bidding : public ui::Observable<Bidding>
 {
 public:
 	using History = std::vector<Call>;
@@ -25,6 +25,14 @@ public:
 	{
 		findDeclarer();
 		return currentContract;
+	}
+	Call getCall()
+	{
+		return history[ history.size() - 1];
+	}
+	int returnCurrentCaller()
+	{
+		return (firstCaller + callNumber)%4;
 	}
 	int getLastBidder()
 	{
@@ -50,7 +58,8 @@ private:
 	int firstCaller;
 	History history;
 	int callNumber = 0;
-
+	//Call currentCall;
+	
 	void findDeclarer();
 };
 
