@@ -2,16 +2,23 @@
 
 namespace bridge {
 
-Card Arbiter::getCard()
+Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand)
 {
-	int index = player.chooseCard();
+	Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
 	//TODO index validation
-	return hand.remove(index);
+	return hand.remove(card);
 }
 
-Call Arbiter::getCall() 
+Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand, Suit const &)
 {
-	Call call = player.makeCall();
+	Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
+	//TODO index validation
+	return hand.remove(card);
+}
+
+Call Arbiter::getCall(Bidding const & bidding, Hand const & hand) 
+{
+	Call call = player.makeCall(bidding, hand);
 	return call;
 }
 
