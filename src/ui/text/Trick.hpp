@@ -15,9 +15,7 @@ public:
 	void notify(const bridge::Trick & trick)
 };
 
-
-}
-}
-
+} // namespace text
+} // namespace ui
 
 #endif

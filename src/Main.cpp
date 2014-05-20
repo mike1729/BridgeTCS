@@ -1,4 +1,4 @@
-//#include "Application.hpp"
+#include "viewmodel/Application.hpp"
 #include "ui/text/ApplicationView.hpp"
 #include <functional>
 

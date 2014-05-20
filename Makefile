@@ -1,7 +1,9 @@
-SOURCES=$(wildcard src/*.cpp)
-TESTSOURCES=$(wildcard src/test/*.cpp)
-LIBRARY=src/libbridge.a
+SOURCES=$(wildcard *.cpp)
+TESTSOURCES=$(wildcard test/*.cpp)
+LOCALLIBRARY=
+PROJECTROOT=.
 TESTDEPLIBS=
-LIBDEPLIBS=src/ui/libbridgeui.a
+LIBDEPLIBS=
+LOCALDIRECTORY=
 
-include Make.rules
+include $(PROJECTROOT)/Make.rules

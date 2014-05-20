@@ -4,7 +4,7 @@
 #include "Card.hpp"
 #include <list>
 #include <utility>
-#include "../ui/Observable.hpp"
+#include "ui/Observable.hpp"
 
 namespace bridge {
 
@@ -20,4 +20,5 @@ class Hand: public ui::Observable<Hand>
 };
 
 }
+
 #endif

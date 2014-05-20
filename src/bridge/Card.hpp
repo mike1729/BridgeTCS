@@ -36,9 +36,12 @@ struct Card
 	Rank rank;
 	Suit suit;
 
-public:
 	Card(Rank r, Suit s) : rank(r), suit(s)
 	{
+	}
+
+	bool operator<(const Card & other) {
+		return ( suit == other.suit ) ? ( rank < other.rank ) : ( suit < other.suit );
 	}
 };
 

@@ -8,7 +8,7 @@
 #include "Arbiter.hpp"
 #include "Bidding.hpp"
 #include "Play.hpp"
-#include "../ui/Observable.hpp"
+#include "ui/Observable.hpp"
 
 namespace bridge {
 
