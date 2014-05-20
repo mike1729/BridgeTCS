@@ -1,23 +1,27 @@
-#ifndef Hand_hpp
-#define Hand_hpp
+#ifndef UI_PLAY_DEAL_HPP
+#define UI_PLAY_DEAL_HPP
 
-#include "bridge/Contract.hpp"
+#include "Trick.hpp"
 
 namespace ui
 {
 namespace text
 {
-
-class Play : public Observer<::Play>
+class Play
 {
 public:
-	void Play::registerTrick(const ::Play & play)
+	void registerTrick(const bridge::Play & play)
 	{
+		/*play.getTrick().sigModified.connect([& trickView](Trick const & trick) {
+			trickView.print(trick);
+		});*/
 	}
+private:
+	ui::text::Trick trickView;
+	
 };
-
-} // namespace text
-} // namespace ui
+}
+}
 
 
 #endif

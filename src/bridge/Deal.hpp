@@ -33,6 +33,44 @@ public:
 	void dealCards();
 	Contract performBidding();
 	DealResult performPlay();
+	
+	/*const Play & getPlay() const
+	{
+		return *play;
+	}
+	const Bidding & getBidding() const
+	{
+		return *bidding;
+	}
+	int getFirstCaller() const
+	{
+		return firstCaller;
+	}
+	
+	bool biddingDone()
+	{
+        return bidding->isFinished;
+	}
+
+    int getLastBidder()
+    {
+        return bidding->lastBidder;
+    }
+
+    History getHistory()
+    {
+        return bidding->history;
+    }
+
+    int getCallNumber()
+    {
+        return bidding->callNumber;
+    }
+
+    int getConsecutivePassesNumber()
+    {
+        return bidding->consecutivePasses;
+    }*/
 
 private:
 	Contract contract;
@@ -42,6 +80,11 @@ private:
 	std::unique_ptr<Bidding> bidding;
 	std::unique_ptr<Play> play;
 	DealResult result;
+};
+
+enum class DealEvent
+{	
+	CardsDealt, BiddingStart, BiddingEnd, PlayStart, PlayEnd
 };
 
 }

@@ -9,7 +9,7 @@
 
 namespace bridge {
 
-class IPlayer
+class IPlayer : public ui::Observable<IPlayer>
 {
 public:
 	virtual Card chooseCard(Play const &, Hand const &) = 0;
