@@ -85,6 +85,11 @@ class Play: public ui::Observable<Play>
 		{
 			return currentTrick;
 		}
+
+		const History & recentHistory() const
+		{
+			return history; //TODO return up to last 8 tricks
+		}
 		// The card given gets played. No validation -- validating is almost
 		// impossible with non-copyable cards.
 		void add(Card && card);
