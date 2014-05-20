@@ -8,26 +8,16 @@ void Deal::dealCards()
 	Standard52Deck deck;
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
 		hands[currentPlayer].insert(deck.dealCard());
-<<<<<<< HEAD:src/model/Deal.cpp
-	update();
-=======
 		currentPlayer = (currentPlayer+1) % 4;
 	}
 	sigModified(*this);
->>>>>>> 365da20076a5a2667a07f48cbadf46c61ed44293:src/bridge/Deal.cpp
 }
 
 Contract Deal::performBidding() 
 {
 	bidding.reset(new Bidding(firstCaller));
-<<<<<<< HEAD:src/model/Deal.cpp
-	update();
-	while (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
-=======
 	sigModified(*this);
-	int currentCaller = firstCaller;
-	while (!bidding->biddingDone())
->>>>>>> 365da20076a5a2667a07f48cbadf46c61ed44293:src/bridge/Deal.cpp
+	for (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
 	{
 		Call currentCall = arbiters[currentCaller].getCall();
 		wasSuccessful = bidding->makeCall(currentCall);
