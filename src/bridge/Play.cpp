@@ -42,8 +42,9 @@ void Play::add(Card && card)
 	{
 		if(arePartners(currentTrick.getWinner(), declarer))
 			tricksTaken++;
-		history.push_back(std::move(currentTrick));
-		currentTrick = std::move(Trick(trump, getLastTrickWinner()));
+		// deleted both move constructor and copy constructor, TODO somehow fix
+		// history.push_back(std::move(currentTrick));
+		// currentTrick = std::move(Trick(trump, getLastTrickWinner()));
 		sigModified(*this);
 	}
 }
