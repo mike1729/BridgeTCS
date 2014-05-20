@@ -1,8 +1,10 @@
-#ifndef UI_TEXT_HAND_HPP
-#define UI_TEXT_HAND_HPP
+#ifndef UI_TEXT_DEAL_HPP
+#define UI_TEXT_DEAL_HPP
 
 #include <iostream>
-#include "bridge/Deal.cpp"
+#include "bridge/Deal.hpp"
+#include "Play.hpp"
+#include "Bidding.hpp"
 
 namespace ui
 {
@@ -12,7 +14,10 @@ namespace text
 class Hand
 {
 public:
-	void print(const bridge::Deal & deal);
+	void notify(const bridge::Deal & deal, bridge::DealEvent event);
+private:
+	ui::text::Play playView;
+	ui::text::Bidding biddingView;
 };
 
 

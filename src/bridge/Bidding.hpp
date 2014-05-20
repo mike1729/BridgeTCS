@@ -26,6 +26,14 @@ public:
 		findDeclarer();
 		return currentContract;
 	}
+	Call getCall()
+	{
+		return currentCall;
+	}
+	int returnCurrentCaller()
+	{
+		return (firstCaller + callNumber)%4;
+	}
 private:
 	Contract currentContract;
 	int consecutivePasses = 0;
@@ -34,7 +42,8 @@ private:
 	int firstCaller;
 	History history;
 	int callNumber = 0;
-
+	Call currentCall;
+	
 	void findDeclarer();
 };
 

@@ -110,10 +110,13 @@ bool Bidding::makeCall(Call call)
 			}
 			break;
 	}
-	history.push_back(call);
-	callNumber++;
+	currentCall = call;
 	sigModified(*this);
+	
+	callNumber++;
+	history.push_back(call);
 	return true;
+	
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------*
