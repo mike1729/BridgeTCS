@@ -2,17 +2,13 @@
 
 namespace bridge {
 
-Card Player::chooseCard(Play const & p, Hand const & h, BiddingHistory const & bhist, PlayHistory const & plhist, Hand const & dummyHand)
+Card Player::chooseCard(Play const &, Hand const & h, BiddingHistory const &, PlayHistory const &, Hand const &)
 {
-	int resultInd;
-	sigModified(h, resultInd);
-	return h.getHand()[0];
+	return h.getCards().front();
 }
 
-Call Player::makeCall(Bidding const & b, Hand const & h)
+Call Player::makeCall(Bidding const &, Hand const &)
 {
-	Call resultCall;
-	sigModified(resultCall);
 	//random values
 	return Call::BID(1,Denomination::CLUBS);
 }

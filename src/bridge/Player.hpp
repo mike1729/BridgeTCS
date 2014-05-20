@@ -13,8 +13,8 @@ class IPlayer : public ui::Observable<IPlayer>
 {
 public:
     using BiddingHistory = std::vector<Call>;
-    using PlayHistory = std::vector<Play::Trick>;
-	virtual Card chooseCard(Play const &, Hand const &,BiddingHistory const &, PlayHistory const &, Hand const &) = 0;
+    using PlayHistory = std::list<Play::Trick>;
+	virtual Card chooseCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &) = 0;
 	virtual Call makeCall(Bidding const &, Hand const &) = 0;
 };
 
