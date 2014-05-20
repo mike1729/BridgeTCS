@@ -1,18 +1,17 @@
 #ifndef UI_TEXT_HAND_HPP
 #define UI_TEXT_HAND_HPP
 
-#include "../Observer.hpp"
+#include "bridge/Hand.cpp"
 
 namespace ui
 {
 namespace text
 {
 
-class Hand : public Observer<::Hand>
+class Hand
 {
-private:
-    const std::list<Card> & cards;
-
+public:
+	void print(const bridge::Hand & hand);
 };
 
 

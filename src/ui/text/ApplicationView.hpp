@@ -1,8 +1,7 @@
 #ifndef UI_TEXT_APPLICATIONVIEW_HPP
 #define UI_TEXT_APPLICATIONVIEW_HPP
 
-#include "../Observer.hpp"
-#include "../../Application.hpp"
+#include "viewmodel/Application.hpp"
 
 namespace ui
 {

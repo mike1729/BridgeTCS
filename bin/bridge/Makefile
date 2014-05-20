@@ -1,9 +1,9 @@
 SOURCES=$(wildcard *.cpp)
 TESTSOURCES=$(wildcard test/*.cpp)
-LOCALLIBRARY=
-PROJECTROOT=.
+LOCALLIBRARY=libbridge.a
+PROJECTROOT=../..
 TESTDEPLIBS=
 LIBDEPLIBS=
-LOCALDIRECTORY=
+LOCALDIRECTORY=bridge
 
 include $(PROJECTROOT)/Make.rules

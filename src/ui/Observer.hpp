@@ -1,8 +1,6 @@
 #ifndef UI_OBSERVER_HPP
 #define UI_OBSERVER_HPP
 
-#include <boost/signals2.hpp>
-
 namespace ui
 {
 
