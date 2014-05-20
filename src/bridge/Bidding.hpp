@@ -11,7 +11,6 @@ namespace bridge {
 
 class Bidding : public ui::Observable<Bidding>
 {
-    friend class Deal;
 public:
 	using History = std::vector<Call>;
 
@@ -35,6 +34,22 @@ public:
 	{
 		return (firstCaller + callNumber)%4;
 	}
+	int getLastBidder()
+	{
+        return lastBidder;
+	}
+	History getHistory()
+	{
+	    return history;
+	}
+	int getCallNumber()
+	{
+	    return callNumber;
+	}
+	int getConsecutivePassesNumber()
+    {
+        return consecutivePasses;
+    }
 private:
 	Contract currentContract;
 	int consecutivePasses = 0;
