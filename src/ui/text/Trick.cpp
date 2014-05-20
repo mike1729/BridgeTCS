@@ -1,4 +1,5 @@
 #include "Trick.hpp"
+#include "Printer.hpp"
 
 namespace ui 
 {
@@ -11,7 +12,7 @@ void Trick::print(const bridge::Play::Trick & trick)
 	int currentPlayer = trick.getInitiator();
 	for(auto & card : trick.getCards())
 	{
-		//std::cout << "\tPlayer " << currentPlayer + 1 << ":" << card.rank << " " << card.suit << "\n";
+		std::cout << "\tPlayer " << currentPlayer + 1 << ":" << Printer::print(card.rank) << " " << Printer::print(card.suit) << "\n";
 		currentPlayer = (currentPlayer + 1)%4;
 	}
 	if(trick.full())
