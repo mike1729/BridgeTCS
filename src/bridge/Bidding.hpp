@@ -21,14 +21,14 @@ public:
 	{
 		return isFinished;
 	}
-	Contract getContract() const 
+	Contract const & getContract()
 	{
 		findDeclarer();
 		return currentContract;
 	}
 	Call getLastCall() const
 	{
-		return history[ history.size() const - 1];
+		return history[ history.size() - 1];
 	}
 	int getCurrentCaller() const
 	{
