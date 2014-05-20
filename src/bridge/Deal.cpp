@@ -1,14 +1,15 @@
 #include "Deal.hpp"
 #include "Deck.hpp"
 
-namespace bridge {
+namespace bridge 
+{
 
 void Deal::dealCards()
 {
 	Standard52Deck deck;
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
+	{
 		hands[currentPlayer].insert(deck.dealCard());
-		currentPlayer = (currentPlayer+1) % 4;
 	}
 	event = DealEvent::CardsDealt;
 	sigModified(*this);
