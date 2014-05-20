@@ -17,36 +17,36 @@ public:
 	Bidding(int firstCaller) : firstCaller(firstCaller) {}
 
 	bool makeCall(Call call);
-	bool Done()
+	bool Done() const
 	{
 		return isFinished;
 	}
-	Contract getContract()
+	Contract getContract() const 
 	{
 		findDeclarer();
 		return currentContract;
 	}
-	Call getCall()
+	Call getLastCall() const
 	{
-		return history[ history.size() - 1];
+		return history[ history.size() const - 1];
 	}
-	int returnCurrentCaller()
+	int getCurrentCaller() const
 	{
 		return (firstCaller + callNumber)%4;
 	}
-	int getLastBidder()
+	int getLastBidder() const
 	{
         return lastBidder;
 	}
-	History getHistory()
+	History const & getHistory() const
 	{
 	    return history;
 	}
-	int getCallNumber()
+	int getCallNumber() const
 	{
 	    return callNumber;
 	}
-	int getConsecutivePassesNumber()
+	int getConsecutivePassesNumber() const
     {
         return consecutivePasses;
     }
