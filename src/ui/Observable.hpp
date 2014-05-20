@@ -11,7 +11,7 @@ template <typename Derived>
 class Observable 
 {
 public:
-	boost::signals2::signal<void (Derived const &)> sigModified;
+	mutable boost::signals2::signal<void (Derived const &)> sigModified;
 	
 	/*Observable<Derived> & operator=(Observable<Derived> && other)
 	{

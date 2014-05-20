@@ -10,14 +10,15 @@ namespace text
 class Play
 {
 public:
+	ui::text::Trick trickView;
+	
 	void registerTrick(const bridge::Play & play)
 	{
-		/*play.getTrick().sigModified.connect([& trickView](Trick const & trick) {
-			trickView.print(trick);
-		});*/
+		auto & trick = play.getTrick();
+		trick.sigModified.connect([this](bridge::Play::Trick const & trick) {
+			this->trickView.print(trick);
+		});
 	}
-private:
-	ui::text::Trick trickView;
 	
 };
 }
