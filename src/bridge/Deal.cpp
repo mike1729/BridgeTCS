@@ -22,8 +22,8 @@ Contract Deal::performBidding()
 	sigModified(*this);
 	for (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
 	{
-		Call currentCall = arbiters[currentCaller].getCall(bidding);
-		wasSuccessful = bidding->makeCall(currentCall);
+		Call currentCall = arbiters[currentCaller].getCall(*bidding, hands[currentCaller]);
+		auto wasSuccessful = bidding->makeCall(currentCall);
 	}
 	contract = bidding->getContract();
 	event = DealEvent::BiddingEnd;
@@ -40,12 +40,13 @@ DealResult Deal::performPlay()
 	int currentPlayer = contract.declarer;
 	for (int trick = 0; trick < 13; trick++)
 	{
-	    Card firstCard = arbiters[currentPlayer].getCard();
-	    play->add(firstCard);
+		Card firstCard = arbiters[currentPlayer].getCard(*play.get(), hands[currentPlayer], bidding->getHistory(), play->recentHistory(), hands[(contract.declarer + 2) % 4]);
+		Suit firstCardSuit = firstCard.suit;
+		play->add(std::move(firstCard));
 		for (int i = 0; i < 3; i++)
 		{
 			currentPlayer = (currentPlayer+1)%4;
-			play->add(arbiters[currentPlayer].getCard(firstCard.suit));
+			play->add(arbiters[currentPlayer].getCard(*play.get(), hands[currentPlayer], bidding->getHistory(), play->recentHistory(), hands[(contract.declarer + 2) % 4], firstCardSuit));
 		}
 		currentPlayer = play->getLastTrickWinner();
 	}
@@ -55,4 +56,4 @@ DealResult Deal::performPlay()
 	return result;
 };
 
-}
+} // namespace bridge
