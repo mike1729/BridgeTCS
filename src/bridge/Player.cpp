@@ -2,7 +2,7 @@
 
 namespace bridge {
 
-Card Player::chooseCard(Play const & p, Hand const & h)
+Card Player::chooseCard(Play const & p, Hand const & h, BiddingHistory const & bhist, PlayHistory const & plhist, Hand const & dummyHand)
 {
 	int resultInd;
 	sigModified(h, resultInd);
