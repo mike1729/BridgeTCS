@@ -19,7 +19,7 @@ Contract Deal::performBidding()
 	sigModified(*this);
 	for (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
 	{
-		Call currentCall = arbiters[currentCaller].getCall();
+		Call currentCall = arbiters[currentCaller].getCall(bidding);
 		wasSuccessful = bidding->makeCall(currentCall);
 	}
 	contract = bidding->getContract();
@@ -37,7 +37,7 @@ DealResult Deal::performPlay()
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			play->add(arbiters[currentPlayer].getCard());
+			play->add(arbiters[currentPlayer].getCard(bidding));
 			currentPlayer = (currentPlayer+1)%4;
 		}
 		currentPlayer = play->getLastTrickWinner();
