@@ -35,10 +35,12 @@ DealResult Deal::performPlay()
 	int currentPlayer = contract.declarer;
 	for (int trick = 0; trick < 13; trick++)
 	{
-		for (int i = 0; i < 4; i++)
+	    Card firstCard = arbiters[currentPlayer].getCard();
+	    play->add(firstCard);
+		for (int i = 0; i < 3; i++)
 		{
-			play->add(arbiters[currentPlayer].getCard(bidding));
 			currentPlayer = (currentPlayer+1)%4;
+			play->add(arbiters[currentPlayer].getCard(firstCard.suit));
 		}
 		currentPlayer = play->getLastTrickWinner();
 	}
