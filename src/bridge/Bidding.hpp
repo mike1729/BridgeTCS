@@ -15,7 +15,7 @@ public:
 	using History = std::vector<Call>;
 
 	Bidding(int firstCaller) : firstCaller(firstCaller) {}
-
+	
 	bool makeCall(Call call);
 	bool Done() const
 	{

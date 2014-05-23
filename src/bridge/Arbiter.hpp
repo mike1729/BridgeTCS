@@ -16,7 +16,7 @@ public:
 	Arbiter(Hand &hand, IPlayer &player): hand(hand), player(player) {}
 	Card getCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &);
 	Card getCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &, Suit const &);
-	Call getCall(Bidding const &, Hand const &);
+	Call getCall(Bidding &, Hand const &);
 private:
 	Hand &hand;
 	IPlayer &player;
