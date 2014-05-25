@@ -11,7 +11,10 @@ namespace text
 class Hand
 {
 public:
-	void print(const bridge::Hand & hand);
+	void print(const bridge::Hand & hand)
+	{
+		Printer::print(hand);
+	}
 };
 
 
