@@ -11,7 +11,7 @@ namespace text
 class Bidding
 {
 public:
-	//void notify(const bridge::Bidding & bidding);
+	void notify(const bridge::Bidding & bidding);
 private:
 	
 };

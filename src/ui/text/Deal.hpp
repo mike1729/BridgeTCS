@@ -13,13 +13,13 @@ namespace text
 
 class Deal
 {
-/*public:
-	void notify(const bridge::Deal & deal, bridge::DealEvent event);
+public:
+	void notify(const bridge::Deal & deal);
 private:
 	ui::text::Play playView;
 	ui::text::Bidding biddingView;
 };
-*/
+
 };
 
 } // namespace text
