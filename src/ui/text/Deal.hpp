@@ -5,6 +5,7 @@
 #include "bridge/Deal.hpp"
 #include "Play.hpp"
 #include "Bidding.hpp"
+#include "Hand.hpp"
 
 namespace ui
 {
@@ -18,6 +19,7 @@ public:
 private:
 	ui::text::Play playView;
 	ui::text::Bidding biddingView;
+	ui::text::Hand handView;
 };
 
 

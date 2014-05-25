@@ -13,6 +13,16 @@ void Deal::notify(const bridge::Deal & deal)
 	bridge::DealEvent event = deal.getEvent();
 	switch(event)
 	{
+		case bridge::DealEvent::CardsDealt:
+			{
+				bridge::Hands const & hands = deal.getHands();
+				for(auto it = hands.begin(); it != hands.end(); it++)
+					it->sigModified.connect([this](bridge::Hand const & hand) {
+						this->handView.print(hand);
+					});
+			}
+			break;
+			
 		case bridge::DealEvent::BiddingStart:
 		
 			{
@@ -45,7 +55,7 @@ void Deal::notify(const bridge::Deal & deal)
 			}
 			break;
 
-		default:
+		case bridge::DealEvent::PlayEnd:
 			break;
 	}
 
