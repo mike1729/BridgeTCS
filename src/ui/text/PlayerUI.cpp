@@ -5,6 +5,8 @@ namespace ui
 namespace text 
 {
 
+=======
+//using BiddingHistory, PlayHistory
 bridge::Card PlayerUI::chooseCard(bridge::Play const & play, bridge::Hand const & hand, BiddingHistory const & biddignHistory, PlayHistory const & playHistory, bridge::Hand const & partnerHand)
 {
 	hand.sigModified(hand);
