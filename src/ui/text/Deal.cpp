@@ -10,33 +10,45 @@ namespace text
 void Deal::notify(const bridge::Deal & deal)
 {
 	std::cout << "\n\nFrom now on it's not probably your fault :)\n\n";
-	bridge::DealEvent event = deal.event;
+	bridge::DealEvent event = deal.getEvent();
 	switch(event)
 	{
 		case bridge::DealEvent::BiddingStart:
 		
-			std::cout << "Player " << deal.getFirstCaller() << "starts bidding.\n";
-			const bridge::Bidding & bidding = deal.getBidding();
-			bidding.sigModified.connect([this](Bidding const & bidding) {
-				this->biddingView.notify(bidding);
-			});
+			{
+				const bridge::Bidding & bidding = deal.getBidding();
+				std::cout << "Player " << bidding.getFirstCaller() << "starts bidding.\n";
+				bidding.sigModified.connect([this](bridge::Bidding const & bidding) {
+					this->biddingView.print(bidding);
+				});
+			}
 			break;
 		
 		case bridge::DealEvent::BiddingEnd:
 		
-			Contract contract = deal.getBidding().getContract();
-			std::cout << "Bidding finished. The contract is " << contract.level << " " << contact.denomination << " declared by player " << constract.declarer << ".\n";
+			{
+				bridge::Contract contract = deal.getValidatedContract();
+				std::cout << "Bidding finished. The contract is " << contract.level << " ";
+				Printer::print(contract.denomination);
+				std::cout << " declared by player " << contract.declarer << ".\n";
+			}
 			break;
 			
 		case bridge::DealEvent::PlayStart:
 		
-			const bridge::Play & play = deal.getPlay();
-			play.sigModified.connect([this](Play const & play) {
-				this->playView.registerTrick(play);
-			play.sigModified(play);
+			{
+				const bridge::Play & play = deal.getPlay();
+				play.sigModified.connect([this](bridge::Play const & play) {
+					this->playView.registerTrick(play);
+				});
+				play.sigModified(play);
+			}
 			break;
 
-}*/
+		default:
+			break;
+	}
 
+}
 } // namespace text
 } // namespace ui

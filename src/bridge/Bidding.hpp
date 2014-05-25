@@ -21,7 +21,7 @@ public:
 	{
 		return isFinished;
 	}
-	Contract const & getContract()
+	Contract const & getContract() 
 	{
 		findDeclarer();
 		return currentContract;
@@ -47,9 +47,13 @@ public:
 	    return callNumber;
 	}
 	int getConsecutivePassesNumber() const
-    {
-        return consecutivePasses;
-    }
+    	{
+        	return consecutivePasses;
+    	}
+	int getFirstCaller() const
+	{
+		return firstCaller;
+	}
 private:
 	Contract currentContract;
 	int consecutivePasses = 0;

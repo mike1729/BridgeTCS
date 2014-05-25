@@ -1,8 +1,10 @@
-#ifndef Hand_hpp
-#define Hand_hpp
+#ifndef UI_TEXT_BIDDING_HPP
+#define UI_TEXT_BIDDING_HPP
 
 #include "bridge/Bidding.hpp"
 #include "bridge/Contract.hpp"
+#include "Printer.hpp"
+
 
 namespace ui
 {
@@ -11,7 +13,10 @@ namespace text
 class Bidding
 {
 public:
-	void notify(const bridge::Bidding & bidding);
+	void print(const bridge::Bidding & bidding)
+	{
+		Printer::print(bidding);
+	}
 private:
 	
 };

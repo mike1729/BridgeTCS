@@ -20,7 +20,6 @@ private:
 	ui::text::Bidding biddingView;
 };
 
-};
 
 } // namespace text
 } // namespace ui
