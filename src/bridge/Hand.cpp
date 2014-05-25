@@ -5,7 +5,7 @@ namespace bridge {
 void Hand::insert(Card&& c)
 {
 	hand.push_back(std::move(c));
-	sigModified(*this);
+//	sigModified(*this);
 }
 
 Card Hand::remove(int index)
