@@ -40,7 +40,7 @@ fullclean :
 -include $(TESTSOURCES:.cpp=.d)
 
 $(MAINTARGET) : $(MAINDEPLIBS)
-	$(CXX) $^ -o $@ $(LDFLAGS) $(TESTLDFLAGS)
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -MMD $< -o $@

@@ -22,9 +22,9 @@ bool arePartners(int player1, int player2)
 	return player1%2 == player2%2;
 }
 
-void Play::Trick::add(Card && presentCard)
+void Play::Trick::add(Card presentCard)
 {
-	cards.push_back(std::move(presentCard));
+	cards.push_back(presentCard);
 	/* check whether this card wins the trick so far i.e. whether it beats the presently winnig one */
 	if(cards.size() == 1 || defeat( *presentWinningCard, presentCard))
 	{
@@ -35,16 +35,15 @@ void Play::Trick::add(Card && presentCard)
 	sigModified(*this);
 }
 
-void Play::add(Card && card)
+void Play::add(Card card)
 {
-	currentTrick.add(std::move(card));
-	if (currentTrick.full())
+	currentTrick->add(card);
+	if (currentTrick->full())
 	{
-		if(arePartners(currentTrick.getWinner(), declarer))
+		if(arePartners(currentTrick->getWinner(), declarer))
 			tricksTaken++;
-		// deleted both move constructor and copy constructor, TODO somehow fix
-		// history.push_back(std::move(currentTrick));
-		// currentTrick = std::move(Trick(trump, getLastTrickWinner()));
+		history.push_back( std::move(currentTrick) );
+		currentTrick.reset(new Trick(trump, getLastTrickWinner()) );
 		sigModified(*this);
 	}
 }

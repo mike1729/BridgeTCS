@@ -31,7 +31,7 @@ TEST(DeckTest, containsEachCard)
 	std::vector<std::pair<Suit, Rank> > cards;
 	while(!deck.empty())
 	{
-		Card&& card = deck.dealCard();
+		Card card = deck.dealCard();
 		cards.push_back(std::make_pair(card.suit, card.rank));
 	}
 
@@ -45,7 +45,7 @@ TEST(DeckTest, shuffledContainsEachCard)
 	std::vector<std::pair<Suit, Rank> > cards;
 	while(!deck.empty())
 	{
-		Card&& card = deck.dealCard();
+		Card card = deck.dealCard();
 		cards.push_back(std::make_pair(card.suit, card.rank));
 	}
 
