@@ -6,6 +6,7 @@
 
 #include "Player.hpp"
 #include "Arbiter.hpp"
+#include "Deal.hpp"
 
 namespace bridge {
 
@@ -16,10 +17,12 @@ public:
 		arbiters{{{hands[0], *players[0].get()}, {hands[1], *players[1].get()},
 		{hands[2], *players[2].get()}, {hands[3], *players[3].get()}}} {}
 	void start();
+	const Deal& getDeal() const { return *deal; };
 private:
 	std::array<std::unique_ptr<IPlayer>,4> const & players;
 	std::array<Hand,4> hands;
 	std::array<Arbiter,4> arbiters;
+	Deal* deal;
 };
 
 }

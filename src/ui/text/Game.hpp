@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "bridge/Game.hpp"
+#include "ui/text/Deal.hpp"
 
 namespace ui
 {
@@ -14,6 +15,8 @@ class Game
 public:
 	void showScore(const bridge::Game & game);
 	void registerDeal(const bridge::Game & game);
+private:
+		ui::text::Deal dealView;
 };
 
 
