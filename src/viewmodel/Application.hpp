@@ -15,9 +15,12 @@ public:
 	void run() 
 	{	
 		std::array<std::unique_ptr<bridge::IPlayer>,4> players{ { std::unique_ptr<bridge::IPlayer>(new ui::text::PlayerUI()),std::unique_ptr<bridge::IPlayer>(new Bot()),std::unique_ptr<bridge::IPlayer>(new Bot()),std::unique_ptr<bridge::IPlayer>(new Bot()) } };
-		(new bridge::Game(players))->start();
+		game = new bridge::Game(players);
+		game->start();
 		sigModified(*this);
 	}
+private:
+	bridge::Game* game; 
 };
 
 }
