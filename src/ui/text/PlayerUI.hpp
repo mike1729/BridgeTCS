@@ -12,7 +12,7 @@ namespace ui
 {
 namespace text
 {
-class PlayerUI : bridge::IPlayer
+class PlayerUI : public bridge::IPlayer
 {
 public:
 	bridge::Card chooseCard(bridge::Play const &, bridge::Hand const &, BiddingHistory const &, PlayHistory const &, bridge::Hand const &);

@@ -12,7 +12,8 @@ namespace text
 class Game
 {
 public:
-	void notify(const bridge::Game & game);
+	void showScore(const bridge::Game & game);
+	void registerDeal(const bridge::Game & game);
 };
 
 
