@@ -11,9 +11,15 @@ namespace text
 class ApplicationView
 {
 public:
-	virtual void notify(viewmodel::Application const &) {
+	virtual void notify(const viewmodel::Application & application) {
 		std::cout << "Hello World!\n";
+		application.getGame().sigModified.connect([this](bridge::Game const & game) {
+					this->gameView.registerDeal(game);
+				});
+		
 	}
+private:
+		ui::text::Game gameView;
 };
 
 } // namespace text

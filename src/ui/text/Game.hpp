@@ -13,6 +13,7 @@ class Game
 {
 public:
 	void showScore(const bridge::Game & game);
+	void registerDeal(const bridge::Game & game);
 };
 
 
