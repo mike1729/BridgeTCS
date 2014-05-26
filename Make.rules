@@ -32,6 +32,7 @@ fullclean :
 	make -C $(PROJECTROOT)/src/viewmodel clean
 	make -C $(PROJECTROOT)/src/ui clean
 	make -C $(PROJECTROOT)/src/ui/text clean
+	rm -f $(MAINTARGET)
 
 .PHONY : all library test clean fullclean $(TESTTARGETS)
 
