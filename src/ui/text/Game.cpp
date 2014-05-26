@@ -6,7 +6,7 @@ namespace ui
 namespace text 
 {
 
-void Game::notify(const bridge::Game & game)
+void Game::showScore(const bridge::Game & game)
 {
 	std::cout << "Here is place for score or sth\n";
 }
