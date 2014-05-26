@@ -4,6 +4,7 @@
 
 int main() 
 {
+
 	viewmodel::Application application;
 	ui::text::ApplicationView appView;
 	
