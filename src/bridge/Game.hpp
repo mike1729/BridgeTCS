@@ -9,7 +9,7 @@
 
 namespace bridge {
 
-class Game: public ui::Observable<Deal>
+class Game: public ui::Observable<Game>
 {
 public:
 	Game(std::array<std::unique_ptr<IPlayer>,4> & players) : players(players),
