@@ -8,7 +8,7 @@ Standard52Deck::Standard52Deck()
 	for (int r = (int) Rank::TWO; r <= (int) Rank::ACE; ++r)
 		allCards.push_back(createCard((Rank) r, (Suit) s));
 	for (size_t i = 0; i < allCards.size(); ++i)
-		deck.push_back(&allCards[i]);
+		deck.push_back(allCards[i]);
 }
 
 void Standard52Deck::shuffle()
@@ -18,9 +18,9 @@ void Standard52Deck::shuffle()
 
 Card Standard52Deck::dealCard()
 {
-	Card&& card = std::move(*deck.back());
+	Card card = deck.back();
 	deck.pop_back();
-	return std::move(card);
+	return card;
 }
 
 int Standard52Deck::cardsLeft()

@@ -23,11 +23,11 @@ class HandTest: public ::testing::Test
 
 TEST_F(HandTest, SimpleInsertRemove) 
 {
-	Card&& c = deck->dealCard();
+	Card c = deck->dealCard();
 	Suit s = c.suit;
 	Rank r = c.rank;
-	hand->insert(std::move(c));
-	Card&& c1 = hand->remove(0);
+	hand->insert(c);
+	Card c1 = hand->remove(0);
 	ASSERT_EQ(c1.suit, s);
 	ASSERT_EQ(c1.rank, r);
 }

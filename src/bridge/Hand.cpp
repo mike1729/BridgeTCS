@@ -2,9 +2,9 @@
 
 namespace bridge {
 
-void Hand::insert(Card&& c)
+void Hand::insert(Card c)
 {
-	hand.push_back(std::move(c));
+	hand.push_back(c);
 //	sigModified(*this);
 }
 
@@ -13,10 +13,10 @@ Card Hand::remove(int index)
 	auto it = hand.begin();
 	while(index--)
 		it++;
-	Card&& c = std::move(*it);
+	Card c = *it;
 	hand.erase(it);
 	sigModified(*this);
-	return std::move(c);
+	return c;
 }
 
 Card Hand::remove(Card const & card)
@@ -25,10 +25,10 @@ Card Hand::remove(Card const & card)
 	{
 		if (*it == card)
 		{
-			Card&& c = std::move(*it);
+			Card c = *it;
 			hand.erase(it);
 			sigModified(*this);
-			return std::move(c);
+			return c;
 		}
 	}
 

@@ -31,7 +31,7 @@ protected:
 class Standard52Deck : public Deck
 {
 private:
-	std::vector<Card *> deck;
+	std::vector<Card> deck;
 	std::vector<Card> allCards;
 
 public:

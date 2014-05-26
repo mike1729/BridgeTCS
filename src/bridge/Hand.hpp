@@ -11,7 +11,7 @@ namespace bridge {
 class Hand: public ui::Observable<Hand>
 {
 	public:
-		void insert(Card&&);
+		void insert(Card);
 		Card remove(int);
 		Card remove(Card const &);
 		void removeAll();

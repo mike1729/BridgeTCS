@@ -3,6 +3,7 @@
 
 #include <array>
 #include <list>
+#include <memory>
 #include <utility>
 
 #include "Card.hpp"
@@ -14,7 +15,7 @@ namespace bridge {
 class Play: public ui::Observable<Play>
 {
 	public:
-		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick(trump, declarer)
+		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick( new Trick(trump, declarer) )
 		{
 		}
 
@@ -25,13 +26,7 @@ class Play: public ui::Observable<Play>
 				{
 				}
 
-				Trick(Trick && t) = default;
-
-				Trick(Trick const & trick) = delete;
-
-				Trick & operator=(Trick && other) = default;
-
-				void add(Card && card);
+				void add(Card card);
 
 				bool full() const
 				{
@@ -69,11 +64,11 @@ class Play: public ui::Observable<Play>
 				bool defeat(const Card& winningCard, const Card& attempterCard);
 		};
 
-		using History = std::list<Trick>;
+		using History = std::list< std::unique_ptr<Trick> >;
 
 		int getLastTrickWinner()
 		{
-			return history.back().getWinner();
+			return history.back()->getWinner();
 		}
 
 		int getTricksTaken()
@@ -83,21 +78,20 @@ class Play: public ui::Observable<Play>
 		
 		const Trick & getTrick() const
 		{
-			return currentTrick;
+			return *currentTrick;
 		}
 
 		const History & recentHistory() const
 		{
 			return history; //TODO return up to last 8 tricks
 		}
-		// The card given gets played. No validation -- validating is almost
-		// impossible with non-copyable cards.
-		void add(Card && card);
+
+		void add(Card card);
 
 	private:
 		Denomination trump;
 		int declarer;
-		Trick currentTrick;
+		std::unique_ptr<Trick> currentTrick;
 		int tricksTaken = 0;
 		History history;
 };
