@@ -1,8 +1,8 @@
 #include "Bot.hpp"
 
-bridge::Card Bot::chooseCard(bridge::Play const & play, bridge::Hand const & hand, BiddingHistory const &, PlayHistory const &, bridge::Hand const &)
+bridge::Card Bot::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
 {
-	/*std::list<bridge::Card> cards = play.getTrick().getCards();
+	std::list<bridge::Card> cards = play.getTrick().getCards();
 	if (cards.size() > 0)
 	{
 		if (hasCardToSuit(hand,(*cards.begin()).suit))
@@ -18,11 +18,16 @@ bridge::Card Bot::chooseCard(bridge::Play const & play, bridge::Hand const & han
 			return minCard(hand);
 	}
 	else
-		return maxCard(hand);*/
-	return *hand.getCards().begin();
+		return maxCard(hand);
 }
 
-bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
+
+bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+{
+	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
+}
+
+bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	for (auto c : hand.getCards())
 		if (c.suit == suit)
@@ -30,7 +35,7 @@ bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
 	return false;
 }
 
-bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
+bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
 	for (auto c : hand.getCards())
@@ -39,7 +44,7 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
 	return card;
 }
 
-bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
+bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
 	for (auto c : hand.getCards())
@@ -48,7 +53,7 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit)
 	return card;
 }
 
-bridge::Card Bot::minCard(bridge::Hand const & hand)
+bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
 	for (auto c : hand.getCards())
@@ -57,7 +62,7 @@ bridge::Card Bot::minCard(bridge::Hand const & hand)
 	return card;
 }
 
-bridge::Card Bot::maxCard(bridge::Hand const & hand)
+bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
 	for (auto c : hand.getCards())
@@ -66,7 +71,7 @@ bridge::Card Bot::maxCard(bridge::Hand const & hand)
 	return card;
 }
 
-int Bot::highCardPoints(bridge::Hand const & hand)
+int Bot::highCardPoints(bridge::Hand const & hand) const
 {
 	int value = 0;
 
@@ -78,7 +83,7 @@ int Bot::highCardPoints(bridge::Hand const & hand)
 	return value;
 }
 
-int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit)
+int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 {
 	int result = 0;
 
@@ -90,7 +95,7 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit)
 	return result;
 }
 
-bool Bot::isOpening(bridge::Bidding const & bidding) 
+bool Bot::isOpening(bridge::Bidding const & bidding) const
 {
 	auto history = bidding.getHistory();
 	if (history.size() > 4)
@@ -103,7 +108,7 @@ bool Bot::isOpening(bridge::Bidding const & bidding)
 	return false;
 }
 
-bool Bot::isBalanced(bridge::Hand const & hand)
+bool Bot::isBalanced(bridge::Hand const & hand) const
 {
 	int length[4];
 	length[0] = length[1] = length[2] = length[3] = 0;
@@ -113,10 +118,10 @@ bool Bot::isBalanced(bridge::Hand const & hand)
 		length[(int) card.suit]++;
 	}
 
- int missing = 0;
+	int missing = 0;
 
- for (int i = 0; i < 4; i++)
- {
+	for (int i = 0; i < 4; i++)
+	{
 		if (length[i] == 0) 
 		{
 			missing++;
@@ -132,20 +137,21 @@ bool Bot::isBalanced(bridge::Hand const & hand)
 		}
 	}
 
- return true;
+	return true;
 }
 
-bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding)
+bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding) const
 {
 	auto history = bidding.getHistory();
 	if (history.size() >= 2)
 	{
 		return history[ history.size() - 2];
 	}
+
 	return bridge::Call::PASS();
 }
 
-std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand)
+std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) const
 {
 	int length[4];
 	length[0] = length[1] = length[2] = length[3] = 0;
@@ -167,11 +173,9 @@ std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand)
 	return std::make_pair((bridge::Denomination) suit, length[suit]);
 }
 
-bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {
 	if (madeCall) return bridge::Call::PASS();
-
-	madeCall = true;
 
 	if (isOpening(bidding)) 
 	{
@@ -209,4 +213,34 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 	if (length > 3) return bridge::Call::BID(partnerCall.level + length - 3, denomination);
 
 	return bridge::Call::PASS();
+}
+
+bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+{
+	auto call = proposeCall(bidding, hand);
+
+	if (call.type == bridge::CallType::PASS)
+	{
+		return call;
+	}
+
+	auto history = bidding.getHistory();
+
+	int it = history.size() - 1;
+	while(it >= 0 && history[it].type != bridge::CallType::BID) it--;
+	
+	madeCall = true;
+
+	if (it >= 0)
+	{
+		auto lastCall = history[it];
+
+		if (lastCall.level > call.level ||
+			(lastCall.level == call.level && (int) lastCall.denomination > (int) lastCall.denomination))
+		{
+			return bridge::Call::PASS();
+		}
+	}
+
+	return call;
 }
