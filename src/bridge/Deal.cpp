@@ -23,7 +23,7 @@ Contract Deal::performBidding()
 	for (int currentCaller = firstCaller; !bidding->Done(); currentCaller = (currentCaller+1)%4)
 	{
 		Call currentCall = arbiters[currentCaller].getCall(*bidding, hands[currentCaller]);
-		auto wasSuccessful = bidding->makeCall(currentCall);
+		bidding->makeCall(currentCall);
 	}
 	contract = bidding->getContract();
 	event = DealEvent::BiddingEnd;
