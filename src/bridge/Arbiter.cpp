@@ -39,31 +39,38 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 	return true;
 }
 
-Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand)
+Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, Hand const & dummy)
 {
-	// Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-	// //TODO index validation
-	// return hand.remove(card);
-	
-	return Card(Rank::ACE, Suit::SPADES);
-}
+	//TODO handle dummy role
+	std::list<Card> cards = play.getTrick().getCards();
+	//TODO refactor
+	if (cards.size() == 0)
+	{
+		while(true)
+		{
+			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			if(hand.hasCard(card))
+				return hand.remove(card);
+		}
+	}
 
-Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand, Suit const & suit)
-{
-	//TODO index validation
-	// if ( !hand.hasSuit(suit) ) 
-	// {
-	// 	Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-	// 	return hand.remove(card);
-	// }
-	
-	// while (true)
-	// {
-	// 	Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-	// 	if ( card.suit == suit ) return hand.remove(card);
-	// }
+	Suit suit = (*cards.begin()).suit;
+	if(!hand.hasSuit(suit))
+	{
+		while(true)
+		{
+			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			if(hand.hasCard(card))
+				return hand.remove(card);
+		}
+	}
 
-	return Card(Rank::ACE, Suit::SPADES);
+	while(true)
+	{
+		Card card = player.chooseCard(bidding, play, hand, &dummy);
+		if(hand.hasCard(card) && card.suit == suit)
+			return hand.remove(card);
+	}
 }
 
 Call Arbiter::getCall(Bidding & bidding, Hand const & hand) 
