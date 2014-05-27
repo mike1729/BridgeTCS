@@ -71,7 +71,7 @@ Call Arbiter::getCall(Bidding & bidding, Hand const & hand)
 		Call call = player.makeCall(bidding, hand);
 		if ( CallType::BID == call.type && !( call.level > contract.level || ( call.level  == contract.level && call.denomination >= contract.denomination )) ) continue;
 		if ( CallType::DOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 1 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2) ) continue;
-		if ( contract.level == 0 || contract.pointMultiplier != 2 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2 ) continue;
+		if ( CallType::REDOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 2 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2 ) ) continue;
 	    return call;
 	}
 }
