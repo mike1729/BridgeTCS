@@ -39,7 +39,10 @@ void Bidding::makeCall(Call call)
 			break;
 	}
 	history.push_back(call);
-	std::cout << "a  " << (int)call.type << lastBidder << "\n";
+	/*
+	 * It seems like this point is not always being reached
+	 * std::cout << "Here in Bidding.cpp after a call:" << (int)call.type << " " << lastBidder << "\n";
+	*/
 	findDeclarer();
 	sigModified(*this);
 }
