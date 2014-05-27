@@ -17,6 +17,7 @@ private:
 	bool isBalanced(bridge::Hand const &) const;
 	bool hasCardToSuit(bridge::Hand const &, bridge::Suit) const;
 	bridge::Call getPartnerCall(bridge::Bidding const &) const;
+	bridge::Call proposeCall(bridge::Bidding const &, bridge::Hand const &);
 	bridge::Card minCardToSuit(bridge::Hand const &, bridge::Suit) const;
 	bridge::Card maxCardToSuit(bridge::Hand const &, bridge::Suit) const;
 	bridge::Card minCard(bridge::Hand const &) const;
