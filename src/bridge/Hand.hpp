@@ -16,8 +16,8 @@ class Hand: public ui::Observable<Hand>
 		Card remove(Card const &);
 		void removeAll();
 		std::list<Card> const & getCards() const;
-		bool hasSuit( Suit suit );
-		bool hasCard( Card card );
+		bool hasSuit( Suit suit ) const;
+		bool hasCard( Card card ) const;
 	private:
 		std::list<Card> hand;
 };

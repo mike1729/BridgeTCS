@@ -45,15 +45,15 @@ std::list<Card> const & Hand::getCards() const
 	return hand;
 }
 
-bool Hand::hasCard( Card card )
+bool Hand::hasCard( Card card ) const
 {
-    auto it = hand.begin();
-    while( it->suit != card.suit || it->rank != card.rank ) it++;
-    if( it != hand.end() ) return true;
-    return false;
+	auto it = hand.begin();
+	while( it->suit != card.suit || it->rank != card.rank ) it++;
+	if( it != hand.end() ) return true;
+	return false;
 }
 
-bool Hand::hasSuit( Suit suit ) 
+bool Hand::hasSuit( Suit suit ) const
 {
 	auto it = hand.begin();
 	while( it->suit != suit ) it++;

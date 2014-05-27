@@ -65,7 +65,7 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	
 /*static*/ void Printer::print(bridge::Bidding const & bidding)
 {
-	std::cout << "Player " << bidding.getCurrentCaller() << ": ";
+	std::cout << "Player " << (bidding.getCurrentCaller() + 3)%4 << ": ";
 	bridge::Call call = bidding.getLastCall();
 	Printer::print(call); 
 }
