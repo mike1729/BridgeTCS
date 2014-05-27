@@ -10,9 +10,9 @@ class BiddingPlayer : public IPlayer
 public:
 	std::queue<Call> toCall;
 
-	virtual int chooseCard() { return 0; }
+	virtual Card chooseCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
 
-	virtual Call makeCall()
+	virtual Call makeCall(Bidding const &, Hand const &)
 	{
 		if ( toCall.empty() )
 		{
