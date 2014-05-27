@@ -38,9 +38,9 @@ void Bidding::makeCall(Call call)
 			}
 			break;
 	}
-	sigModified(*this);
 	callNumber++;
 	history.push_back(call);
+	sigModified(*this);
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------*
