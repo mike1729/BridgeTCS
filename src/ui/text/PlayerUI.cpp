@@ -113,11 +113,11 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand co
 		}
 		
 		std::cout << level << " ";
-		//Printer::print(denomination);
+		Printer::print(denomination);
 		std::cout << std::endl;
 		return bridge::Call::BID(level, denomination);
 	}
 }
 
-} //text
-} //ui
+} // namespace text
+} // namespace ui
