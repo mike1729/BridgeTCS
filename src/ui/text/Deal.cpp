@@ -9,7 +9,6 @@ namespace text
 
 void Deal::notify(const bridge::Deal & deal)
 {
-	std::cout << "\n\nFrom now on it's not probably your fault :)\n\n";
 	bridge::DealEvent event = deal.getEvent();
 	switch(event)
 	{
@@ -34,7 +33,7 @@ void Deal::notify(const bridge::Deal & deal)
 		
 			{
 				const bridge::Bidding & bidding = deal.getBidding();
-				std::cout << "Player " << bidding.getFirstCaller() << "starts bidding.\n";
+				std::cout << "Player " << bidding.getFirstCaller() << " starts bidding.\n";
 				bidding.sigModified.connect([this](bridge::Bidding const & bidding) {
 					this->biddingView.print(bidding);
 				});

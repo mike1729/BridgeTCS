@@ -13,8 +13,9 @@ void Game::showScore(const bridge::Game & game)
 void Game::registerDeal(const bridge::Game & game)
 {
 	game.getDeal().sigModified.connect([this](bridge::Deal const & deal) {
-					this->dealView.notify(deal);
-				});
+		this->dealView.notify(deal);
+	});
+	
 }
 
 } // namespace text

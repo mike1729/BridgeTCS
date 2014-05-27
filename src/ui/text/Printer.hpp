@@ -29,7 +29,7 @@ public:
 	inline static void print(bridge::Denomination const & denomination)
 	{
 		int nr = static_cast<int>(denomination);
-		if(nr == 5) std::cout << "NT";
+		if(nr == 4) std::cout << "NT";
 		else std::cout << suitSymbols[nr];
 	}
 

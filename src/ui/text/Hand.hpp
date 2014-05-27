@@ -1,7 +1,7 @@
 #ifndef UI_TEXT_HAND_HPP
 #define UI_TEXT_HAND_HPP
 
-#include "bridge/Hand.cpp"
+#include "bridge/Hand.hpp"
 
 namespace ui
 {

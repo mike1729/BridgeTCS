@@ -23,6 +23,7 @@ bool Bidding::makeCall(Call call)
 			currentContract.pointMultiplier = 4;
 			break;
 		case CallType::PASS :
+			consecutivePasses++;
 			if ( currentContract.level != 0 && consecutivePasses >= 3 )
 			{
 				isFinished = true;
@@ -35,7 +36,6 @@ bool Bidding::makeCall(Call call)
 			break;
 	}
 	sigModified(*this);
-	
 	callNumber++;
 	history.push_back(call);
 	return true;

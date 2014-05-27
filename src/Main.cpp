@@ -11,6 +11,6 @@ int main()
 	application.sigModified.connect([& appView](viewmodel::Application const & app) {
 		appView.notify(app);
 	});
-	application.run();
+	application.runApplication();
 	return 0;
 }

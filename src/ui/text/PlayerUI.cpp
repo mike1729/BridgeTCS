@@ -1,4 +1,5 @@
 #include "PlayerUI.hpp"
+#include "Printer.hpp"
 
 namespace ui 
 {
@@ -13,9 +14,8 @@ bridge::Card PlayerUI::chooseCard(bridge::Play const & play, bridge::Hand const 
 	while(true)
 	{
 		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [1-4]\n";
-		std::string in, delimiter = " ";
-		std::cin >> in;
-		std::string rankStr = in.substr(0, in.find(delimiter));
+		std::string rankStr, delimiter = " ";
+		std::cin >> rankStr;
 		bridge::Rank rank;
 		if(rankStr == "j") rank = bridge::Rank::JACK;
 		else if(rankStr == "q") rank = bridge::Rank::QUEEN;
@@ -41,7 +41,8 @@ bridge::Card PlayerUI::chooseCard(bridge::Play const & play, bridge::Hand const 
 		}
 		
 		bridge::Suit suit;
-		std::string suitStr = in.substr(in.find(delimiter)+1);
+		std::string suitStr;
+		std::cin >> suitStr;
 		int suitInt;
 		try {
 			suitInt = std::stoi(suitStr);
@@ -67,14 +68,15 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand co
 	while(true)
 	{
 		std::cout << "Make a bid\nFormat: [1-7] [1-5] | p[ass] | d[ouble] | r[edouble]\n";
-		std::string in, delimiter = " ";
+		
+		std::string in;
 		std::cin >> in;
 		if(in[0] == 'p') return bridge::Call::PASS();
 		if(in[0] == 'd') return bridge::Call::DOUBLE();
 		if(in[0] == 'r') return bridge::Call::REDOUBLE();
 		int level;
 		try {
-			level = std::stoi(in.substr(0, in.find(delimiter)));
+			level = std::stoi(in);
 		} catch (...)
 		{
 			std::cout << "Wrong format\n";
@@ -86,23 +88,29 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand co
 			continue;
 		}
 		
+		
 		int denominationInt;
+		std::string denominationStr;
+		std::cin >> denominationStr;
 		bridge::Denomination denomination;
 		try {
-			denominationInt = std::stoi(in.substr(in.find(delimiter)+1));
+			denominationInt = std::stoi(denominationStr);
 		} catch (...)
 		{
 			std::cout << "Wrong format\n";
 			continue;
 		}
 		if(denominationInt <= 5 && denominationInt >= 1)
-			denomination = static_cast<bridge::Denomination>(denominationInt);
+			denomination = static_cast<bridge::Denomination>(denominationInt - 1);
 		else
 		{
 			std::cout << "Wrong denomination\n";
 			continue;
 		}
 		
+		std::cout << level << " ";
+		Printer::print(denomination);
+		std::cout << std::endl;
 		return bridge::Call::BID(level, denomination);
 	}
 }
