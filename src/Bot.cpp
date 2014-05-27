@@ -1,30 +1,86 @@
 #include "Bot.hpp"
 
-bridge::Card Bot::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
+bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const *)
 {
-	std::list<bridge::Card> cards = play.getTrick().getCards();
+	auto cards = play.getTrick().getCards();
 	if (cards.size() > 0)
 	{
 		if (hasCardToSuit(hand,(*cards.begin()).suit))
 		{
-			bridge::Card minCard = minCardToSuit(hand,(*cards.begin()).suit);
-			bridge::Card maxCard = maxCardToSuit(hand,(*cards.begin()).suit);
+			auto minCard = minCardToSuit(hand,(*cards.begin()).suit);
+			auto maxCard = maxCardToSuit(hand,(*cards.begin()).suit);
 			for (auto c : cards)
-				if (maxCard.suit==c.suit and maxCard < c)
+				if (maxCard.suit == c.suit and maxCard < c)
 					return minCard;
+
+			if (cards.size() > 1)
+			{
+				auto cardIt = cards.end();
+				cardIt--; cardIt--;
+
+				auto rank = (*cardIt).rank;
+				auto suit = (*cardIt).suit;
+
+				bool highest = true;
+				for (auto card : cards)
+				{
+					if (suit == card.suit and rank < card.rank)
+					{
+						highest = false;
+						break;
+					}
+				}
+
+				if (highest) return minCard;
+			}
+
 			return maxCard;
 		}
-		else
-			return minCard(hand);
+		else return minCard(hand);
 	}
-	else
-		return maxCard(hand);
+	else return maxCard(hand);
 }
 
 
-bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const &, bridge::Hand const & dummyHand)
 {
-	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
+	auto cards = play.getTrick().getCards();
+	if (cards.size() > 0)
+	{
+		if (hasCardToSuit(dummyHand,(*cards.begin()).suit))
+		{
+			auto minCard = minCardToSuit(dummyHand,(*cards.begin()).suit);
+			auto maxCard = maxCardToSuit(dummyHand,(*cards.begin()).suit);
+			for (auto c : cards)
+				if (maxCard.suit == c.suit and maxCard < c)
+					return minCard;
+
+			if (cards.size() > 1)
+			{
+				auto cardIt = cards.end();
+				cardIt--; cardIt--;
+
+				auto rank = (*cardIt).rank;
+				auto suit = (*cardIt).suit;
+
+				bool highest = true;
+				for (auto card : cards)
+				{
+					if (suit == card.suit and rank < card.rank)
+					{
+						highest = false;
+						break;
+					}
+				}
+
+				if (highest) return minCard;
+			}
+
+			return maxCard;
+		}
+		else return minCard(dummyHand);
+	}
+	else return maxCard(dummyHand);
 }
 
 bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
@@ -39,7 +95,7 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && c<card)
+		if (c.suit == suit && c < card)
 			card=c;
 	return card;
 }
@@ -48,7 +104,7 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && card<c)
+		if (c.suit == suit && card < c)
 			card = c;
 	return card;
 }
@@ -57,7 +113,7 @@ bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
 	for (auto c : hand.getCards())
-		if (c<card)
+		if (c.rank < card.rank)
 			card = c;
 	return card;
 }
@@ -66,7 +122,7 @@ bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
 	for (auto c : hand.getCards())
-		if (card<c)
+		if (card.rank < c.rank)
 			card = c;
 	return card;
 }
