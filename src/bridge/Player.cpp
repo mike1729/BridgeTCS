@@ -2,9 +2,14 @@
 
 namespace bridge {
 
-Card Player::chooseCard(Play const &, Hand const & h, BiddingHistory const &, PlayHistory const &, Hand const &)
+Card Player::chooseCard(Bidding const &, Play const &, Hand const & hand, Hand const *)
 {
-	return h.getCards().front();
+	return hand.getCards().front();
+}
+
+Card Player::chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const & dummyHand)
+{
+	return dummyHand.getCards().front();
 }
 
 Call Player::makeCall(Bidding const &, Hand const &)

@@ -6,9 +6,8 @@ namespace ui
 namespace text 
 {
 
-
 //using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Play const & play, bridge::Hand const & hand, BiddingHistory const & biddignHistory, PlayHistory const & playHistory, bridge::Hand const & partnerHand)
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
 {
 	hand.sigModified(hand);
 	while(true)
@@ -61,6 +60,11 @@ bridge::Card PlayerUI::chooseCard(bridge::Play const & play, bridge::Hand const 
 		
 		return bridge::Card(rank, suit);
 	}
+}
+
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+{
+	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
 }
 
 bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)

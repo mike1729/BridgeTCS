@@ -7,8 +7,9 @@
 class Bot : public bridge::IPlayer
 {
 public:
-	bridge::Card chooseCard(bridge::Play const &, bridge::Hand const &, BiddingHistory const &, PlayHistory const &, bridge::Hand const &);
-	bridge::Call makeCall(bridge::Bidding const &, bridge::Hand const &);
+	virtual bridge::Card chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const *);
+	virtual bridge::Card chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &);
+	virtual bridge::Call makeCall(bridge::Bidding const &, bridge::Hand const &);
 private:
 	bool madeCall;
 	int highCardPoints(bridge::Hand const &) const;
