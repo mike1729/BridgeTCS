@@ -40,13 +40,10 @@ DealResult Deal::performPlay()
 	int currentPlayer = contract.declarer;
 	for (int trick = 0; trick < 13; trick++)
 	{
-		Card firstCard = arbiters[currentPlayer].getCard(*play.get(), hands[currentPlayer], bidding->getHistory(), play->recentHistory(), hands[(contract.declarer + 2) % 4]);
-		Suit firstCardSuit = firstCard.suit;
-		play->add(std::move(firstCard));
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
+			play->add(arbiters[currentPlayer].getCard(*play.get(), hands[currentPlayer], bidding->getHistory(), play->recentHistory(), hands[(contract.declarer + 2) % 4]));
 			currentPlayer = (currentPlayer+1)%4;
-			play->add(arbiters[currentPlayer].getCard(*play.get(), hands[currentPlayer], bidding->getHistory(), play->recentHistory(), hands[(contract.declarer + 2) % 4], firstCardSuit));
 		}
 		currentPlayer = play->getLastTrickWinner();
 	}
