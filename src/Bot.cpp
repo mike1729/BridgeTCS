@@ -1,8 +1,8 @@
 #include "Bot.hpp"
 
-bridge::Card Bot::chooseCard(bridge::Play const & play, bridge::Hand const & hand, BiddingHistory const &, PlayHistory const &, bridge::Hand const &)
+bridge::Card Bot::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
 {
-	/*std::list<bridge::Card> cards = play.getTrick().getCards();
+	std::list<bridge::Card> cards = play.getTrick().getCards();
 	if (cards.size() > 0)
 	{
 		if (hasCardToSuit(hand,(*cards.begin()).suit))
@@ -18,8 +18,13 @@ bridge::Card Bot::chooseCard(bridge::Play const & play, bridge::Hand const & han
 			return minCard(hand);
 	}
 	else
-		return maxCard(hand);*/
-	return *hand.getCards().begin();
+		return maxCard(hand);
+}
+
+
+bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+{
+	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
 }
 
 bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
@@ -224,6 +229,8 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 	int it = history.size() - 1;
 	while(it >= 0 && history[it].type != bridge::CallType::BID) it--;
 	
+	madeCall = true;
+
 	if (it >= 0)
 	{
 		auto lastCall = history[it];
@@ -234,8 +241,6 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 			return bridge::Call::PASS();
 		}
 	}
-
-	madeCall = true;
 
 	return call;
 }
