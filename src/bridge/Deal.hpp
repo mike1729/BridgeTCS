@@ -14,6 +14,7 @@ namespace bridge {
 
 using Arbiters = std::array<Arbiter, 4>;
 using Hands = std::array<Hand, 4>;
+using Players = std::array<std::unique_ptr<IPlayer>, 4>;
 
 
 enum class DealEvent
@@ -32,7 +33,7 @@ class Deal: public ui::Observable<Deal>
 {
 public:
 
-	Deal(Arbiters & arbiters, Hands & hands, int firstCaller) : arbiters(arbiters), hands(hands), firstCaller(firstCaller)
+	Deal(const Players & players, int firstCaller) : arbiters{{{*players[0]}, {*players[1]},{*players[2]}, {*players[3]}}}, firstCaller(firstCaller)
 	{
 	}
 
@@ -64,8 +65,8 @@ public:
 	} 
 private:
 	Contract contract;
-	Arbiters & arbiters;
-	Hands & hands;
+	Arbiters arbiters;
+	Hands hands;
 	int firstCaller;
 	std::unique_ptr<Bidding> bidding;
 	std::unique_ptr<Play> play;
