@@ -90,9 +90,17 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit)
 	return result;
 }
 
-bool Bot::isOpening(bridge::Bidding const &) 
+bool Bot::isOpening(bridge::Bidding const & bidding) 
 {
-	return true;
+	auto history = bidding.getHistory();
+	if (history.size() > 4)
+	{
+		return false;
+	} else if (history.size() < 2 || history[history.size() - 2].type == bridge::CallType::PASS)
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Bot::isBalanced(bridge::Hand const & hand)
@@ -127,9 +135,14 @@ bool Bot::isBalanced(bridge::Hand const & hand)
  return true;
 }
 
-bridge::Call Bot::getPartnerCall(bridge::Bidding const &)
+bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding)
 {
-return bridge::Call::PASS();
+	auto history = bidding.getHistory();
+	if (history.size() >= 2)
+	{
+		return history[ history.size() - 2];
+	}
+	return bridge::Call::PASS();
 }
 
 std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand)
