@@ -21,9 +21,8 @@ public:
 	{
 		return isFinished;
 	}
-	Contract const & getContract() 
+	Contract const & getContract() const
 	{
-		findDeclarer();
 		return currentContract;
 	}
 	Call getLastCall() const

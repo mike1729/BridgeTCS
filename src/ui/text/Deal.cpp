@@ -43,7 +43,7 @@ void Deal::notify(const bridge::Deal & deal)
 		case bridge::DealEvent::BiddingEnd:
 		
 			{
-				bridge::Contract contract = deal.getValidatedContract();
+				bridge::Contract contract = deal.getContract();
 				std::cout << "Bidding finished. The contract is " << contract.level << " ";
 				Printer::print(contract.denomination);
 				std::cout << " declared by player " << contract.declarer << ".\n";
