@@ -39,26 +39,37 @@ bool operator <=( const Denomination &d1, const Denomination &d2 )
 	return true;
 }
 
-Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand)
+Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, Hand const & dummy)
 {
-	Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-	//TODO index validation
-	return hand.remove(card);
-}
-
-Card Arbiter::getCard(Play const & play, Hand const & myhand, BiddingHistory const & bhistory, PlayHistory const & phistory, Hand const & thand, Suit const & suit)
-{
-	//TODO index validation
-    if ( !hand.hasSuit(suit) ) 
+	//TODO handle dummy role
+	std::list<Card> cards = play.getTrick().getCards();
+	//TODO refactor
+	if (cards.size() == 0)
 	{
-	    Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-		return hand.remove(card);
+		while(true)
+		{
+			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			if(hand.hasCard(card))
+				return hand.remove(card);
+		}
 	}
-	
-    while (true)
+
+	Suit suit = (*cards.begin()).suit;
+	if(!hand.hasSuit(suit))
 	{
-		Card card = player.chooseCard(play, myhand, bhistory, phistory, thand);
-		if ( card.suit == suit ) return hand.remove(card);
+		while(true)
+		{
+			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			if(hand.hasCard(card))
+				return hand.remove(card);
+		}
+	}
+
+	while(true)
+	{
+		Card card = player.chooseCard(bidding, play, hand, &dummy);
+		if(hand.hasCard(card) && card.suit == suit)
+			return hand.remove(card);
 	}
 }
 
@@ -72,7 +83,7 @@ Call Arbiter::getCall(Bidding & bidding, Hand const & hand)
 		if ( CallType::BID == call.type && !( call.level > contract.level || ( call.level  == contract.level && call.denomination >= contract.denomination )) ) continue;
 		if ( CallType::DOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 1 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2) ) continue;
 		if ( CallType::REDOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 2 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2 ) ) continue;
-	    return call;
+		return call;
 	}
 }
 
