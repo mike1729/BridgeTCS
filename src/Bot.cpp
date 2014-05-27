@@ -90,9 +90,17 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 	return result;
 }
 
-bool Bot::isOpening(bridge::Bidding const &) const
+bool Bot::isOpening(bridge::Bidding const & bidding) const
 {
-	return true;
+	auto history = bidding.getHistory();
+	if (history.size() > 4)
+	{
+		return false;
+	} else if (history.size() < 2 || history[history.size() - 2].type == bridge::CallType::PASS)
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Bot::isBalanced(bridge::Hand const & hand) const
@@ -127,8 +135,14 @@ bool Bot::isBalanced(bridge::Hand const & hand) const
 	return true;
 }
 
-bridge::Call Bot::getPartnerCall(bridge::Bidding const &) const
+bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding) const
 {
+	auto history = bidding.getHistory();
+	if (history.size() >= 2)
+	{
+		return history[ history.size() - 2];
+	}
+
 	return bridge::Call::PASS();
 }
 
@@ -154,11 +168,9 @@ std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) c
 	return std::make_pair((bridge::Denomination) suit, length[suit]);
 }
 
-bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {
 	if (madeCall) return bridge::Call::PASS();
-
-	madeCall = true;
 
 	if (isOpening(bidding)) 
 	{
@@ -196,4 +208,34 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 	if (length > 3) return bridge::Call::BID(partnerCall.level + length - 3, denomination);
 
 	return bridge::Call::PASS();
+}
+
+bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+{
+	auto call = proposeCall(bidding, hand);
+
+	if (call.type == bridge::CallType::PASS)
+	{
+		return call;
+	}
+
+	auto history = bidding.getHistory();
+
+	int it = history.size() - 1;
+	while(it >= 0 && history[it].type != bridge::CallType::BID) it--;
+	
+	if (it >= 0)
+	{
+		auto lastCall = history[it];
+
+		if (lastCall.level > call.level ||
+			(lastCall.level == call.level && (int) lastCall.denomination > (int) lastCall.denomination))
+		{
+			return bridge::Call::PASS();
+		}
+	}
+
+	madeCall = true;
+
+	return call;
 }
