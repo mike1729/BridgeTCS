@@ -224,6 +224,8 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 	int it = history.size() - 1;
 	while(it >= 0 && history[it].type != bridge::CallType::BID) it--;
 	
+	madeCall = true;
+
 	if (it >= 0)
 	{
 		auto lastCall = history[it];
@@ -234,8 +236,6 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 			return bridge::Call::PASS();
 		}
 	}
-
-	madeCall = true;
 
 	return call;
 }
