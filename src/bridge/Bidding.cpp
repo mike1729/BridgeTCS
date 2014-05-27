@@ -11,15 +11,18 @@ void Bidding::makeCall(Call call)
 	switch ( call.type )
 	{
 		case CallType::BID :
+			consecutivePasses = 0;
 			currentContract.level = call.level;
 			currentContract.denomination = call.denomination;
 			currentContract.pointMultiplier = 1;
 			lastBidder = callNumber;
 			break;
 		case CallType::DOUBLE :
+			consecutivePasses = 0;
 			currentContract.pointMultiplier = 2;
 			break;
 		case CallType::REDOUBLE :
+			consecutivePasses = 0;
 			currentContract.pointMultiplier = 4;
 			break;
 		case CallType::PASS :

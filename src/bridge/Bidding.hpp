@@ -28,6 +28,8 @@ public:
 	}
 	Call getLastCall() const
 	{
+		if(history.empty())
+			return Call::PASS();
 		return history[ history.size() - 1];
 	}
 	int getCurrentCaller() const
