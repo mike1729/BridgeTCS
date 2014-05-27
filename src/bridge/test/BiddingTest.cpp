@@ -27,57 +27,42 @@ public:
 
 TEST_F(BiddingTest, FourPasses) 
 {
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
 	ASSERT_EQ(bidding->getContract().redeal, true);
-	ASSERT_EQ(bidding->makeCall(pass), false);
-	ASSERT_EQ(bidding->makeCall(oneClub), false);
 }
 
 TEST_F(BiddingTest, SimpleFinish) 
 {
-	ASSERT_EQ(bidding->makeCall(oneClub), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
+	bidding->makeCall(oneClub);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
 	Contract res = bidding->getContract();
 	ASSERT_EQ(res.redeal, false);
 	ASSERT_EQ(res.denomination, Denomination::CLUBS);
 	ASSERT_EQ(res.level, 1);
-	//TODO: declarer checking.
-	ASSERT_EQ(bidding->makeCall(pass), false);
-	ASSERT_EQ(bidding->makeCall(oneClub), false);
 }
 
 TEST_F(BiddingTest, RealFinish)
 {
-	ASSERT_EQ(bidding->makeCall(oneClub), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(oneHeart), true);
-	ASSERT_EQ(bidding->makeCall(doubleCall), true);
-	ASSERT_EQ(bidding->makeCall(twoHearts), true);
-	ASSERT_EQ(bidding->makeCall(threeDiamonds), true);
-	ASSERT_EQ(bidding->makeCall(threeSpades), true);
-	ASSERT_EQ(bidding->makeCall(fiveDiamonds), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
+	bidding->makeCall(oneClub);
+	bidding->makeCall(pass);
+	bidding->makeCall(oneHeart);
+	bidding->makeCall(doubleCall);
+	bidding->makeCall(twoHearts);
+	bidding->makeCall(threeDiamonds);
+	bidding->makeCall(threeSpades);
+	bidding->makeCall(fiveDiamonds);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
+	bidding->makeCall(pass);
 	Contract res = bidding->getContract();
 	ASSERT_EQ(res.redeal, false);
 	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
 	ASSERT_EQ(res.level, 5);
-	//TODO: declarer checking.
-	ASSERT_EQ(bidding->makeCall(pass), false);
-	ASSERT_EQ(bidding->makeCall(oneClub), false);
-}
-
-TEST_F(BiddingTest, WrongDouble)
-{
-	ASSERT_EQ(bidding->makeCall(oneClub), true);
-	ASSERT_EQ(bidding->makeCall(pass), true);
-	ASSERT_EQ(bidding->makeCall(doubleCall), false);
 }
 
 }
