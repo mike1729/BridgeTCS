@@ -47,9 +47,9 @@ public:
 	    return callNumber;
 	}
 	int getConsecutivePassesNumber() const
-    	{
-        	return consecutivePasses;
-    	}
+	{
+					return consecutivePasses;
+	}
 	int getFirstCaller() const
 	{
 		return firstCaller;
