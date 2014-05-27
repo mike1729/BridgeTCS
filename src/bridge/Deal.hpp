@@ -53,8 +53,7 @@ public:
 		return event;
 	}
 
-/* This function got provided because bidding.getContract had been written is const-discarding way. If one wants to delete it, they must ensure that bidding.getContract and all its calls are revalidated. */
-	const Contract & getValidatedContract() const 
+	const Contract & getContract() const 
 	{
 		return contract;
 	}

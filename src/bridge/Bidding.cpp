@@ -38,6 +38,7 @@ void Bidding::makeCall(Call call)
 			}
 			break;
 	}
+	findDeclarer();
 	callNumber++;
 	history.push_back(call);
 	sigModified(*this);
