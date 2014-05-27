@@ -33,7 +33,7 @@ public:
 	}
 	int getCurrentCaller() const
 	{
-		return (firstCaller + callNumber)%4;
+		return (firstCaller + history.size())%4;
 	}
 	int getLastBidder() const
 	{
@@ -45,7 +45,7 @@ public:
 	}
 	int getCallNumber() const
 	{
-	    return callNumber;
+	    return history.size();
 	}
 	int getConsecutivePassesNumber() const
 	{
@@ -62,7 +62,6 @@ private:
 	int lastBidder = 0;
 	int firstCaller;
 	History history;
-	int callNumber = 0;
 	//Call currentCall;
 	
 	void findDeclarer();

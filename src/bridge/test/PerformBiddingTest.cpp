@@ -87,7 +87,7 @@ TEST_F(PerformBiddingTest, RealFinish)
 	ASSERT_EQ(res.redeal, false);
 	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
 	ASSERT_EQ(res.level, 5);
-	ASSERT_EQ(res.declarer, 1);
+	ASSERT_EQ(1, res.declarer);
 }
 
 TEST_F(PerformBiddingTest, WrongDouble)
