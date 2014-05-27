@@ -15,17 +15,11 @@ void Deal::notify(const bridge::Deal & deal)
 		case bridge::DealEvent::CardsDealt:
 			{
 				bridge::Hands const & hands = deal.getHands();
-				/*for(auto it = hands.begin(); it != hands.end(); it++)
-					if() 
-					     
-				//TODO
-				      Validation whether this hand belongs to a living player
-				//\TODO		     
-					     
+				for(auto it = hands.begin(); it != hands.end(); it++){	      
 						it->sigModified.connect([this](bridge::Hand const & hand) {
 							this->handView.print(hand);
 						});
-				*/
+				}
 			}
 			break;
 			
