@@ -5,7 +5,7 @@ namespace bridge {
 
 void Game::start()
 {
-	deal = new Deal(arbiters, hands, 0);
+	deal.reset( new Deal(players, 0) );
 	sigModified(*this);
 	Contract contract = deal->performBidding();
 	deal->performPlay();
