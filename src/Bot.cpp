@@ -1,5 +1,10 @@
 #include "Bot.hpp"
 
+inline bool operator<(const bridge::Card & a, const bridge::Card & b)
+{
+	return ( a.suit == b.suit ) ? ( a.rank < b.rank ) : ( a.suit < b.suit );
+}
+
 bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const &)
 {
 	auto cards = play.getTrick().getCards();

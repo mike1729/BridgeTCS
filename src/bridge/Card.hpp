@@ -40,11 +40,8 @@ struct Card
 	{
 	}
 
-	inline bool operator<(const Card & other) {
-		return ( suit == other.suit ) ? ( rank < other.rank ) : ( suit < other.suit );
-	}
-
-	inline bool operator==(const Card & other) {
+	inline bool operator==(const Card & other) const
+	{
 		return suit == other.suit && rank == other.rank;
 	}
 };
