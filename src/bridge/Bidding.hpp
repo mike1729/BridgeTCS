@@ -37,19 +37,19 @@ public:
 	}
 	int getLastBidder() const
 	{
-        return lastBidder;
+		return lastBidder;
 	}
 	History const & getHistory() const
 	{
-	    return history;
+		return history;
 	}
 	int getCallNumber() const
 	{
-	    return history.size();
+		return history.size();
 	}
 	int getConsecutivePassesNumber() const
 	{
-					return consecutivePasses;
+		return consecutivePasses;
 	}
 	int getFirstCaller() const
 	{
