@@ -2,7 +2,7 @@
 
 namespace bridge {
 
-Card Player::chooseCard(Bidding const &, Play const &, Hand const & hand, Hand const *)
+Card Player::chooseCard(Bidding const &, Play const &, Hand const & hand, Hand const &)
 {
 	return hand.getCards().front();
 }
