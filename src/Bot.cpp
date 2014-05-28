@@ -1,6 +1,6 @@
 #include "Bot.hpp"
 
-bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const *)
+bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const &)
 {
 	auto cards = play.getTrick().getCards();
 	if (cards.size() > 0)

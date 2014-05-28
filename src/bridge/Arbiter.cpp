@@ -48,7 +48,7 @@ Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, H
 	{
 		while(true)
 		{
-			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			Card card = player.chooseCard(bidding, play, hand, dummy);
 			if(hand.hasCard(card))
 				return hand.remove(card);
 		}
@@ -59,7 +59,7 @@ Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, H
 	{
 		while(true)
 		{
-			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			Card card = player.chooseCard(bidding, play, hand, dummy);
 			if(hand.hasCard(card))
 				return hand.remove(card);
 		}
@@ -67,7 +67,7 @@ Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, H
 
 	while(true)
 	{
-		Card card = player.chooseCard(bidding, play, hand, &dummy);
+		Card card = player.chooseCard(bidding, play, hand, dummy);
 		if(hand.hasCard(card) && card.suit == suit)
 			return hand.remove(card);
 	}

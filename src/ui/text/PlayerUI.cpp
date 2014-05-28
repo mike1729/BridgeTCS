@@ -7,7 +7,7 @@ namespace text
 {
 
 //using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
 {
 	hand.sigModified(hand);
 	while(true)

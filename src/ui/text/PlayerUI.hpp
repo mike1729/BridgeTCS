@@ -16,7 +16,7 @@ namespace text
 class PlayerUI : public bridge::IPlayer
 {
 public:
-	virtual bridge::Card chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const *);
+	virtual bridge::Card chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &);
 	virtual bridge::Card chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &);
 	virtual bridge::Call makeCall(bridge::Bidding const &, bridge::Hand const &);
 };
