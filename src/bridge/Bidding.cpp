@@ -49,7 +49,7 @@ void Bidding::makeCall(Call call)
 void Bidding::findDeclarer()
 {
 	int declarer;
-	for (declarer = lastBidder%2 ; declarer<history.size() ; declarer += 2) 
+	for (declarer = lastBidder%2 ; declarer<static_cast<int>( history.size() ) ; declarer += 2) 
 		if (history[declarer].type == CallType::BID && history[declarer].denomination == currentContract.denomination)
 			break;
 	currentContract.declarer = (declarer+firstCaller)%4;
