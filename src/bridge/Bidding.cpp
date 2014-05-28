@@ -39,10 +39,6 @@ void Bidding::makeCall(Call call)
 			break;
 	}
 	history.push_back(call);
-	/*
-	 * It seems like this point is not always being reached
-	 * std::cout << "Here in Bidding.cpp after a call:" << (int)call.type << " " << lastBidder << "\n";
-	*/
 	findDeclarer();
 	sigModified(*this);
 }
@@ -56,9 +52,8 @@ void Bidding::findDeclarer()
 	for (declarer = lastBidder%2 ; declarer<history.size() ; declarer += 2) 
 		if (history[declarer].type == CallType::BID && history[declarer].denomination == currentContract.denomination)
 			break;
+	}
 	currentContract.declarer = (declarer+firstCaller)%4;
-	
-	std::cout << currentContract.declarer << "\n";
 }
 
 }

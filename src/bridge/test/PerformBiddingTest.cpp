@@ -3,6 +3,7 @@
 #include <queue>
 #include <iostream>
 
+
 namespace bridge {
 
 class BiddingPlayer : public IPlayer 
@@ -10,13 +11,15 @@ class BiddingPlayer : public IPlayer
 public:
 	std::queue<Call> toCall;
 
-	virtual Card chooseCard(Play const &, Hand const &, BiddingHistory const &, PlayHistory const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
+	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
+
+	virtual Card chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
 
 	virtual Call makeCall(Bidding const &, Hand const &)
-	{
+	{ 
 		if ( toCall.empty() )
 		{
-			return Call::PASS();
+				return Call::PASS();
 		}
 		Call res = toCall.front();
 		toCall.pop();
@@ -24,7 +27,7 @@ public:
 	}
 
 	void addCall(Call c)
-	{
+	{ 
 		toCall.push(c);
 	}
 };
@@ -32,7 +35,7 @@ public:
 class PerformBiddingTest: public ::testing::Test
 {
 public:
-	Hands hands;
+	Players players;
 	Call pass = Call::PASS();
 	Call oneClub = Call::BID(1, Denomination::CLUBS);
 	Call oneHeart = Call::BID(1, Denomination::HEARTS);
@@ -43,86 +46,102 @@ public:
 	Call doubleCall = Call::DOUBLE();
 	void SetUp()
 	{
+		for ( int i = 0; i < 4; i++ )
+		{
+			players[i].reset( new BiddingPlayer() );
+		}
 	}
 	void TearDown()
 	{
 	}
+
+	void addCall(int i, Call call ) {
+		reinterpret_cast<BiddingPlayer *>( players[i].get() ) -> addCall(call);
+	}
+
 };
 
 TEST_F(PerformBiddingTest, FourPasses) 
 {
-	std::array<BiddingPlayer, 4> players;
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Deal deal(arbiters, hands, 0);
-	ASSERT_EQ(deal.performBidding().redeal, true);
+	Deal deal(players, 0);
+	EXPECT_EQ(true, deal.performBidding().redeal);
 }
 
 TEST_F(PerformBiddingTest, SimpleFinish) 
 {
-	std::array<BiddingPlayer, 4> players;
-	players[0].addCall(oneClub);
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Deal deal(arbiters, hands, 0);
+	addCall(0, oneClub);
+	Deal deal(players, 0);
 	Contract res = deal.performBidding();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::CLUBS);
-	ASSERT_EQ(res.level, 1);
-	ASSERT_EQ(res.declarer, 0);
+	EXPECT_EQ(false, res.redeal);
+	EXPECT_EQ(Denomination::CLUBS, res.denomination);
+	EXPECT_EQ(1, res.level);
+	EXPECT_EQ(1, res.pointMultiplier);
+	EXPECT_EQ(0, res.declarer);
 }
 
 TEST_F(PerformBiddingTest, RealFinish)
 {
-	std::array<BiddingPlayer, 4> players;
-	players[0].addCall(oneClub);
-	players[1].addCall(pass);
-	players[2].addCall(oneHeart);
-	players[3].addCall(doubleCall);
-	players[0].addCall(twoHearts);
-	players[1].addCall(threeDiamonds);
-	players[2].addCall(threeSpades);
-	players[3].addCall(fiveDiamonds);
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Deal deal(arbiters, hands, 0);
+	addCall(0, oneClub);
+	addCall(1, pass);
+	addCall(2, oneHeart);
+	addCall(3, doubleCall);
+	addCall(0, twoHearts);
+	addCall(1, threeDiamonds);
+	addCall(2, threeSpades);
+	addCall(3, fiveDiamonds);
+	Deal deal(players, 0);
 	Contract res = deal.performBidding();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
-	ASSERT_EQ(res.level, 5);
-	ASSERT_EQ(1, res.declarer);
+	EXPECT_EQ(false, res.redeal);
+	EXPECT_EQ(Denomination::DIAMONDS, res.denomination);
+	EXPECT_EQ(5, res.level);
+	EXPECT_EQ(1, res.pointMultiplier);
+	EXPECT_EQ(1, res.declarer);
+}
+
+TEST_F(PerformBiddingTest, ValidDouble)
+{
+	addCall(0, oneClub);
+	addCall(1, doubleCall);
+	Deal deal(players, 0);
+	Contract res = deal.performBidding();
+	EXPECT_EQ(false, res.redeal);
+	EXPECT_EQ(Denomination::CLUBS, res.denomination);
+	EXPECT_EQ(1, res.level);
+	EXPECT_EQ(2, res.pointMultiplier);
+	EXPECT_EQ(0, res.declarer);
 }
 
 TEST_F(PerformBiddingTest, WrongDouble)
 {
-	std::array<BiddingPlayer, 4> players;
-	players[0].addCall(oneClub);
-	players[1].addCall(pass);
-	players[2].addCall(doubleCall);
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Deal deal(arbiters, hands, 0);
+	addCall(0, oneClub);
+	addCall(1, pass);
+	addCall(2, doubleCall);
+	Deal deal(players, 0);
 	Contract res = deal.performBidding();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::CLUBS);
-	ASSERT_EQ(res.level, 1);
-	ASSERT_EQ(res.declarer, 0);
+	EXPECT_EQ(false, res.redeal);
+	EXPECT_EQ(Denomination::CLUBS, res.denomination);
+	EXPECT_EQ(1, res.level);
+	EXPECT_EQ(1, res.pointMultiplier);
+	EXPECT_EQ(0, res.declarer);
 }
 
 TEST_F(PerformBiddingTest, RealFinishOtherStart)
 {
-	std::array<BiddingPlayer, 4> players;
-	players[1].addCall(oneClub);
-	players[2].addCall(pass);
-	players[3].addCall(oneHeart);
-	players[0].addCall(doubleCall);
-	players[1].addCall(twoHearts);
-	players[2].addCall(threeDiamonds);
-	players[3].addCall(threeSpades);
-	players[0].addCall(fiveDiamonds);
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Deal deal(arbiters, hands, 1);
+	addCall(1, oneClub);
+	addCall(2, pass);
+	addCall(3, oneHeart);
+	addCall(0, doubleCall);
+	addCall(1, twoHearts);
+	addCall(2, threeDiamonds);
+	addCall(3, threeSpades);
+	addCall(4, fiveDiamonds);
+	Deal deal(players, 1);
 	Contract res = deal.performBidding();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
-	ASSERT_EQ(res.level, 5);
-	ASSERT_EQ(res.declarer, 2);
+	EXPECT_EQ(false, res.redeal);
+	EXPECT_EQ(Denomination::DIAMONDS, res.denomination);
+	EXPECT_EQ(5, res.level);
+	EXPECT_EQ(1, res.pointMultiplier);
+	EXPECT_EQ(2, res.declarer);
 }
 
 }
