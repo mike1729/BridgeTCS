@@ -1,29 +1,35 @@
 #include <gtest/gtest.h>
 #include "bridge/Deal.hpp"
-#include <map>
+#include <set>
 #include <utility>
 
 namespace bridge {
 
+inline bool operator<(const Card & a, const Card & b) 
+{
+	return ( a.suit == b.suit ) ? ( a.rank < b.rank ) : ( a.suit < b.suit );
+}
+
 class DealPlayer : public IPlayer
 {
 public:
-	virtual int chooseCard() { return 0; }
-	virtual Call makeCall() { return Call::PASS(); }
+	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::TWO, Suit::CLUBS); }
+	virtual Card chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::TWO, Suit::CLUBS); }
+	virtual Call makeCall(Bidding const &, Hand const &) { return Call::PASS(); }
 };
 
 
 class DealCardsTest: public ::testing::Test
 {
 public:
-	Hands hands;
-	using mcard = std::pair<Suit, Rank>;
-	std::map<mcard, bool> noticed;
-	std::array<DealPlayer, 4> players;
-	Arbiters arbiters{ { {hands[0], players[0]}, {hands[1], players[1]}, {hands[2], players[2]}, {hands[3], players[3]} } };
-	Standard52Deck auxilaryDeck;
+	std::set<Card> noticed;
+	Players players;
 	void SetUp()
 	{
+		for ( int i = 0; i < 4; i++ )
+		{
+			players[i].reset( new DealPlayer() );
+		}
 	}
 	void TearDown()
 	{
@@ -32,104 +38,92 @@ public:
 
 TEST_F(DealCardsTest, StartFrom0) 
 {
-	Deal deal(arbiters, hands, 0);
+	Deal deal(players, 0);
 	deal.dealCards();
-	while (auxilaryDeck.cardsLeft())
-	{
-		Card card(auxilaryDeck.dealCard());
-		noticed[mcard(card.suit, card.rank)] = false;
-	}
 
-	EXPECT_EQ(hands[0].getHand().size(), 13);
-	EXPECT_EQ(hands[1].getHand().size(), 13);
-	EXPECT_EQ(hands[2].getHand().size(), 13);
-	EXPECT_EQ(hands[3].getHand().size(), 13);
+	Hands const & hands = deal.getHands();
+
+	EXPECT_EQ(13, hands[0].getCards().size());
+	EXPECT_EQ(13, hands[1].getCards().size());
+	EXPECT_EQ(13, hands[2].getCards().size());
+	EXPECT_EQ(13, hands[3].getCards().size());
 	
 	for (int i = 0; i < 4; ++i) 
 	{
-		std::list<Card> const & playerHand = hands[i].getHand();
-		for (Card const & card : playerHand)
+		auto playerCards = hands[i].getCards();
+		for (auto card : playerCards)
 		{
-			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
-			noticed[mcard(card.suit, card.rank)] = true;
+			EXPECT_EQ(0, noticed.count(card) );
+			noticed.insert(card);
 		}
-	}	
+	}
 }
 
 TEST_F(DealCardsTest, StartFrom1) 
 {
-	Deal deal(arbiters, hands, 1);
+	Deal deal(players, 1);
 	deal.dealCards();
-	while (auxilaryDeck.cardsLeft())
-	{
-		Card card(auxilaryDeck.dealCard());
-		noticed[mcard(card.suit, card.rank)] = false;
-	}
 
-	EXPECT_EQ(hands[0].getHand().size(), 13);
-	EXPECT_EQ(hands[1].getHand().size(), 13);
-	EXPECT_EQ(hands[2].getHand().size(), 13);
-	EXPECT_EQ(hands[3].getHand().size(), 13);
+	Hands const & hands = deal.getHands();
+
+	EXPECT_EQ(13, hands[0].getCards().size());
+	EXPECT_EQ(13, hands[1].getCards().size());
+	EXPECT_EQ(13, hands[2].getCards().size());
+	EXPECT_EQ(13, hands[3].getCards().size());
 	
 	for (int i = 0; i < 4; ++i) 
 	{
-		std::list<Card> const & playerHand = hands[i].getHand();
-		for (Card const & card : playerHand)
+		auto playerCards = hands[i].getCards();
+		for (auto card : playerCards)
 		{
-			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
-			noticed[mcard(card.suit, card.rank)] = true;
+			EXPECT_EQ(0, noticed.count(card) );
+			noticed.insert(card);
 		}
 	}
 }
 
 TEST_F(DealCardsTest, StartFrom2) 
 {
-	Deal deal(arbiters, hands, 2);
+	Deal deal(players, 2);
 	deal.dealCards();
-	while (auxilaryDeck.cardsLeft())
-	{
-		Card card(auxilaryDeck.dealCard());
-		noticed[mcard(card.suit, card.rank)] = false;
-	}
 
-	EXPECT_EQ(hands[0].getHand().size(), 13);
-	EXPECT_EQ(hands[1].getHand().size(), 13);
-	EXPECT_EQ(hands[2].getHand().size(), 13);
-	EXPECT_EQ(hands[3].getHand().size(), 13);
+	Hands const & hands = deal.getHands();
+
+	EXPECT_EQ(13, hands[0].getCards().size());
+	EXPECT_EQ(13, hands[1].getCards().size());
+	EXPECT_EQ(13, hands[2].getCards().size());
+	EXPECT_EQ(13, hands[3].getCards().size());
 	
 	for (int i = 0; i < 4; ++i) 
 	{
-		std::list<Card> const & playerHand = hands[i].getHand();
-		for (Card const & card : playerHand)
+		auto playerCards = hands[i].getCards();
+		for (auto card : playerCards)
 		{
-			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
-			noticed[mcard(card.suit, card.rank)] = true;
+			EXPECT_EQ(0, noticed.count(card) );
+			noticed.insert(card);
 		}
 	}
 }
 
 TEST_F(DealCardsTest, StartFrom3) 
 {
-	Deal deal(arbiters, hands, 3);
+	Deal deal(players, 3);
 	deal.dealCards();
-	while (auxilaryDeck.cardsLeft())
-	{
-		Card card(auxilaryDeck.dealCard());
-		noticed[mcard(card.suit, card.rank)] = false;
-	}
 
-	EXPECT_EQ(hands[0].getHand().size(), 13);
-	EXPECT_EQ(hands[1].getHand().size(), 13);
-	EXPECT_EQ(hands[2].getHand().size(), 13);
-	EXPECT_EQ(hands[3].getHand().size(), 13);
+	Hands const & hands = deal.getHands();
+
+	EXPECT_EQ(13, hands[0].getCards().size());
+	EXPECT_EQ(13, hands[1].getCards().size());
+	EXPECT_EQ(13, hands[2].getCards().size());
+	EXPECT_EQ(13, hands[3].getCards().size());
 	
 	for (int i = 0; i < 4; ++i) 
 	{
-		std::list<Card> const & playerHand = hands[i].getHand();
-		for (Card const & card : playerHand)
+		auto playerCards = hands[i].getCards();
+		for (auto card : playerCards)
 		{
-			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
-			noticed[mcard(card.suit, card.rank)] = true;
+			EXPECT_EQ(0, noticed.count(card) );
+			noticed.insert(card);
 		}
 	}
 }
