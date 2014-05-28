@@ -55,7 +55,7 @@ void trickTestCommon (
 	trick.add(std::move(card4));
 	
 	int winner = trick.getWinner();
-	ASSERT_EQ(winner, anticipatedWinner);
+	EXPECT_EQ(winner, anticipatedWinner);
 	
 }
 

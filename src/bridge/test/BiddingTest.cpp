@@ -31,7 +31,7 @@ TEST_F(BiddingTest, FourPasses)
 	bidding->makeCall(pass);
 	bidding->makeCall(pass);
 	bidding->makeCall(pass);
-	ASSERT_EQ(bidding->getContract().redeal, true);
+	EXPECT_EQ(bidding->getContract().redeal, true);
 }
 
 TEST_F(BiddingTest, SimpleFinish) 
@@ -41,9 +41,9 @@ TEST_F(BiddingTest, SimpleFinish)
 	bidding->makeCall(pass);
 	bidding->makeCall(pass);
 	Contract res = bidding->getContract();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::CLUBS);
-	ASSERT_EQ(res.level, 1);
+	EXPECT_EQ(res.redeal, false);
+	EXPECT_EQ(res.denomination, Denomination::CLUBS);
+	EXPECT_EQ(res.level, 1);
 }
 
 TEST_F(BiddingTest, RealFinish)
@@ -60,9 +60,9 @@ TEST_F(BiddingTest, RealFinish)
 	bidding->makeCall(pass);
 	bidding->makeCall(pass);
 	Contract res = bidding->getContract();
-	ASSERT_EQ(res.redeal, false);
-	ASSERT_EQ(res.denomination, Denomination::DIAMONDS);
-	ASSERT_EQ(res.level, 5);
+	EXPECT_EQ(res.redeal, false);
+	EXPECT_EQ(res.denomination, Denomination::DIAMONDS);
+	EXPECT_EQ(res.level, 5);
 }
 
 }

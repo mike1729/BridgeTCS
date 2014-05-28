@@ -8,7 +8,7 @@ namespace bridge {
 TEST(DeckTest, cardsLeftAll)
 {
 	Standard52Deck deck = Standard52Deck();
-	ASSERT_EQ(deck.cardsLeft(), 52);
+	EXPECT_EQ(deck.cardsLeft(), 52);
 }
 
 bool containsEach(std::vector<std::pair<Suit, Rank> > cards)
@@ -35,7 +35,7 @@ TEST(DeckTest, containsEachCard)
 		cards.push_back(std::make_pair(card.suit, card.rank));
 	}
 
-	ASSERT_EQ(containsEach(cards), true);
+	EXPECT_EQ(containsEach(cards), true);
 }
 
 TEST(DeckTest, shuffledContainsEachCard)
@@ -49,7 +49,7 @@ TEST(DeckTest, shuffledContainsEachCard)
 		cards.push_back(std::make_pair(card.suit, card.rank));
 	}
 
-	ASSERT_EQ(containsEach(cards), true);
+	EXPECT_EQ(containsEach(cards), true);
 }
 
 }

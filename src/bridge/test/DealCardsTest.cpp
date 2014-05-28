@@ -40,17 +40,17 @@ TEST_F(DealCardsTest, StartFrom0)
 		noticed[mcard(card.suit, card.rank)] = false;
 	}
 
-	ASSERT_EQ(hands[0].getHand().size(), 13);
-	ASSERT_EQ(hands[1].getHand().size(), 13);
-	ASSERT_EQ(hands[2].getHand().size(), 13);
-	ASSERT_EQ(hands[3].getHand().size(), 13);
+	EXPECT_EQ(hands[0].getHand().size(), 13);
+	EXPECT_EQ(hands[1].getHand().size(), 13);
+	EXPECT_EQ(hands[2].getHand().size(), 13);
+	EXPECT_EQ(hands[3].getHand().size(), 13);
 	
 	for (int i = 0; i < 4; ++i) 
 	{
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
+			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}	
@@ -66,17 +66,17 @@ TEST_F(DealCardsTest, StartFrom1)
 		noticed[mcard(card.suit, card.rank)] = false;
 	}
 
-	ASSERT_EQ(hands[0].getHand().size(), 13);
-	ASSERT_EQ(hands[1].getHand().size(), 13);
-	ASSERT_EQ(hands[2].getHand().size(), 13);
-	ASSERT_EQ(hands[3].getHand().size(), 13);
+	EXPECT_EQ(hands[0].getHand().size(), 13);
+	EXPECT_EQ(hands[1].getHand().size(), 13);
+	EXPECT_EQ(hands[2].getHand().size(), 13);
+	EXPECT_EQ(hands[3].getHand().size(), 13);
 	
 	for (int i = 0; i < 4; ++i) 
 	{
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
+			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}
@@ -92,17 +92,17 @@ TEST_F(DealCardsTest, StartFrom2)
 		noticed[mcard(card.suit, card.rank)] = false;
 	}
 
-	ASSERT_EQ(hands[0].getHand().size(), 13);
-	ASSERT_EQ(hands[1].getHand().size(), 13);
-	ASSERT_EQ(hands[2].getHand().size(), 13);
-	ASSERT_EQ(hands[3].getHand().size(), 13);
+	EXPECT_EQ(hands[0].getHand().size(), 13);
+	EXPECT_EQ(hands[1].getHand().size(), 13);
+	EXPECT_EQ(hands[2].getHand().size(), 13);
+	EXPECT_EQ(hands[3].getHand().size(), 13);
 	
 	for (int i = 0; i < 4; ++i) 
 	{
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
+			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}
@@ -118,17 +118,17 @@ TEST_F(DealCardsTest, StartFrom3)
 		noticed[mcard(card.suit, card.rank)] = false;
 	}
 
-	ASSERT_EQ(hands[0].getHand().size(), 13);
-	ASSERT_EQ(hands[1].getHand().size(), 13);
-	ASSERT_EQ(hands[2].getHand().size(), 13);
-	ASSERT_EQ(hands[3].getHand().size(), 13);
+	EXPECT_EQ(hands[0].getHand().size(), 13);
+	EXPECT_EQ(hands[1].getHand().size(), 13);
+	EXPECT_EQ(hands[2].getHand().size(), 13);
+	EXPECT_EQ(hands[3].getHand().size(), 13);
 	
 	for (int i = 0; i < 4; ++i) 
 	{
 		std::list<Card> const & playerHand = hands[i].getHand();
 		for (Card const & card : playerHand)
 		{
-			ASSERT_EQ(noticed[mcard(card.suit, card.rank)], false);
+			EXPECT_EQ(noticed[mcard(card.suit, card.rank)], false);
 			noticed[mcard(card.suit, card.rank)] = true;
 		}
 	}

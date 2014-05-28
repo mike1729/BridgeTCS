@@ -28,8 +28,8 @@ TEST_F(HandTest, SimpleInsertRemove)
 	Rank r = c.rank;
 	hand->insert(c);
 	Card c1 = hand->remove(0);
-	ASSERT_EQ(c1.suit, s);
-	ASSERT_EQ(c1.rank, r);
+	EXPECT_EQ(c1.suit, s);
+	EXPECT_EQ(c1.rank, r);
 }
 
 
@@ -40,7 +40,7 @@ TEST_F(HandTest, SimpleInsertRemoveAll)
 	hand->insert(deck->dealCard());
 	hand->insert(deck->dealCard());
 	hand->removeAll();
-	ASSERT_EQ(0, hand->getHand().size());
+	EXPECT_EQ(0, hand->getHand().size());
 }
 
 }
