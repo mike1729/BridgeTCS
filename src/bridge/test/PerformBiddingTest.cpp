@@ -134,7 +134,7 @@ TEST_F(PerformBiddingTest, RealFinishOtherStart)
 	addCall(1, twoHearts);
 	addCall(2, threeDiamonds);
 	addCall(3, threeSpades);
-	addCall(4, fiveDiamonds);
+	addCall(0, fiveDiamonds);
 	Deal deal(players, 1);
 	Contract res = deal.performBidding();
 	EXPECT_EQ(false, res.redeal);
