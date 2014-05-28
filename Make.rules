@@ -13,7 +13,7 @@ BINDIRECTORY=$(PROJECTROOT)/bin
 MAINDEPLIBS=$(BINDIRECTORY)/libmain.a
 MAINTARGET=$(BINDIRECTORY)/BridgeTCS
 
-all: $(MAINTARGET)
+all: fulltest $(MAINTARGET)
 
 library: $(LIBRARY)
 
@@ -25,6 +25,14 @@ $(TESTTARGETS): %.run: %
 clean :
 	rm -f $(OBJECTS) $(TESTEXECUTABLES) $(TESTOBJECTS) $(LIBRARY) $(OBJECTDEPFILES) $(TESTSOURCES:.cpp=.d)
 
+fulltest :
+	make -C $(PROJECTROOT) test
+	make -C $(PROJECTROOT)/src test
+	make -C $(PROJECTROOT)/src/bridge test
+	make -C $(PROJECTROOT)/src/viewmodel test
+	make -C $(PROJECTROOT)/src/ui test
+	make -C $(PROJECTROOT)/src/ui/text test
+
 fullclean :
 	make -C $(PROJECTROOT) clean
 	make -C $(PROJECTROOT)/src clean
@@ -34,7 +42,7 @@ fullclean :
 	make -C $(PROJECTROOT)/src/ui/text clean
 	rm -f $(MAINTARGET)
 
-.PHONY : all library test clean fullclean $(TESTTARGETS)
+.PHONY : all library test clean fulltest fullclean $(TESTTARGETS)
 
 -include $(OBJECTDEPFILES)
 -include $(TESTSOURCES:.cpp=.d)
