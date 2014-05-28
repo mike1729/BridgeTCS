@@ -52,7 +52,6 @@ void Bidding::findDeclarer()
 	for (declarer = lastBidder%2 ; declarer<history.size() ; declarer += 2) 
 		if (history[declarer].type == CallType::BID && history[declarer].denomination == currentContract.denomination)
 			break;
-	}
 	currentContract.declarer = (declarer+firstCaller)%4;
 }
 
