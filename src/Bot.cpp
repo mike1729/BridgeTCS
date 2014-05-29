@@ -249,7 +249,7 @@ bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand cons
 		else if (points > 14 && points < 18 && isBalanced(hand)) return bridge::Call::BID(1, bridge::Denomination::NT);
 		else if (points < 18) return bridge::Call::BID(1, longer.first);
 		else if (points > 20 && points < 24 && isBalanced(hand)) return bridge::Call::BID(2, bridge::Denomination::NT);
-		else if (points < 25) return bridge::Call::BID(2, longer.first);
+		else if (points < 25 && longer.second > 4) return bridge::Call::BID(2, longer.first);
 		else return bridge::Call::BID(3, bridge::Denomination::NT);
 	}
 
@@ -265,8 +265,8 @@ bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand cons
 		else if (partnerCall.level == 2) points += 21;
 		else points += 25;
 
-		if (points/3 <= partnerCall.level) return bridge::Call::PASS();
-		return bridge::Call::BID(points/3, denomination);
+		if (points / 3 - 6 <= partnerCall.level) return bridge::Call::PASS();
+		return bridge::Call::BID(points / 3 - 6, denomination);
 	}
 
 	int length = cardsInSuit(hand, (bridge::Suit)(int)denomination);
