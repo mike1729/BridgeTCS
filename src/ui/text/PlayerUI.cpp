@@ -71,6 +71,7 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand co
 {
 	while(true)
 	{
+		hand.sigModified(hand);
 		std::cout << "Make a bid\nFormat: [1-7] [1-5] | p[ass] | d[ouble] | r[edouble]\n";
 		
 		std::string in;
