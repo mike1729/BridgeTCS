@@ -2,43 +2,6 @@
 
 namespace bridge {
 
-bool operator <=( const Denomination &d1, const Denomination &d2 )
-{
-	if ( d2 == Denomination::NT )
-	{
-		return true;
-	}
-	if ( d2 == Denomination::SPADES )
-	{
-		if ( d1 == Denomination::NT )
-		{
-			return false;
-		}
-		return true;
-	}
-	if ( d2 == Denomination::HEARTS )
-	{
-		if ( d1 == Denomination::NT || d1 == Denomination::SPADES )
-		{
-			return false;
-		}
-		return true;
-	}
-	if ( d2 == Denomination::DIAMONDS )
-	{
-		if ( d1 == Denomination::NT || d1 == Denomination::SPADES || d1 == Denomination::HEARTS )
-		{
-			return false;
-		}
-		return true;
-	}
-	if ( d1 != Denomination::CLUBS )
-	{
-		return false;
-	}
-	return true;
-}
-
 Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, Hand const & dummy)
 {
 	//TODO handle dummy role
@@ -73,17 +36,45 @@ Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, H
 	}
 }
 
-Call Arbiter::getCall(Bidding & bidding, Hand const & hand) 
+bool Arbiter::isValid(Call call, Bidding const & bidding)
 {
 	Contract contract = bidding.getContract();
-	
+	switch(call.type) 
+	{
+	case CallType::BID:
+		if ( call.level < contract.level )
+			return false;
+		if ( call.level == contract.level && call.denomination <= contract.denomination )
+			return false;
+		return true;
+	case CallType::DOUBLE:
+		if ( contract.level == 0 )
+			return false;
+		if ( contract.pointMultiplier != 1 )
+			return false;
+		if ( bidding.getLastBidder()%2 == bidding.getCallNumber()%2 )
+			return false;
+		return true;
+	case CallType::REDOUBLE:
+		if ( contract.level == 0 )
+			return false;
+		if ( contract.pointMultiplier != 2 )
+			return false;
+		if ( bidding.getLastBidder()%2 != bidding.getCallNumber()%2 )
+			return false;
+		return true;
+	case CallType::PASS:
+		return true;
+	}
+}
+
+Call Arbiter::getCall(Bidding const & bidding, Hand const & hand) 
+{
 	while (true) 
 	{
 		Call call = player.makeCall(bidding, hand);
-		if ( CallType::BID == call.type && !( call.level > contract.level || ( call.level  == contract.level && call.denomination >= contract.denomination )) ) continue;
-		if ( CallType::DOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 1 || bidding.getLastBidder()%2 == bidding.getCallNumber()%2) ) continue;
-		if ( CallType::REDOUBLE == call.type && ( contract.level == 0 || contract.pointMultiplier != 2 || bidding.getLastBidder()%2 != bidding.getCallNumber()%2 ) ) continue;
-		return call;
+		if ( isValid(call, bidding) )
+			return call;
 	}
 }
 

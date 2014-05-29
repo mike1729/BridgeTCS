@@ -16,7 +16,7 @@ public:
 	enum class Role { NORMAL, DUMMY };
 	Arbiter(IPlayer &player): player(player) {}
 	Card getCard(Play const &, Hand &, Bidding const &, Hand const &);
-	Call getCall(Bidding &, Hand const &);
+	Call getCall(Bidding const &, Hand const &);
 	void setRole(Role role)
 	{
 		this->role = role;
@@ -28,6 +28,7 @@ public:
 private:
 	IPlayer &player;
 	Role role;
+	bool isValid(Call, Bidding const &);
 };
 
 }
