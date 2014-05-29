@@ -13,6 +13,7 @@ Standard52Deck::Standard52Deck()
 
 void Standard52Deck::shuffle()
 {
+	std::srand(std::time(0));
 	std::random_shuffle(deck.begin(), deck.end());
 }
 

@@ -7,6 +7,7 @@ namespace bridge
 void Deal::dealCards()
 {
 	Standard52Deck deck;
+	deck.shuffle();
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
 	{
 		hands[currentPlayer].insert(deck.dealCard());
