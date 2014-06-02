@@ -33,7 +33,12 @@ class Deal: public ui::Observable<Deal>
 {
 public:
 
-	Deal(const Players & players, int firstCaller) : arbiters{{{*players[0]}, {*players[1]},{*players[2]}, {*players[3]}}}, firstCaller(firstCaller)
+	Deal(const Players & players, int firstCaller) : arbiters{{
+		{*players[0], *players[2]},
+		{*players[1], *players[3]},
+		{*players[2], *players[0]},
+		{*players[3], *players[1]}}},
+		firstCaller(firstCaller)
 	{
 	}
 

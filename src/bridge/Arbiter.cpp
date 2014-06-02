@@ -18,18 +18,22 @@ bool Arbiter::validateCard(Card & card, Hand & hand, Play const & play)
 	return true;
 }
 
-Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, Hand const & dummy)
+Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, Hand & dummy)
 {
 	if(role == Role::DUMMY)
-	{
-		//TODO handle dummy role
-	}
-	while(true)
-	{
-		Card card = player.chooseCard(bidding, play, hand, dummy);
-		if(validateCard(card, hand, play))
-			return hand.remove(card);
-	}
+		while(true)
+		{
+			Card card = partner.chooseCardFromDummy(bidding, play, *partnerHand, dummy);
+			if(validateCard(card, dummy, play))
+				return dummy.remove(card);
+		}
+	else
+		while(true)
+		{
+			Card card = player.chooseCard(bidding, play, hand, dummy);
+			if(validateCard(card, hand, play))
+				return hand.remove(card);
+		}
 }
 
 bool Arbiter::isValid(Call call, Bidding const & bidding)
