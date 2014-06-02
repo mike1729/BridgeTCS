@@ -2,36 +2,32 @@
 
 namespace bridge {
 
-Card Arbiter::getCard(Play const & play, Hand & hand, Bidding const & bidding, Hand const & dummy)
+bool Arbiter::validateCard(Card & card, Hand & hand, Play const & play)
 {
-	//TODO handle dummy role
-	std::list<Card> cards = play.getTrick().getCards();
-	//TODO refactor
-	if (cards.size() == 0)
-	{
-		while(true)
-		{
-			Card card = player.chooseCard(bidding, play, hand, dummy);
-			if(hand.hasCard(card))
-				return hand.remove(card);
-		}
-	}
+	if(!hand.hasCard(card))
+		return false;
 
-	Suit suit = (*cards.begin()).suit;
-	if(!hand.hasSuit(suit))
-	{
-		while(true)
-		{
-			Card card = player.chooseCard(bidding, play, hand, dummy);
-			if(hand.hasCard(card))
-				return hand.remove(card);
-		}
-	}
+	std::list<Card> const & cards = play.getTrick().getCards();
+	if(cards.empty())
+		return true;
 
+	Suit suit = cards.front().suit;
+	if(hand.hasSuit(suit) && card.suit != suit)
+		return false;
+
+	return true;
+}
+
+Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, Hand const & dummy)
+{
+	if(role == Role::DUMMY)
+	{
+		//TODO handle dummy role
+	}
 	while(true)
 	{
 		Card card = player.chooseCard(bidding, play, hand, dummy);
-		if(hand.hasCard(card) && card.suit == suit)
+		if(validateCard(card, hand, play))
 			return hand.remove(card);
 	}
 }

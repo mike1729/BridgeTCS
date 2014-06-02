@@ -43,7 +43,7 @@ DealResult Deal::performPlay()
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			play->add(arbiters[currentPlayer].getCard(*play, hands[currentPlayer], *bidding, hands[(contract.declarer + 2) % 4]));
+			play->add(arbiters[currentPlayer].getCard(*bidding, *play, hands[currentPlayer], hands[(contract.declarer + 2) % 4]));
 			currentPlayer = (currentPlayer+1)%4;
 		}
 		currentPlayer = play->getLastTrickWinner();
