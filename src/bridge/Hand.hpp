@@ -18,6 +18,7 @@ class Hand: public ui::Observable<Hand>
 		std::list<Card> const & getCards() const;
 		bool hasSuit( Suit suit ) const;
 		bool hasCard( Card card ) const;
+		void sort();
 	private:
 		std::list<Card> hand;
 };

@@ -9,9 +9,9 @@ void Deal::dealCards()
 	Standard52Deck deck;
 	deck.shuffle();
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
-	{
 		hands[currentPlayer].insert(deck.dealCard());
-	}
+	for (int i = 0; i < 4; i++)
+		hands[i].sort();
 	event = DealEvent::CardsDealt;
 	sigModified(*this);
 }

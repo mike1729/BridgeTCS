@@ -36,9 +36,9 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	{
 		Printer::print(card.rank);
 		Printer::print(card.suit);
-		std::cout << "\n";
+		std::cout << "  ";
 	}
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 }
 
 /*static*/ void Printer::print(bridge::Play::Trick const & trick)
