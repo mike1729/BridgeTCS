@@ -13,7 +13,7 @@ inline bool operator<(const Card & a, const Card & b)
 class DealPlayer : public IPlayer
 {
 public:
-	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::TWO, Suit::CLUBS); }
+	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const *) { return Card(Rank::TWO, Suit::CLUBS); }
 	virtual Card chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::TWO, Suit::CLUBS); }
 	virtual Call makeCall(Bidding const &, Hand const &) { return Call::PASS(); }
 };

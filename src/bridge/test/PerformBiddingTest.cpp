@@ -11,7 +11,7 @@ class BiddingPlayer : public IPlayer
 public:
 	std::queue<Call> toCall;
 
-	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
+	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const *) { return Card(Rank::ACE, Suit::SPADES); }
 
 	virtual Card chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const &) { return Card(Rank::ACE, Suit::SPADES); }
 

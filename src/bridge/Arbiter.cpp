@@ -33,7 +33,7 @@ Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, H
 	else
 		while(true)
 		{
-			Card card = player.chooseCard(bidding, play, hand, dummy);
+			Card card = player.chooseCard(bidding, play, hand, &dummy);
 			if(validateCard(card, hand, play))
 			{
 				hand.remove(card);

@@ -14,7 +14,7 @@ inline bool operator<=(const bridge::Card & a, const bridge::Card & b)
 /* Simple startegy: if bot can beat cards from trick (has card higher than every card in trick)
  * or is first-turn player, then throw maximal possesed card.
  * In other case bot returns the lowest possessed card. */
-bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const &)
+bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const *)
 {
 	auto cards = play.getTrick().getCards();
 	if (cards.size() > 0)
@@ -52,7 +52,7 @@ bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play,
 		}
 		else return minCard(hand);
 	}
-	else return maxCard(	hand);
+	else return maxCard(hand);
 }
 
 
