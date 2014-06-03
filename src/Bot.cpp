@@ -4,6 +4,12 @@ inline bool operator<(const bridge::Card & a, const bridge::Card & b)
 {
 	return ( a.suit == b.suit ) ? ( a.rank < b.rank ) : ( a.suit < b.suit );
 }
+inline bool operator<=(const bridge::Card & a, const bridge::Card & b)
+{
+	return ( a.suit == b.suit ) ? ( a.rank <= b.rank ) : ( a.suit <= b.suit );
+}
+
+
 
 bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const &)
 {
@@ -43,7 +49,7 @@ bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play,
 		}
 		else return minCard(hand);
 	}
-	else return maxCard(hand);
+	else return maxCard(	hand);
 }
 
 
@@ -100,7 +106,7 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && c < card)
+		if (c.suit == suit && c <= card)
 			card=c;
 	return card;
 }
@@ -109,7 +115,7 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && card < c)
+		if (c.suit == suit && card <= c)
 			card = c;
 	return card;
 }
@@ -118,7 +124,7 @@ bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
 	for (auto c : hand.getCards())
-		if (c.rank < card.rank)
+		if (c.rank <= card.rank)
 			card = c;
 	return card;
 }
@@ -127,7 +133,7 @@ bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
 	for (auto c : hand.getCards())
-		if (card.rank < c.rank)
+		if (card.rank <= c.rank)
 			card = c;
 	return card;
 }
