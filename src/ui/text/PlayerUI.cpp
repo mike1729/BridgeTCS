@@ -12,7 +12,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 	hand.sigModified(hand);
 	while(true)
 	{
-		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [1-4]\n";
+		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\u2663=1, \u2666=2, \u2665=3, \u2660=4]\n";
 		std::string rankStr, delimiter = " ";
 		std::cin >> rankStr;
 		bridge::Rank rank;
