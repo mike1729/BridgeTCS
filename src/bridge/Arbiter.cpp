@@ -55,7 +55,7 @@ bool Arbiter::isValid(Call call, Bidding const & bidding)
 	switch(call.type) 
 	{
 	case CallType::BID:
-		if ( call.level < contract.level )
+		if ( call.level < 1 || call.level > 7 || call.level < contract.level )
 			return false;
 		if ( call.level == contract.level && call.denomination <= contract.denomination )
 			return false;
