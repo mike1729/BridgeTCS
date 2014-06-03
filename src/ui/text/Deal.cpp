@@ -25,7 +25,7 @@ void Deal::notify(const bridge::Deal & deal)
 		
 			{
 				const bridge::Bidding & bidding = deal.getBidding();
-				std::cout << "Player " << bidding.getFirstCaller() << " starts bidding.\n";
+				std::cout << "Player " << bidding.getFirstCaller() + 1 << " starts bidding.\n";
 				bidding.sigModified.connect([this](bridge::Bidding const & bidding) {
 					this->biddingView.print(bidding);
 				});
