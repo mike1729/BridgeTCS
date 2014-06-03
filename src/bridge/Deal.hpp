@@ -19,7 +19,7 @@ using Players = std::array<std::unique_ptr<IPlayer>, 4>;
 
 enum class DealEvent
 {	
-	CardsDealt, BiddingStart, BiddingEnd, PlayStart, PlayEnd
+	InitState, CardsDealt, BiddingStart, BiddingEnd, PlayStart, PlayEnd
 };
 
 struct DealResult
@@ -28,7 +28,9 @@ struct DealResult
 	int declarerTakenTricks;
 };
 
-
+/*
+ *  Performs deal cards, bidding and play.
+ */
 class Deal: public ui::Observable<Deal>
 {
 public:
@@ -38,7 +40,8 @@ public:
 		{*players[1], *players[3]},
 		{*players[2], *players[0]},
 		{*players[3], *players[1]}}},
-		firstCaller(firstCaller)
+		firstCaller(firstCaller),
+		event(DealEvent::InitState)
 	{
 	}
 
@@ -72,7 +75,7 @@ private:
 	Contract contract;
 	Arbiters arbiters;
 	Hands hands;
-	int firstCaller;
+	int firstCaller; // index of player which is the first to make a call
 	std::unique_ptr<Bidding> bidding;
 	std::unique_ptr<Play> play;
 	DealResult result;

@@ -12,10 +12,10 @@ class Hand: public ui::Observable<Hand>
 {
 	public:
 		void insert(Card);
-		Card remove(int);
 		Card remove(Card const &);
 		void removeAll();
 		std::list<Card> const & getCards() const;
+		// check if hand contains a card of certain suit
 		bool hasSuit( Suit suit ) const;
 		bool hasCard( Card card ) const;
 		void sort();
