@@ -33,3 +33,6 @@ BridgeTCS
 
 # Dynamically created dependency files
 *.d
+
+#Binary files
+!*.*

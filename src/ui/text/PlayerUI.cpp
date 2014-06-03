@@ -35,7 +35,7 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 				continue;
 			}
 			if(rankInt<= 10 && rankInt >= 2)
-				rank = static_cast<bridge::Rank>(std::stoi(rankStr));
+				rank = static_cast<bridge::Rank>(std::stoi(rankStr) - 2);
 			else 
 			{
 				std::cout << "Wrong rank format.\n";
@@ -55,7 +55,7 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 			continue;
 		}
 		if(suitInt >=1 && suitInt<=4)
-			suit = static_cast<bridge::Suit>(suitInt);
+			suit = static_cast<bridge::Suit>(suitInt - 1);
 		else
 		{
 			std::cout << "Wrong suit format.\n";
