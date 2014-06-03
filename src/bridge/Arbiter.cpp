@@ -66,6 +66,7 @@ bool Arbiter::isValid(Call call, Bidding const & bidding)
 	case CallType::PASS:
 		return true;
 	}
+	return false;
 }
 
 Call Arbiter::getCall(Bidding const & bidding, Hand const & hand) 
