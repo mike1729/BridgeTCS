@@ -9,6 +9,8 @@
 
 namespace bridge {
 
+using PlayerID = int;
+
 class IPlayer : public ui::Observable<IPlayer>
 {
 public:

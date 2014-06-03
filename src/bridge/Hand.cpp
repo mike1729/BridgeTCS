@@ -35,17 +35,17 @@ std::list<Card> const & Hand::getCards() const
 
 bool Hand::hasCard( Card card ) const
 {
-	auto it = hand.begin();
-	while( it->suit != card.suit || it->rank != card.rank ) it++;
-	if( it != hand.end() ) return true;
+	for(auto it = hand.begin(); it != hand.end(); it++)
+		if(it->suit != card.suit && it->rank != card.rank)
+			return true;
 	return false;
 }
 
 bool Hand::hasSuit( Suit suit ) const
 {
-	auto it = hand.begin();
-	while( it->suit != suit ) it++;
-	if( it != hand.end() ) return true;
+	for(auto it = hand.begin(); it != hand.end(); it++)
+		if(it->suit == suit)
+			return true;
 	return false;
 }
 

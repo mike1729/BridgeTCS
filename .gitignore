@@ -6,6 +6,7 @@
 ###################### Executable #####################
 
 BridgeTCS
+*Test
 
 ################# C++ connected files #################
 
@@ -33,3 +34,4 @@ BridgeTCS
 
 # Dynamically created dependency files
 *.d
+
