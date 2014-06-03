@@ -6,12 +6,9 @@
 ###################### Executable #####################
 
 BridgeTCS
+*Test
 
 ################# C++ connected files #################
-
-# Binary files
-*
-!*.*
 
 # Compiled Object files
 *.slo

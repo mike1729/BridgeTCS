@@ -5,18 +5,6 @@ namespace bridge {
 void Hand::insert(Card c)
 {
 	hand.push_back(c);
-//	sigModified(*this);
-}
-
-Card Hand::remove(int index)
-{
-	auto it = hand.begin();
-	while(index--)
-		it++;
-	Card c = *it;
-	hand.erase(it);
-	sigModified(*this);
-	return c;
 }
 
 Card Hand::remove(Card const & card)
