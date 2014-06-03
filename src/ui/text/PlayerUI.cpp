@@ -55,7 +55,7 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 			continue;
 		}
 		if(suitInt >=1 && suitInt<=4)
-			suit = static_cast<bridge::Suit>(suitInt);
+			suit = static_cast<bridge::Suit>(suitInt - 1);
 		else
 		{
 			std::cout << "Wrong suit format.\n";
