@@ -15,7 +15,7 @@ namespace bridge {
 class Play: public ui::Observable<Play>
 {
 	public:
-		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick( new Trick(trump, declarer) )
+		Play(Denomination trump, int declarer) : trump(trump), declarer(declarer), currentTrick( new Trick(trump, (declarer+1) % 4) )
 		{
 		}
 

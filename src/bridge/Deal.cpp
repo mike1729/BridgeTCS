@@ -38,7 +38,7 @@ DealResult Deal::performPlay()
 	result.contract = contract;
 	event = DealEvent::PlayStart;
 	sigModified(*this);
-	int currentPlayer = contract.declarer;
+	int currentPlayer = (contract.declarer + 1) % 4;
 	int dummyPlayer = (contract.declarer + 2) % 4;
 	for (int i = 0; i < 4; i++)
 		arbiters[i].setRole((i == dummyPlayer) ? Arbiter::Role::DUMMY : Arbiter::Role::NORMAL);
