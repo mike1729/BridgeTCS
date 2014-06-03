@@ -24,7 +24,7 @@ class HandTest: public ::testing::Test
 TEST_F(HandTest, SimpleInsertRemove) 
 {
 	hand.insert(c1);
-	Card c = hand.remove(0);
+	Card c = hand.remove(c1);
 	EXPECT_EQ(c1.suit, c.suit);
 	EXPECT_EQ(c1.rank, c.rank);
 }
