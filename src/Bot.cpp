@@ -159,10 +159,7 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 bool Bot::isOpening(bridge::Bidding const & bidding) const
 {
 	auto history = bidding.getHistory();
-	if (history.size() > 4)
-	{
-		return false;
-	} else if (history.size() < 2 || history[history.size() - 2].type == bridge::CallType::PASS)
+	if (history.size() < 2 || history[history.size() - 2].type == bridge::CallType::PASS)
 	{
 		return true;
 	}
@@ -206,7 +203,7 @@ bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding) const
 	auto history = bidding.getHistory();
 	if (history.size() >= 2)
 	{
-		return history[ history.size() - 2];
+		return history[history.size() - 2];
 	}
 
 	return bridge::Call::PASS();
@@ -234,23 +231,40 @@ std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) c
 	return std::make_pair((bridge::Denomination) suit, length[suit]);
 }
 
-bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bool Bot::madeCall(bridge::Bidding const & bidding) const
 {
-	if (madeCall) return bridge::Call::PASS();
+	bool ret = false;
 
-	if (isOpening(bidding)) 
+	auto history = bidding.getHistory();
+	for (int i = history.size() - 4; i >= 0; i--)
 	{
-		int points = highCardPoints(hand);
-		auto longer = getLonger(hand);
+		if (history[i].type == bridge::CallType::BID)
+		{
+			ret = true;
+			break;
+		}
+	}
 
-		if (points < 6) return bridge::Call::PASS();
-		else if (points < 12 && longer.second < 7) return bridge::Call::PASS();
-		else if (points < 12) return bridge::Call::BID(3, longer.first);
-		else if (points > 14 && points < 18 && isBalanced(hand)) return bridge::Call::BID(1, bridge::Denomination::NT);
-		else if (points < 18) return bridge::Call::BID(1, longer.first);
-		else if (points > 20 && points < 24 && isBalanced(hand)) return bridge::Call::BID(2, bridge::Denomination::NT);
-		else if (points < 25 && longer.second > 4) return bridge::Call::BID(2, longer.first);
-		else return bridge::Call::BID(3, bridge::Denomination::NT);
+	return ret;
+}
+
+bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+{	
+	if (madeCall(bidding)) return bridge::Call::PASS(); // it is a simple bidding - pass if you already said something
+
+	if (isOpening(bidding)) // check if you are opening the bidding
+	{
+		int points = highCardPoints(hand); // counting hand-points (J = 1, Q = 2, K = 3, A = 4)
+		auto longer = getLonger(hand); // longer = longest suit and its size
+
+		if (points < 6) return bridge::Call::PASS(); // nearly no points - PASS
+		else if (points < 12 && longer.second < 7) return bridge::Call::PASS(); // few points and no really long color - PASS
+		else if (points < 12) return bridge::Call::BID(3, longer.first); // very long suit - call 3 with that suit
+		else if (points > 14 && points < 18 && isBalanced(hand)) return bridge::Call::BID(1, bridge::Denomination::NT); // balanced hand and quite a few points - 1 NT
+		else if (points < 18) return bridge::Call::BID(1, longer.first); // not balanced hand and/or not enough points - 1 with longer color
+		else if (points > 20 && points < 24 && isBalanced(hand)) return bridge::Call::BID(2, bridge::Denomination::NT); // pretty many points and balanced hand - 2 NT
+		else if (points < 25 && longer.second > 4) return bridge::Call::BID(2, longer.first); // not balanced hand/not so many points - 2 with longer color
+		else return bridge::Call::BID(3, bridge::Denomination::NT); // lots of points - 3 NT
 	}
 
 	auto partnerCall = getPartnerCall(bidding);
@@ -290,8 +304,6 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 
 	int it = history.size() - 1;
 	while(it >= 0 && history[it].type != bridge::CallType::BID) it--;
-	
-	madeCall = true;
 
 	if (it >= 0)
 	{
