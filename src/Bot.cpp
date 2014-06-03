@@ -4,6 +4,12 @@ inline bool operator<(const bridge::Card & a, const bridge::Card & b)
 {
 	return ( a.suit == b.suit ) ? ( a.rank < b.rank ) : ( a.suit < b.suit );
 }
+inline bool operator<=(const bridge::Card & a, const bridge::Card & b)
+{
+	return ( a.suit == b.suit ) ? ( a.rank <= b.rank ) : ( a.suit <= b.suit );
+}
+
+
 
 /* Simple startegy: if bot can beat cards from trick (has card higher than every card in trick)
  * or is first-turn player, then throw maximal possesed card.
@@ -46,7 +52,7 @@ bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play,
 		}
 		else return minCard(hand);
 	}
-	else return maxCard(hand);
+	else return maxCard(	hand);
 }
 
 
@@ -104,7 +110,7 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && c < card)
+		if (c.suit == suit && c <= card)
 			card=c;
 	return card;
 }
@@ -114,7 +120,7 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
 	for (auto c : hand.getCards())
-		if (c.suit == suit && card < c)
+		if (c.suit == suit && card <= c)
 			card = c;
 	return card;
 }
@@ -124,7 +130,7 @@ bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
 	for (auto c : hand.getCards())
-		if (c.rank < card.rank)
+		if (c.rank <= card.rank)
 			card = c;
 	return card;
 }
@@ -134,11 +140,18 @@ bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
 	for (auto c : hand.getCards())
-		if (card.rank < c.rank)
+		if (card.rank <= c.rank)
 			card = c;
 	return card;
 }
 
+/*
+ *	Counts card points using rules:
+ *	J = 1p
+ *	Q = 2p
+ *	K = 3p
+ *	A = 4p 
+ */
 int Bot::highCardPoints(bridge::Hand const & hand) const
 {
 	int value = 0;
@@ -151,6 +164,9 @@ int Bot::highCardPoints(bridge::Hand const & hand) const
 	return value;
 }
 
+/*
+ *	Counts number of cards in a given suit
+ */
 int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 {
 	int result = 0;
@@ -163,6 +179,9 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 	return result;
 }
 
+/*
+ *	Checks if you are the opening person from your pair
+ */
 bool Bot::isOpening(bridge::Bidding const & bidding) const
 {
 	auto history = bidding.getHistory();
@@ -173,6 +192,9 @@ bool Bot::isOpening(bridge::Bidding const & bidding) const
 	return false;
 }
 
+/*
+ *	Checks if your hand is balanced
+ */
 bool Bot::isBalanced(bridge::Hand const & hand) const
 {
 	int length[4];
@@ -205,6 +227,9 @@ bool Bot::isBalanced(bridge::Hand const & hand) const
 	return true;
 }
 
+/*
+ *	Retrieve your partner's last call from Bidding
+ */
 bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding) const
 {
 	auto history = bidding.getHistory();
@@ -216,6 +241,9 @@ bridge::Call Bot::getPartnerCall(bridge::Bidding const & bidding) const
 	return bridge::Call::PASS();
 }
 
+/*
+ *	Get longer from your hand - suit with most cards in it
+ */
 std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) const
 {
 	int length[4];
@@ -238,6 +266,9 @@ std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) c
 	return std::make_pair((bridge::Denomination) suit, length[suit]);
 }
 
+/*
+ *	Check if you have already made a call in this bidding
+ */
 bool Bot::madeCall(bridge::Bidding const & bidding) const
 {
 	bool ret = false;
@@ -255,6 +286,9 @@ bool Bot::madeCall(bridge::Bidding const & bidding) const
 	return ret;
 }
 
+/*
+ *	Determine call based ONLY on your cards and your partner's call
+ */
 bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {	
 	if (madeCall(bidding)) return bridge::Call::PASS(); // it is a simple bidding - pass if you already said something
@@ -297,6 +331,9 @@ bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand cons
 	return bridge::Call::PASS();
 }
 
+/*
+ *	Make a call in bidding
+ */
 bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {
 	auto call = proposeCall(bidding, hand);

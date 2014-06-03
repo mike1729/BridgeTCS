@@ -14,12 +14,10 @@ void Deal::notify(const bridge::Deal & deal)
 	{
 		case bridge::DealEvent::CardsDealt:
 			{
-				bridge::Hands const & hands = deal.getHands();
-				for(auto it = hands.begin(); it != hands.end(); it++){	      
-						it->sigModified.connect([this](bridge::Hand const & hand) {
-							this->handView.print(hand);
-						});
-				}
+				bridge::Hands const & hands = deal.getHands();	      
+				hands[id].sigModified.connect([this](bridge::Hand const & hand) {
+					this->handView.print(hand);
+				});
 			}
 			break;
 			
@@ -45,7 +43,7 @@ void Deal::notify(const bridge::Deal & deal)
 				{
 					std::cout << "Bidding finished. The contract is " << contract.level << " ";
 					Printer::print(contract.denomination);
-					std::cout << "  declared by player " << contract.declarer << ".\n";
+					std::cout << "  declared by player " << contract.declarer + 1 << ".\n";
 				}
 			}
 			break;

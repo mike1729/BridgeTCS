@@ -6,7 +6,8 @@ int main()
 {
 
 	viewmodel::Application application;
-	ui::text::ApplicationView appView;
+	bridge::PlayerID id =0;
+	ui::text::ApplicationView appView(id);
 	
 	application.sigModified.connect([& appView](viewmodel::Application const & app) {
 		appView.notify(app);

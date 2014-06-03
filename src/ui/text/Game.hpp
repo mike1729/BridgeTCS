@@ -15,7 +15,9 @@ class Game
 public:
 	void showScore(const bridge::Game & game);
 	void registerDeal(const bridge::Game & game);
+	Game(bridge::PlayerID id) : id(id), dealView(id) {}
 private:
+	bridge::PlayerID id;
 	ui::text::Deal dealView;
 };
 
