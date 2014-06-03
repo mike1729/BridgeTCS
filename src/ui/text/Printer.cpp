@@ -7,7 +7,7 @@ namespace text
 {
 
 std::string Printer::suitSymbols[] = {"\u2663", "\u2666", "\u2665", "\u2660"};
-char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','A'};
+std::string Printer::rankSymbols[] = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
 
 
 /*static*/ void Printer::print(bridge::Call const & call)
@@ -34,8 +34,7 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	
 	for(auto & card : hand.getCards())
 	{
-		Printer::print(card.rank);
-		Printer::print(card.suit);
+        Printer::print(card);
 		std::cout << "  ";
 	}
 	std::cout << std::endl << std::endl;
@@ -48,9 +47,8 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	for(auto & card : trick.getCards())
 	{
 		std::cout << "\tPlayer " << currentPlayer + 1 << ":";
-		Printer::print(card.rank);
-		Printer::print(card.suit);
-		
+        Printer::print(card);
+
 		std::cout << std::endl;
 		
 		currentPlayer = (currentPlayer + 1)%4;
@@ -70,6 +68,16 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	Printer::print(call); 
 }
 
+/*static*/ void Printer::print(bridge::Card const & card)
+{
+    if (card.suit == bridge::Suit::HEARTS or card.suit == bridge::Suit::DIAMONDS)
+        std::cout<< "\e[1;31m"; // red
+    else
+        std::cout<<"\e[1;30m"; // black 
+    Printer::print(card.suit);
+    Printer::print(card.rank);
+    std::cout<<"\e[0m";
+}
 
 } //namespace text
 } //namespace ui

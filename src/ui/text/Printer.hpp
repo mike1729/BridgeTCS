@@ -15,7 +15,7 @@ namespace text
 class Printer
 {
 	static std::string suitSymbols[];
-	static char rankSymbols[];
+	static std::string rankSymbols[];
 
 public:
 	inline static void print(bridge::Rank const & rank)
@@ -37,6 +37,7 @@ public:
 	static void print(bridge::Hand const & hand);
 	static void print(bridge::Play::Trick const & trick);
 	static void print(bridge::Bidding const & bidding);
+    static void print(bridge::Card const & card);
 };
 
 } // namespace text
