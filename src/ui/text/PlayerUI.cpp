@@ -11,11 +11,11 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 	bool firstTry = true;
 	while(true)
 	{
+		hand.sigModified(hand);
 		if(firstTry)
 			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [1-4]\n";
 		else
 			std::cout << "Try again\n";
-		hand.sigModified(hand);
 		
 		std::string rankStr, delimiter = " ";
 		std::cin >> rankStr;
@@ -72,9 +72,10 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 	return chooseAndParseCard(hand);
 }
 
-bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
 {
-	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
+	std::cout << "************ Dummy ***************\n";
+	return chooseAndParseCard(dummyHand);
 }
 
 bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
