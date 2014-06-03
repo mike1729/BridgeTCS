@@ -25,14 +25,20 @@ Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, H
 		{
 			Card card = partner.chooseCardFromDummy(bidding, play, *partnerHand, dummy);
 			if(validateCard(card, dummy, play))
-				return dummy.remove(card);
+			{
+				dummy.remove(card);
+				return card;
+			}
 		}
 	else
 		while(true)
 		{
 			Card card = player.chooseCard(bidding, play, hand, dummy);
 			if(validateCard(card, hand, play))
-				return hand.remove(card);
+			{
+				hand.remove(card);
+				return card;
+			}
 		}
 }
 

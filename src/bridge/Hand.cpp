@@ -7,20 +7,17 @@ void Hand::insert(Card c)
 	hand.push_back(c);
 }
 
-Card Hand::remove(Card const & card)
+void Hand::remove(Card const & card)
 {
 	for (auto it = hand.begin(); it != hand.end(); it++)
 	{
 		if (*it == card)
 		{
-			Card c = *it;
 			hand.erase(it);
 			sigModified(*this);
-			return c;
+			return;
 		}
 	}
-
-	return Card(Rank::ACE, Suit::CLUBS);
 }
 
 void Hand::removeAll()
