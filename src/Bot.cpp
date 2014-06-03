@@ -271,25 +271,22 @@ std::pair<bridge::Denomination, int> Bot::getLonger(bridge::Hand const & hand) c
  */
 bool Bot::madeCall(bridge::Bidding const & bidding) const
 {
-	bool ret = false;
-
 	auto history = bidding.getHistory();
 	for (int i = history.size() - 4; i >= 0; i--)
 	{
 		if (history[i].type == bridge::CallType::BID)
 		{
-			ret = true;
-			break;
+			return true;
 		}
 	}
 
-	return ret;
+	return false;
 }
 
 /*
  *	Determine call based ONLY on your cards and your partner's call
  */
-bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand) const
 {	
 	if (madeCall(bidding)) return bridge::Call::PASS(); // it is a simple bidding - pass if you already said something
 
