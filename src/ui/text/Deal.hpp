@@ -16,10 +16,12 @@ class Deal
 {
 public:
 	void notify(const bridge::Deal & deal);
+	Deal(bridge::PlayerID id): id(id) {}
 private:
 	ui::text::Play playView;
 	ui::text::Bidding biddingView;
 	ui::text::Hand handView;
+    bridge::PlayerID id;
 };
 
 
