@@ -20,10 +20,9 @@ public:
 		});
 		
 	}
-	ApplicationView(bridge::PlayerID id) : id(id), gameView(id) {}
+	ApplicationView(bridge::PlayerID id) : gameView(id) {}
 	
 private:
-		bridge::PlayerID id;
 		ui::text::Game gameView;
 };
 
