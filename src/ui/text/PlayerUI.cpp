@@ -6,13 +6,17 @@ namespace ui
 namespace text 
 {
 
-//using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
+bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 {
-	hand.sigModified(hand);
+	bool firstTry = true;
 	while(true)
 	{
-		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
+		hand.sigModified(hand);
+		if(firstTry)
+			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
+		else
+			std::cout << "Try again\n";
+		
 		std::string rankStr, delimiter = " ";
 		std::cin >> rankStr;
 		bridge::Rank rank;
@@ -62,9 +66,16 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 	}
 }
 
-bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &)
+//using BiddingHistory, PlayHistory
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
 {
-	return bridge::Card(bridge::Rank::ACE, bridge::Suit::SPADES);
+	return chooseAndParseCard(hand);
+}
+
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
+{
+	std::cout << "************ Dummy ***************\n";
+	return chooseAndParseCard(dummyHand);
 }
 
 bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
