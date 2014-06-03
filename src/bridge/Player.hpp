@@ -21,13 +21,5 @@ public:
 	virtual Call makeCall(Bidding const &, Hand const &) = 0;
 };
 
-class Player : public IPlayer
-{
-public:
-	virtual Card chooseCard(Bidding const &, Play const &, Hand const &, Hand const &);
-	virtual Card chooseCardFromDummy(Bidding const &, Play const &, Hand const &, Hand const &);
-	virtual Call makeCall(Bidding const &, Hand const &);
-};
-
 }
 #endif
