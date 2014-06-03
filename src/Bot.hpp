@@ -11,9 +11,9 @@ public:
 	virtual bridge::Card chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const &);
 	virtual bridge::Call makeCall(bridge::Bidding const &, bridge::Hand const &);
 private:
-	bool madeCall;
 	int highCardPoints(bridge::Hand const &) const;
 	int cardsInSuit(bridge::Hand const &, bridge::Suit const &) const;
+	bool madeCall(bridge::Bidding const &) const;
 	bool isOpening(bridge::Bidding const &) const;
 	bool isBalanced(bridge::Hand const &) const;
 	bool hasCardToSuit(bridge::Hand const &, bridge::Suit) const;

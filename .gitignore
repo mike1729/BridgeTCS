@@ -9,6 +9,10 @@ BridgeTCS
 
 ################# C++ connected files #################
 
+# Binary files
+*
+!*.*
+
 # Compiled Object files
 *.slo
 *.lo
@@ -34,5 +38,3 @@ BridgeTCS
 # Dynamically created dependency files
 *.d
 
-#Binary files
-!*.*
