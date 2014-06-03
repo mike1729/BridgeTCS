@@ -12,7 +12,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 	hand.sigModified(hand);
 	while(true)
 	{
-		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\u2663=1, \u2666=2, \u2665=3, \u2660=4]\n";
+		std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
 		std::string rankStr, delimiter = " ";
 		std::cin >> rankStr;
 		bridge::Rank rank;
@@ -57,7 +57,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 			std::cout << "Wrong suit format.\n";
 			continue;
 		}
-		
+
 		return bridge::Card(rank, suit);
 	}
 }
