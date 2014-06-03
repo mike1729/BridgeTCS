@@ -36,7 +36,7 @@ std::list<Card> const & Hand::getCards() const
 bool Hand::hasCard( Card card ) const
 {
 	for(auto it = hand.begin(); it != hand.end(); it++)
-		if(it->suit != card.suit && it->rank != card.rank)
+		if(it->suit == card.suit && it->rank == card.rank)
 			return true;
 	return false;
 }
