@@ -5,6 +5,9 @@ inline bool operator<(const bridge::Card & a, const bridge::Card & b)
 	return ( a.suit == b.suit ) ? ( a.rank < b.rank ) : ( a.suit < b.suit );
 }
 
+/* Simple startegy: if bot can beat cards from trick (has card higher than every card in trick)
+ * or is first-turn player, then throw maximal possesed card.
+ * In other case bot returns the lowest possessed card. */
 bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const &)
 {
 	auto cards = play.getTrick().getCards();
@@ -96,6 +99,7 @@ bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 	return false;
 }
 
+/* Returns minimal possessed range of particular suit. */
 bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
@@ -105,6 +109,7 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 	return card;
 }
 
+/* Returns maximal possessed range of particular suit. */
 bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
@@ -114,6 +119,7 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 	return card;
 }
 
+/* Returns minimal possessed card. */
 bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
@@ -123,6 +129,7 @@ bridge::Card Bot::minCard(bridge::Hand const & hand) const
 	return card;
 }
 
+/* Returns maximal possessed card. */
 bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
