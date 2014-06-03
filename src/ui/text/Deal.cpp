@@ -43,7 +43,7 @@ void Deal::notify(const bridge::Deal & deal)
 				{
 					std::cout << "Bidding finished. The contract is " << contract.level << " ";
 					Printer::print(contract.denomination);
-					std::cout << "  declared by player " << contract.declarer << ".\n";
+					std::cout << "  declared by player " << contract.declarer + 1 << ".\n";
 				}
 			}
 			break;
