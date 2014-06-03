@@ -31,15 +31,22 @@ Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, H
 			}
 		}
 	else
+	{
+		Hand const * dummy_ptr;
+		if(hand.getCards().size() == 13 && play.getTrick().getCards().empty())
+			dummy_ptr = nullptr;
+		else
+			dummy_ptr = &dummy;
 		while(true)
 		{
-			Card card = player.chooseCard(bidding, play, hand, &dummy);
+			Card card = player.chooseCard(bidding, play, hand, dummy_ptr);
 			if(validateCard(card, hand, play))
 			{
 				hand.remove(card);
 				return card;
 			}
 		}
+	}
 }
 
 bool Arbiter::isValid(Call call, Bidding const & bidding)
