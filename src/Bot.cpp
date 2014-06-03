@@ -279,6 +279,7 @@ bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand cons
 bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {
 	auto call = proposeCall(bidding, hand);
+	call.level = std::min(call.level, 7);
 
 	if (call.type == bridge::CallType::PASS)
 	{
