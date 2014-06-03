@@ -42,7 +42,7 @@ bool Arbiter::isValid(Call call, Bidding const & bidding)
 	switch(call.type) 
 	{
 	case CallType::BID:
-		if ( call.level > 7 || call.level < contract.level )
+		if ( call.level < contract.level )
 			return false;
 		if ( call.level == contract.level && call.denomination <= contract.denomination )
 			return false;
@@ -66,6 +66,7 @@ bool Arbiter::isValid(Call call, Bidding const & bidding)
 	case CallType::PASS:
 		return true;
 	}
+	return false;
 }
 
 Call Arbiter::getCall(Bidding const & bidding, Hand const & hand) 
