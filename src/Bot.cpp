@@ -351,7 +351,7 @@ bridge::Call Bot::makeCall(bridge::Bidding const & bidding, bridge::Hand const &
 		auto lastCall = history[it];
 
 		if (lastCall.level > call.level ||
-			(lastCall.level == call.level && (int) lastCall.denomination > (int) lastCall.denomination))
+			(lastCall.level == call.level && (int) lastCall.denomination >= (int) call.denomination))
 		{
 			return bridge::Call::PASS();
 		}
