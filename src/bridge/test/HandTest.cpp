@@ -12,6 +12,7 @@ class HandTest: public ::testing::Test
 		Card c2 = Card(Rank::TWO, Suit::DIAMONDS);
 		Card c3 = Card(Rank::TWO, Suit::HEARTS);
 		Card c4 = Card(Rank::TWO, Suit::SPADES);
+		Card c5 = Card(Rank::THREE, Suit::CLUBS);
 		void SetUp()
 		{
 			hand.removeAll();
@@ -41,6 +42,19 @@ TEST_F(HandTest, SimpleInsertRemoveAll)
 	hand.insert(c4);
 	hand.removeAll();
 	EXPECT_EQ(0, hand.getCards().size());
+}
+
+TEST_F(HandTest, HasSuit)
+{
+	EXPECT_EQ(hand.hasSuit(c1.suit), false);
+	hand.insert(c1);
+	EXPECT_EQ(hand.hasSuit(c1.suit), true);
+	hand.insert(c5);
+	EXPECT_EQ(hand.hasSuit(c2.suit), false);
+	hand.remove(c1);
+	EXPECT_EQ(hand.hasSuit(c1.suit), true);
+	hand.remove(c5);
+	EXPECT_EQ(hand.hasSuit(c1.suit), false);
 }
 
 }
