@@ -21,7 +21,6 @@ public:
 		});
 		
 	}
-	//ApplicationView(bridge::PlayerID id) : gameView(id) {}
 	
 private:
 		ui::text::Game* gameView;
