@@ -21,12 +21,15 @@ public:
 				std::unique_ptr<bridge::IPlayer>(new Bot()),
 				std::unique_ptr<bridge::IPlayer>(new Bot()) } };
 		game = new bridge::Game(players);
+		id=0;
 		sigModified(*this);
 		game->start();
 	}
 	const bridge::Game & getGame() const { return *game; };
+	bridge::PlayerID getId() const { return id; };
 private:
-	bridge::Game* game; 
+	bridge::Game* game;
+	bridge::PlayerID id;
 };
 
 }

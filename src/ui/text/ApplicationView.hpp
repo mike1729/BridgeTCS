@@ -15,15 +15,16 @@ class ApplicationView
 public:
 	void notify(const viewmodel::Application & application) {
 		std::cout << "Let's play a game!\n";
+		gameView = new ui::text::Game(application.getId());
 		application.getGame().sigModified.connect([this](const bridge::Game & game) {
-			this->gameView.registerDeal(game);
+			this->gameView->registerDeal(game);
 		});
 		
 	}
-	ApplicationView(bridge::PlayerID id) : gameView(id) {}
+	//ApplicationView(bridge::PlayerID id) : gameView(id) {}
 	
 private:
-		ui::text::Game gameView;
+		ui::text::Game* gameView;
 };
 
 } // namespace text
