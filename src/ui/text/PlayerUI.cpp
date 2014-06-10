@@ -11,9 +11,9 @@ bridge::Card chooseAndParseCard(bool fromDummy=false)
 	while(true)
 	{
 		if(!fromDummy)
-			std::cout << "Throw a card.\nFormat: [2-9|t|j|q|k|a] [\e[1;30m\u2663\e[0m=c, \e[1;31m\u2666\e[0m=d, \e[1;31m\u2665\e[0m=h, \e[1;30m\u2660\e[0m=s]\n";
+			std::cout << "Throw a card.\nFormat: [2-9|t|j|q|k|a] [c|d|h|s]\n";
 		else
-			std::cout << "Throw a card from Dummy.\nFormat: [2-9|t|j|q|k|a] [\e[1;30m\u2663\e[0m=c, \e[1;31m\u2666\e[0m=d, \e[1;31m\u2665\e[0m=h, \e[1;30m\u2660\e[0m=s]\n";
+			std::cout << "Throw a card from Dummy.\nFormat: [2-9|t|j|q|k|a] [c|d|h|s]\n";
 		
 		char rankStr;
 		std::cin >> rankStr;
