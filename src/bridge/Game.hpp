@@ -16,9 +16,11 @@ public:
 	Game(std::array<std::unique_ptr<IPlayer>,4> & players) : players(players) {}
 	void start();
 	const Deal& getDeal() const { return *deal; };
+	const DealResult& getResult() const { return result; }
 private:
 	std::array<std::unique_ptr<IPlayer>,4> const & players;
 	std::unique_ptr<Deal> deal;
+	DealResult result;
 };
 
 }
