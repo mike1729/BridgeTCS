@@ -35,7 +35,6 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 
 /*static*/ void Printer::print(bridge::Hand const & hand)
 {
-	std::cout << "Your cards:\n";
 	
 	for(auto & card : hand.getCards())
 	{
