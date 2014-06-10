@@ -74,8 +74,8 @@ std::string Printer::rankSymbols[] = {"2","3","4","5","6","7","8","9","T","J","Q
         std::cout<< "\e[1;31m"; // red
     else
         std::cout<<"\e[1;30m"; // black 
-    Printer::print(card.suit);
     Printer::print(card.rank);
+    Printer::print(card.suit);
     std::cout<<"\e[0m";
 }
 
