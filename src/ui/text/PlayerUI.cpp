@@ -6,37 +6,29 @@ namespace ui
 namespace text 
 {
 
-bridge::Card chooseAndParseCard(bridge::Hand const & hand)
+bridge::Card chooseAndParseCard(bridge::Hand const & hand, bool fromDummy=false)
 {
-	bool firstTry = true;
 	while(true)
 	{
-		hand.sigModified(hand);
-		if(firstTry)
-			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
-		else
-			std::cout << "Try again\n";
+			if(!fromDummy)
+				std::cout << "Throw a card.\nFormat: [2-9|t|j|q|k|a] [\e[1;30m\u2663\e[0m=c, \e[1;31m\u2666\e[0m=d, \e[1;31m\u2665\e[0m=h, \e[1;30m\u2660\e[0m=s]\n";
+			else
+				std::cout << "Throw a card from Dummy.\nFormat: [2-9|t|j|q|k|a] [\e[1;30m\u2663\e[0m=c, \e[1;31m\u2666\e[0m=d, \e[1;31m\u2665\e[0m=h, \e[1;30m\u2660\e[0m=s]\n";
 		
-		std::string rankStr, delimiter = " ";
+		char rankStr;
 		std::cin >> rankStr;
 		bridge::Rank rank;
-		if(rankStr == "j") rank = bridge::Rank::JACK;
-		else if(rankStr == "q") rank = bridge::Rank::QUEEN;
-		else if(rankStr == "k") rank = bridge::Rank::KING;
-		else if(rankStr == "a") rank = bridge::Rank::ACE;
+		if(rankStr == 't') rank = bridge::Rank::TEN;
+		else if(rankStr == 'j') rank = bridge::Rank::JACK;
+		else if(rankStr == 'q') rank = bridge::Rank::QUEEN;
+		else if(rankStr == 'k') rank = bridge::Rank::KING;
+		else if(rankStr == 'a') rank = bridge::Rank::ACE;
 		else
 		{
-			int rankInt;
-			try {
-				rankInt = std::stoi(rankStr);
-			} catch (...)
-			{
-				std::cout << "Wrong format\n";
-				continue;
-			}
-			if(rankInt<= 10 && rankInt >= 2)
-				rank = static_cast<bridge::Rank>(std::stoi(rankStr) - 2);
-			else 
+			int rankInt = rankStr-'0';
+			if(rankInt<= 9 && rankInt >= 2)
+				rank = static_cast<bridge::Rank>(rankInt - 2);
+			else
 			{
 				std::cout << "Wrong rank format.\n";
 				continue;
@@ -44,18 +36,12 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 		}
 		
 		bridge::Suit suit;
-		std::string suitStr;
+		char suitStr;
 		std::cin >> suitStr;
-		int suitInt;
-		try {
-			suitInt = std::stoi(suitStr);
-		} catch (...)
-		{
-			std::cout << "Wrong format\n";
-			continue;
-		}
-		if(suitInt >=1 && suitInt<=4)
-			suit = static_cast<bridge::Suit>(suitInt - 1);
+		if(suitStr == 'c') suit = bridge::Suit::CLUBS;
+		else if(suitStr == 'd') suit = bridge::Suit::DIAMONDS;
+		else if(suitStr == 'h') suit = bridge::Suit::HEARTS;
+		else if(suitStr == 's') suit = bridge::Suit::SPADES;
 		else
 		{
 			std::cout << "Wrong suit format.\n";
@@ -69,20 +55,32 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 //using BiddingHistory, PlayHistory
 bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
 {
+	
+	if (dummyHand!=nullptr){
+		std::cout << "Dummy Hand:\n\t";
+		Printer::print(*dummyHand);
+	}
+
+	Printer::print(hand);
+
 	return chooseAndParseCard(hand);
 }
 
 bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
 {
-	std::cout << "************ Dummy ***************\n";
-	return chooseAndParseCard(dummyHand);
+	Printer::print(hand);
+
+	std::cout << "Dummy Hand:\n\t";
+	Printer::print(dummyHand);
+
+	return chooseAndParseCard(dummyHand,true);
 }
 
 bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
 {
 	while(true)
 	{
-		hand.sigModified(hand);
+		Printer::print(hand);
 		std::cout << "Make a bid\nFormat: [1-7] [1-5] | p[ass] | d[ouble] | r[edouble]\n";
 		
 		std::string in;
