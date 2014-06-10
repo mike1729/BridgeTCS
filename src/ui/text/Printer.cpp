@@ -9,10 +9,10 @@ namespace text
 #ifdef BRIDGE_UNICODE
 std::string Printer::suitSymbols[] = {"\u2663", "\u2666", "\u2665", "\u2660"};
 #else
-std::string Printer::suitSymbols[] = {"C", "D", "H", "S"};
+char Printer::suitSymbols[] = {'C', 'D', 'H', 'S'};
 #endif
 
-std::string Printer::rankSymbols[] = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
+char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','A'};
 
 
 /*static*/ void Printer::print(bridge::Call const & call)

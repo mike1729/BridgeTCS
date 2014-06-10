@@ -16,8 +16,13 @@ namespace text
 
 class Printer
 {
+	#ifdef BRIDGE_UNICODE
 	static std::string suitSymbols[];
-	static std::string rankSymbols[];
+	#else
+	static char suitSymbols[];
+	#endif
+	
+	static char rankSymbols[];
 
 public:
 	inline static void print(bridge::Rank const & rank)
