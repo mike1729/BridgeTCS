@@ -6,7 +6,7 @@ namespace ui
 namespace text 
 {
 
-bridge::Card chooseAndParseCard(bridge::Hand const & hand, bool fromDummy=false)
+bridge::Card chooseAndParseCard(bool fromDummy=false)
 {
 	while(true)
 	{
@@ -63,7 +63,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &,
 
 	Printer::print(hand);
 
-	return chooseAndParseCard(hand);
+	return chooseAndParseCard();
 }
 
 bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const & dummyHand)
@@ -73,7 +73,7 @@ bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play
 	std::cout << "Dummy Hand:\n\t";
 	Printer::print(dummyHand);
 
-	return chooseAndParseCard(dummyHand,true);
+	return chooseAndParseCard(true);
 }
 
 bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & hand)
