@@ -1,6 +1,8 @@
 #ifndef UI_TEXT_PRINTER_HPP
 #define UI_TEXT_PRINTER_HPP
 
+// #define BRIDGE_UNICODE
+
 #include "bridge/Card.hpp"
 #include "bridge/Hand.hpp"
 #include "bridge/Play.hpp"
@@ -14,8 +16,13 @@ namespace text
 
 class Printer
 {
+	#ifdef BRIDGE_UNICODE
 	static std::string suitSymbols[];
-	static std::string rankSymbols[];
+	#else
+	static char suitSymbols[];
+	#endif
+	
+	static char rankSymbols[];
 
 public:
 	inline static void print(bridge::Rank const & rank)

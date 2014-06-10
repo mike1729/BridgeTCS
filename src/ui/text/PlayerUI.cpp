@@ -53,7 +53,7 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand, bool fromDummy=false)
 }
 
 //using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const *)
 {
 	
 	if (dummyHand!=nullptr){
@@ -66,7 +66,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play 
 	return chooseAndParseCard(hand);
 }
 
-bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const & dummyHand)
 {
 	Printer::print(hand);
 
@@ -76,7 +76,7 @@ bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, brid
 	return chooseAndParseCard(dummyHand,true);
 }
 
-bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & hand)
 {
 	while(true)
 	{
