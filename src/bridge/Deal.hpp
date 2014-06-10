@@ -68,6 +68,10 @@ public:
 	{
 		return hands;
 	} 
+	const DealResult & getResult() const
+	{
+		return result;
+	} 
 private:
 	Contract contract;
 	Arbiters arbiters;
