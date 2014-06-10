@@ -66,7 +66,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &,
 	return chooseAndParseCard(hand);
 }
 
-bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const & dummyHand)
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const & dummyHand)
 {
 	Printer::print(hand);
 
