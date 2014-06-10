@@ -1,6 +1,8 @@
 #ifndef UI_TEXT_PRINTER_HPP
 #define UI_TEXT_PRINTER_HPP
 
+// #define BRIDGE_UNICODE
+
 #include "bridge/Card.hpp"
 #include "bridge/Hand.hpp"
 #include "bridge/Play.hpp"

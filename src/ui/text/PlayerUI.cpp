@@ -13,8 +13,11 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 	{
 		hand.sigModified(hand);
 		if(firstTry)
-			// std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n"; // unicode symbols
+			#ifdef BRIDGE_UNICODE
+			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
+			#else
 			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30mC\e[0m=1, \e[1;31mD\e[0m=2, \e[1;31mH\e[0m=3, \e[1;30mS\e[0m=4]\n";
+			#endif
 		else
 			std::cout << "Try again\n";
 		
@@ -68,18 +71,18 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 }
 
 //using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const * dummyHand)
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const *)
 {
 	return chooseAndParseCard(hand);
 }
 
-bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const & bidding, bridge::Play const & play, bridge::Hand const & hand, bridge::Hand const & dummyHand)
+bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play const &, bridge::Hand const &, bridge::Hand const & dummyHand)
 {
 	std::cout << "************ Dummy ***************\n";
 	return chooseAndParseCard(dummyHand);
 }
 
-bridge::Call PlayerUI::makeCall(bridge::Bidding const & bidding, bridge::Hand const & hand)
+bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & hand)
 {
 	while(true)
 	{
