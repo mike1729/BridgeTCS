@@ -19,8 +19,8 @@ public:
 				std::unique_ptr<bridge::IPlayer>(new ui::text::PlayerUI()),
 				std::unique_ptr<bridge::IPlayer>(new Bot()),
 				std::unique_ptr<bridge::IPlayer>(new Bot()),
-				std::unique_ptr<bridge::IPlayer>(new Bot()) }};
-        bridge::Game game(players);
+				std::unique_ptr<bridge::IPlayer>(new Bot()) } };
+		bridge::Game game(players);
 		pgame = &game;
 		id=0;
 		sigModified(*this);
