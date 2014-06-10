@@ -13,7 +13,8 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand)
 	{
 		hand.sigModified(hand);
 		if(firstTry)
-			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n";
+			// std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30m\u2663\e[0m=1, \e[1;31m\u2666\e[0m=2, \e[1;31m\u2665\e[0m=3, \e[1;30m\u2660\e[0m=4]\n"; // unicode symbols
+			std::cout << "Throw a card.\nFormat: [2-10|j|q|k|a] [\e[1;30mC\e[0m=1, \e[1;31mD\e[0m=2, \e[1;31mH\e[0m=3, \e[1;30mS\e[0m=4]\n";
 		else
 			std::cout << "Try again\n";
 		

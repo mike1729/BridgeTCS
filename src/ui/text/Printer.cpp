@@ -6,7 +6,8 @@ namespace ui
 namespace text
 {
 
-std::string Printer::suitSymbols[] = {"\u2663", "\u2666", "\u2665", "\u2660"};
+// std::string Printer::suitSymbols[] = {"\u2663", "\u2666", "\u2665", "\u2660"}; // unicode symbols
+std::string Printer::suitSymbols[] = {"C", "D", "H", "S"};
 std::string Printer::rankSymbols[] = {"2","3","4","5","6","7","8","9","T","J","Q","K","A"};
 
 
