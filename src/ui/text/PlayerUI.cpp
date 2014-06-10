@@ -53,7 +53,7 @@ bridge::Card chooseAndParseCard(bridge::Hand const & hand, bool fromDummy=false)
 }
 
 //using BiddingHistory, PlayHistory
-bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const *)
+bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &, bridge::Hand const & hand, bridge::Hand const * dummyHand)
 {
 	
 	if (dummyHand!=nullptr){
