@@ -45,7 +45,7 @@ void Deal::notify(const bridge::Deal & deal)
 					Printer::print(contract.denomination);
 					std::cout << "  declared by player " << contract.declarer + 1 << ".\n";
 					bridge::Hands const & hands = deal.getHands();	      
-					hands[contract.declarer+2%4].sigModified.connect([this](bridge::Hand const & hand) {
+					hands[(contract.declarer+2)%4].sigModified.connect([this](bridge::Hand const & hand) {
 						this->handView.print(hand);
 					});
 				}
