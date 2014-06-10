@@ -64,6 +64,13 @@ void Deal::notify(const bridge::Deal & deal)
 			break;
 
 		case bridge::DealEvent::PlayEnd:
+			bridge::DealResult result = deal.getResult();
+			int extra = result.declarerTakenTricks >= result.contract.level + 6;
+			if(extra >= 0)
+				std::cout << "Contract accomplished. " <<  extra << " overtricks.\n";
+			else
+				std::cout << "Contract failed. " <<  extra << " undertricks.\n";
+				
 			break;
 	}
 

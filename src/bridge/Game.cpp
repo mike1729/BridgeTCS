@@ -13,7 +13,7 @@ void Game::start()
 		contract = deal->performBidding();
 	} while ( contract.redeal ) ;
 	result = deal->performPlay();
-	sigModified(*this);
+	//sigModified(*this);
 	//TODO: Handle scores and repeat deals
 }
 
