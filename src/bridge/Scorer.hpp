@@ -6,12 +6,18 @@
 namespace bridge {
 
 struct TeamScore {
-	TeamScore(): aboveTheLine(0), belowTheLine(0) {}
-	int getPointsAbove() const {
+	TeamScore(): aboveTheLine(0), belowTheLine(0), vulnerable(false) {}
+	int getPointsAbove() const 
+	{
 		return aboveTheLine;
 	}
-	int getPointsBelow() const {
+	int getPointsBelow() const 
+	{
 		return belowTheLine;
+	}
+	bool isVulnerable() const
+	{
+		return vulnerable;
 	}
 	void updatePointsAbove(int points) 
 	{
@@ -21,28 +27,20 @@ struct TeamScore {
 	{
 		belowTheLine += points;
 	}
+	void setVulnerability(bool newVulnerability)
+	{
+		vulnerable = newVulnerability;
+	}
 	private:
 	int aboveTheLine;
 	int belowTheLine;
+	bool vulnerable;
 };
 
 struct Scorer
 {
 	Scorer() {}
-	void update(const DealResult & result) 
-	{
-		//TODO: Compute score result to bridge rules
-
-		TeamScore & team1 = (result.contract.declarer % 2 == 0) ? firstTeam : secondTeam;
-		TeamScore & team2 = (result.contract.declarer % 2 == 0) ? secondTeam : firstTeam;
-		int extra = result.contract.level - result.declarerTakenTricks - 6;
-		if ( extra >= 0) {
-			team1.updatePointsBelow(result.contract.level*10);
-			team1.updatePointsAbove(extra*20);
-		} else {
-			team2.updatePointsBelow(100);
-		}
-	}
+	void update(const DealResult & result);
 
 	const TeamScore& getFirstTeam() const { return firstTeam; }
 	const TeamScore& getSecondTeam() const { return secondTeam; }
