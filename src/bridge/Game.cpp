@@ -1,10 +1,9 @@
 #include "Game.hpp"
 #include "Deal.hpp"
-
 namespace bridge {
 
 void Game::start()
-{
+{	
 	Contract contract;
 	do {
 		deal.reset( new Deal(players, 0) );
@@ -13,7 +12,8 @@ void Game::start()
 		contract = deal->performBidding();
 	} while ( contract.redeal ) ;
 	result = deal->performPlay();
-	//sigModified(*this);
+	scorer.update(result);
+	sigModified(*this);
 	//TODO: Handle scores and repeat deals
 }
 

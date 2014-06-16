@@ -7,44 +7,48 @@ namespace bridge {
 
 struct TeamScore {
     TeamScore(): aboveTheLine(0), belowTheLine(0) {}
-    int getPointsAbove() {
+    int getPointsAbove() const {
         return aboveTheLine;
     }
-    int getPointsBelow() {
+    int getPointsBelow() const {
         return belowTheLine;
     }
-    int updatePointsAbove(int points) 
+    void updatePointsAbove(int points) 
     {
         aboveTheLine += points;
     }
-    int updatePointsBelow(int points)
+    void updatePointsBelow(int points)
     {
         belowTheLine += points;
     }
 private:
     int aboveTheLine;
     int belowTheLine;
-}
+};
 
 struct Scorer
 {
     Scorer() {}
     void update(const DealResult & result) 
     {
-        TeamScore team = (result.declarer % 2 == 0) ? firstTeam : secondTeam;
         //TODO: Compute score result to bridge rules
-        if (result.contract.level >= result.declarerTakenTricks) {
-            team.updatePointsBelow(result.contract.level*10);
-            team.updatePointsAbove( (result.declarerTakenTricks - result.contract.level)*20);
+
+        TeamScore & team1 = (result.contract.declarer % 2 == 0) ? firstTeam : secondTeam;
+        TeamScore & team2 = (result.contract.declarer % 2 == 0) ? secondTeam : firstTeam;
+        int extra = result.contract.level - result.declarerTakenTricks - 6;
+        if ( extra >= 0) {
+            team1.updatePointsBelow(result.contract.level*10);
+            team1.updatePointsAbove(extra*20);
+        } else {
+            team2.updatePointsBelow(100);
         }
-        printf("first:%d %d\n",firstTeam.getPointsAbove(),firstTeam.getPointsBelow());
-        printf("second:%d %d\n",secondTeam.getPointsAbove(),firstTeam.getPointsBelow());
-
     }
-private:
-    TeamScore fistTeam, secondTeam;
-}
-    
-}
 
+    const TeamScore& getFirstTeam() const { return firstTeam; }
+    const TeamScore& getSecondTeam() const { return secondTeam; }
+
+private:
+    TeamScore firstTeam, secondTeam;
+};
+}
 #endif
