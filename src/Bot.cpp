@@ -24,8 +24,12 @@ bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play,
 			auto minCard = minCardToSuit(hand,(*cards.begin()).suit);
 			auto maxCard = maxCardToSuit(hand,(*cards.begin()).suit);
 			for (auto c : cards)
+			{
 				if (maxCard.suit == c.suit and maxCard < c)
+				{
 					return minCard;
+				}
+			}
 
 			if (cards.size() > 1)
 			{
@@ -45,7 +49,10 @@ bridge::Card Bot::chooseCard(bridge::Bidding const &, bridge::Play const & play,
 					}
 				}
 
-				if (highest) return minCard;
+				if (highest)
+				{
+					return minCard;
+				}
 			}
 
 			return maxCard;
@@ -66,9 +73,13 @@ bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play cons
 			auto minCard = minCardToSuit(dummyHand,(*cards.begin()).suit);
 			auto maxCard = maxCardToSuit(dummyHand,(*cards.begin()).suit);
 			for (auto c : cards)
+			{
 				if (maxCard.suit == c.suit and maxCard < c)
+				{
 					return minCard;
-
+				}
+			}
+			
 			if (cards.size() > 1)
 			{
 				auto cardIt = cards.end();
@@ -100,8 +111,12 @@ bridge::Card Bot::chooseCardFromDummy(bridge::Bidding const &, bridge::Play cons
 bool Bot::hasCardToSuit(bridge::Hand const & hand, bridge::Suit suit) const
 {
 	for (auto c : hand.getCards())
+	{
 		if (c.suit == suit)
+		{
 			return true;
+		}
+	}	
 	return false;
 }
 
@@ -110,8 +125,12 @@ bridge::Card Bot::minCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::ACE, suit);
 	for (auto c : hand.getCards())
+	{
 		if (c.suit == suit && c <= card)
+		{
 			card=c;
+		}
+	}
 	return card;
 }
 
@@ -120,8 +139,12 @@ bridge::Card Bot::maxCardToSuit(bridge::Hand const & hand, bridge::Suit suit) co
 {
 	bridge::Card card(bridge::Rank::TWO, suit);
 	for (auto c : hand.getCards())
+	{
 		if (c.suit == suit && card <= c)
+		{
 			card = c;
+		}
+	}
 	return card;
 }
 
@@ -130,8 +153,12 @@ bridge::Card Bot::minCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::ACE, bridge::Suit::SPADES);
 	for (auto c : hand.getCards())
+	{
 		if (c.rank <= card.rank)
+		{
 			card = c;
+		}
+	}
 	return card;
 }
 
@@ -140,8 +167,12 @@ bridge::Card Bot::maxCard(bridge::Hand const & hand) const
 {
 	bridge::Card card(bridge::Rank::TWO, bridge::Suit::CLUBS);
 	for (auto c : hand.getCards())
+	{
 		if (card.rank <= c.rank)
+		{
 			card = c;
+		}
+	}
 	return card;
 }
 
@@ -173,7 +204,10 @@ int Bot::cardsInSuit(bridge::Hand const & hand, bridge::Suit const & suit) const
 
 	for (auto card : hand.getCards())
 	{
-		if (card.suit == suit) result++;
+		if (card.suit == suit)
+		{
+			result++;
+		}
 	}
 
 	return result;
@@ -218,9 +252,14 @@ bool Bot::isBalanced(bridge::Hand const & hand) const
 
 		for (int j = 0; j < 4; j++)
 		{
-			if (length[j] == 0) continue;
-
-			if (std::abs(length[i] - length[j]) > 2) return false;
+			if (length[j] == 0)
+			{
+				continue;
+			}
+			if (std::abs(length[i] - length[j]) > 2)
+			{
+				return false;
+			}
 		}
 	}
 
@@ -288,21 +327,48 @@ bool Bot::madeCall(bridge::Bidding const & bidding) const
  */
 bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand const & hand) const
 {	
-	if (madeCall(bidding)) return bridge::Call::PASS(); // it is a simple bidding - pass if you already said something
+	if (madeCall(bidding)) // it is a simple bidding - pass if you already said something
+	{
+		return bridge::Call::PASS();
+	}
 
 	if (isOpening(bidding)) // check if you are opening the bidding
 	{
 		int points = highCardPoints(hand); // counting hand-points (J = 1, Q = 2, K = 3, A = 4)
 		auto longer = getLonger(hand); // longer = longest suit and its size
 
-		if (points < 6) return bridge::Call::PASS(); // nearly no points - PASS
-		else if (points < 12 && longer.second < 7) return bridge::Call::PASS(); // few points and no really long color - PASS
-		else if (points < 12) return bridge::Call::BID(3, longer.first); // very long suit - call 3 with that suit
-		else if (points > 14 && points < 18 && isBalanced(hand)) return bridge::Call::BID(1, bridge::Denomination::NT); // balanced hand and quite a few points - 1 NT
-		else if (points < 18) return bridge::Call::BID(1, longer.first); // not balanced hand and/or not enough points - 1 with longer color
-		else if (points > 20 && points < 24 && isBalanced(hand)) return bridge::Call::BID(2, bridge::Denomination::NT); // pretty many points and balanced hand - 2 NT
-		else if (points < 25 && longer.second > 4) return bridge::Call::BID(2, longer.first); // not balanced hand/not so many points - 2 with longer color
-		else return bridge::Call::BID(3, bridge::Denomination::NT); // lots of points - 3 NT
+		if (points < 6) // nearly no points - PASS
+		{
+			return bridge::Call::PASS();
+		}
+		else if (points < 12 && longer.second < 7) // few points and no really long color - PASS
+		{
+			return bridge::Call::PASS();
+		}
+		else if (points < 12) // very long suit - call 3 with that suit
+		{
+			return bridge::Call::BID(3, longer.first);
+		}
+		else if (points > 14 && points < 18 && isBalanced(hand)) // balanced hand and quite a few points - 1 NT
+		{
+			return bridge::Call::BID(1, bridge::Denomination::NT);
+		}
+		else if (points < 18) // not balanced hand and/or not enough points - 1 with longer color
+		{
+			return bridge::Call::BID(1, longer.first);
+		}
+		else if (points > 20 && points < 24 && isBalanced(hand)) // pretty many points and balanced hand - 2 NT
+		{
+			return bridge::Call::BID(2, bridge::Denomination::NT);
+		}
+		else if (points < 25 && longer.second > 4) // not balanced hand/not so many points - 2 with longer color
+		{
+			return bridge::Call::BID(2, longer.first);
+		}
+		else // lots of points - 3 NT
+		{
+			return bridge::Call::BID(3, bridge::Denomination::NT);
+		}
 	}
 
 	auto partnerCall = getPartnerCall(bidding);
@@ -313,18 +379,32 @@ bridge::Call Bot::proposeCall(bridge::Bidding const & bidding, bridge::Hand cons
 	{
 		int points = highCardPoints(hand);
 
-		if (partnerCall.level == 1) points += 15;
-		else if (partnerCall.level == 2) points += 21;
-		else points += 25;
-
-		if (points / 3 - 6 <= partnerCall.level) return bridge::Call::PASS();
+		if (partnerCall.level == 1)
+		{
+			points += 15;
+		}
+		else if (partnerCall.level == 2)
+		{
+			points += 21;
+		}
+		else
+		{
+			points += 25;
+		}
+		
+		if (points / 3 - 6 <= partnerCall.level)
+		{
+			return bridge::Call::PASS();
+		}
 		return bridge::Call::BID(points / 3 - 6, denomination);
 	}
 
 	int length = cardsInSuit(hand, (bridge::Suit)(int)denomination);
 
-	if (length > 3) return bridge::Call::BID(partnerCall.level + length - 3, denomination);
-
+	if (length > 3)
+	{
+		return bridge::Call::BID(partnerCall.level + length - 3, denomination);
+	}
 	return bridge::Call::PASS();
 }
 
