@@ -6,8 +6,9 @@ namespace bridge {
 
 class MyDeck : public Deck
 {
-	virtual void shuffle(){}
-	virtual Card dealCard(){
+	virtual void shuffle(){ }
+	virtual Card dealCard()
+	{
 		return createCard(Rank::ACE, Suit::CLUBS);
 	}
 	virtual int cardsLeft(){return 0;}

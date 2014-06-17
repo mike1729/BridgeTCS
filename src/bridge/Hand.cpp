@@ -33,16 +33,24 @@ std::list<Card> const & Hand::getCards() const
 bool Hand::hasCard( Card card ) const
 {
 	for(auto it = hand.begin(); it != hand.end(); it++)
+	{
 		if(it->suit == card.suit && it->rank == card.rank)
+		{
 			return true;
+		}
+	}
 	return false;
 }
 
 bool Hand::hasSuit( Suit suit ) const
 {
 	for(auto it = hand.begin(); it != hand.end(); it++)
+	{
 		if(it->suit == suit)
+		{
 			return true;
+		}
+	}
 	return false;
 }
 
