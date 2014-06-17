@@ -19,6 +19,10 @@ public:
 	{
 		return vulnerable;
 	}
+	bool finishedRubber() const
+	{
+		return rubber;
+	}
 	void updatePointsAbove(int points) 
 	{
 		aboveTheLine += points;
@@ -29,12 +33,14 @@ public:
 	}
 	void setVulnerability(bool newVulnerability)
 	{
+		rubber = vulnerable && newVulnerability;
 		vulnerable = newVulnerability;
 	}
 private:
 	int aboveTheLine = 0;
 	int belowTheLine = 0;
 	bool vulnerable = false;
+	bool rubber = false;
 };
 
 class Scorer
@@ -43,7 +49,7 @@ public:
 	void update(const DealResult & result);
 	const TeamScore& getFirstTeam() const { return firstTeam; }
 	const TeamScore& getSecondTeam() const { return secondTeam; }
-	bool gameOver() const { return firstTeam.getPointsBelow() > 200 || secondTeam.getPointsBelow() > 200; }
+	bool gameOver() const { return firstTeam.finishedRubber() || secondTeam.finishedRubber(); }
 
 private:
 	TeamScore firstTeam, secondTeam;
