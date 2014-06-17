@@ -35,7 +35,6 @@ void Scorer::update(const DealResult & result)
 			
 			if ( declaringTeam.isVulnerable() ) 
 				bonusPoints *= 2;
-
 			bonusPoints += 25*result.contract.pointMultiplier; // bonus for making (re)doubled
 		}
 		if ( result.contract.level == 6 )
