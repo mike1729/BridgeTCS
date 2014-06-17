@@ -21,5 +21,5 @@ public:
 	virtual Call makeCall(Bidding const &, Hand const &) = 0;
 };
 
-}
+} //namespace bridge
 #endif

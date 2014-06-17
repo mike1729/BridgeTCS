@@ -83,5 +83,5 @@ private:
 	DealEvent event;
 };
 
-}
+} //namespace bridge
 #endif

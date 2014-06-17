@@ -20,4 +20,4 @@ void Game::start()
 	}
 }
 
-}
+} //namespace bridge

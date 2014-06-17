@@ -131,7 +131,9 @@ TEST_F(ScorerTest, WonMajorExact)
 		EXPECT_EQ(0, scorer->getSecondTeam().getPointsBelow());
 		EXPECT_EQ(0, scorer->getSecondTeam().getPointsAbove());
 	}
+	
 	con.denomination = Denomination::SPADES;
+	
 	for ( int i = 1; i <= 7; i++ )
 	{
 		delete scorer;
@@ -171,6 +173,7 @@ TEST_F(ScorerTest, WonNoTrumpExact)
 	Contract con;
 	con.denomination = Denomination::NT;
 	con.declarer = 0;
+	
 	for ( int i = 1; i <= 7; i++ )
 	{
 		delete scorer;
@@ -232,4 +235,4 @@ TEST_F(ScorerTest, TwoDealsGame)
 	EXPECT_EQ(0, scorer->getSecondTeam().getPointsAbove());
 }
 
-}
+} //namespace bridge

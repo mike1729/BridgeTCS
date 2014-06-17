@@ -65,4 +65,4 @@ TEST_F(BiddingTest, RealFinish)
 	EXPECT_EQ(res.level, 5);
 }
 
-}
+} //namespace bridge

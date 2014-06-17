@@ -17,14 +17,17 @@ void Bidding::makeCall(Call call)
 			currentContract.pointMultiplier = 1;
 			lastBidder = history.size();
 			break;
+		
 		case CallType::DOUBLE :
 			consecutivePasses = 0;
 			currentContract.pointMultiplier = 2;
 			break;
+			
 		case CallType::REDOUBLE :
 			consecutivePasses = 0;
 			currentContract.pointMultiplier = 4;
 			break;
+		
 		case CallType::PASS :
 			consecutivePasses++;
 			if ( currentContract.level != 0 && consecutivePasses >= 3 )
@@ -38,6 +41,7 @@ void Bidding::makeCall(Call call)
 			}
 			break;
 	}
+	
 	history.push_back(call);
 	findDeclarer();
 	sigModified(*this);
@@ -49,10 +53,16 @@ void Bidding::makeCall(Call call)
 void Bidding::findDeclarer()
 {
 	int declarer;
-	for (declarer = lastBidder%2 ; declarer<static_cast<int>( history.size() ) ; declarer += 2) 
+	
+	for (declarer = lastBidder%2 ; declarer<static_cast<int>( history.size() ) ; declarer += 2)
+	{
 		if (history[declarer].type == CallType::BID && history[declarer].denomination == currentContract.denomination)
+		{
 			break;
+		}
+	}
+	
 	currentContract.declarer = (declarer+firstCaller)%4;
 }
 
-}
+} //namespace bridge

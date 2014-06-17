@@ -58,4 +58,4 @@ void Play::add(Card card)
 	}
 }
 
-}
+} //namespace bridge

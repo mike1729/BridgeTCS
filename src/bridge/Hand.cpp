@@ -59,4 +59,4 @@ void Hand::sort()
 	hand.sort([](Card a, Card b){ return std::make_pair(a.suit, a.rank) < std::make_pair(b.suit, b.rank); });
 }
 
-}
+} //namespace bridge

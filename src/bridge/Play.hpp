@@ -96,5 +96,5 @@ class Play: public ui::Observable<Play>
 		History history;
 };
 
-}
+} //namespace bridge
 #endif

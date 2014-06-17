@@ -43,5 +43,5 @@ public:
 	virtual bool empty();
 };
 
-}
+} //namespace bridge
 #endif

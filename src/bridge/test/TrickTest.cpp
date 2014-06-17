@@ -219,4 +219,4 @@ TEST_F(TrickTest, Trump6){
 		player2);
 }
 
-}
+} //namespace bridge

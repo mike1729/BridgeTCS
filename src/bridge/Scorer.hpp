@@ -73,5 +73,5 @@ private:
 	TeamScore firstTeam, secondTeam;
 };
 
-}
+} //namespace bridge
 #endif

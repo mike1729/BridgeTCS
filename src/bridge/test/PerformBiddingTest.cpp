@@ -144,4 +144,4 @@ TEST_F(PerformBiddingTest, RealFinishOtherStart)
 	EXPECT_EQ(2, res.declarer);
 }
 
-}
+} //namespace bridge

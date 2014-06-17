@@ -39,4 +39,4 @@ bool Standard52Deck::empty()
 	return deck.size() == 0;
 }
 
-}
+} //namespace bridge

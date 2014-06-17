@@ -57,4 +57,4 @@ TEST_F(HandTest, HasSuit)
 	EXPECT_EQ(hand.hasSuit(c1.suit), false);
 }
 
-}
+} //namespace bridge

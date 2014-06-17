@@ -16,5 +16,5 @@ struct Contract
 	bool redeal = false;
 };
 
-}
+} //namespace bridge
 #endif

@@ -128,4 +128,4 @@ TEST_F(DealCardsTest, StartFrom3)
 	}
 }
 
-}
+} //namespace bridge

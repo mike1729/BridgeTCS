@@ -22,6 +22,6 @@ class Hand: public ui::Observable<Hand>
 		std::list<Card> hand;
 };
 
-}
+} //namespace bridge
 
 #endif

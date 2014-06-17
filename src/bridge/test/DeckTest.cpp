@@ -52,4 +52,4 @@ TEST(DeckTest, shuffledContainsEachCard)
 	EXPECT_EQ(containsEach(cards), true);
 }
 
-}
+} //namespace bridge

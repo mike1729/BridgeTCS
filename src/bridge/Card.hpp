@@ -46,6 +46,6 @@ struct Card
 	}
 };
 
-}
+} //namespace bridge
 
 #endif
