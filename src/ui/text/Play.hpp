@@ -21,8 +21,8 @@ public:
 	}
 	
 };
-}
-}
+} //namespace text
+} //namespace ui
 
 
 #endif

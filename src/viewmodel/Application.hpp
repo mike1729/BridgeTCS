@@ -27,12 +27,21 @@ public:
 		pgame->start();
 		pgame = nullptr;
 	}
-	const bridge::Game & getGame() const { return *pgame; };
-	bridge::PlayerID getId() const { return id; };
+	
+	const bridge::Game & getGame() const
+	{
+		return *pgame;
+	};
+	
+	bridge::PlayerID getId() const
+	{
+		return id;
+	};
+
 private:
 	bridge::Game * pgame;
 	bridge::PlayerID id;
 };
 
-}
+} // namespace viewmodel
 #endif

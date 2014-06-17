@@ -20,8 +20,8 @@ public:
 private:
 	
 };
-}
-}
+} //namespace text
+} //namespace ui
 
 
 #endif
