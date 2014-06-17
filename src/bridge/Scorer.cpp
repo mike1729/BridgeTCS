@@ -7,13 +7,16 @@ void Scorer::update(const DealResult & result)
 {
 	TeamScore & declaringTeam = (result.contract.declarer % 2 == 0) ? firstTeam : secondTeam;
 	TeamScore & defendingTeam = (result.contract.declarer % 2 == 0) ? secondTeam : firstTeam;
-	int overtricks = result.contract.level - result.declarerTakenTricks - 6;
+	int overtricks = result.declarerTakenTricks - result.contract.level - 6;
 	
 	if ( overtricks >= 0) // declaring team won
 	{
 		int contractPoints = 0;
-		if ( result.contract.denomination == Denomination::NT ) 
-			contractPoints += 30 * (result.contract.level - 1) + 40;
+		if ( result.contract.denomination == Denomination::NT )
+		{
+			contractPoints += 40;
+			contractPoints += 30 * (result.contract.level - 1);
+		}
 		else if ( result.contract.denomination == Denomination::SPADES || result.contract.denomination == Denomination:: HEARTS )
 			contractPoints += 30 * result.contract.level;
 		else
