@@ -6,7 +6,7 @@
 namespace bridge {
 
 struct TeamScore {
-	TeamScore(): aboveTheLine(0), belowTheLine(0), vulnerable(false) {}
+	TeamScore() {}
 	int getPointsAbove() const 
 	{
 		return aboveTheLine;
@@ -32,9 +32,9 @@ struct TeamScore {
 		vulnerable = newVulnerability;
 	}
 	private:
-	int aboveTheLine;
-	int belowTheLine;
-	bool vulnerable;
+	int aboveTheLine = 0;
+	int belowTheLine = 0;
+	bool vulnerable = false;
 };
 
 struct Scorer
