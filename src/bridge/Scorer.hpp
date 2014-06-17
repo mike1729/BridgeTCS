@@ -5,8 +5,8 @@
 
 namespace bridge {
 
-struct TeamScore {
-	TeamScore() {}
+class TeamScore {
+public:
 	int getPointsAbove() const 
 	{
 		return aboveTheLine;
@@ -31,21 +31,21 @@ struct TeamScore {
 	{
 		vulnerable = newVulnerability;
 	}
-	private:
+private:
 	int aboveTheLine = 0;
 	int belowTheLine = 0;
 	bool vulnerable = false;
 };
 
-struct Scorer
+class Scorer
 {
-	Scorer() {}
+public:
 	void update(const DealResult & result);
 
 	const TeamScore& getFirstTeam() const { return firstTeam; }
 	const TeamScore& getSecondTeam() const { return secondTeam; }
 
-	private:
+private:
 	TeamScore firstTeam, secondTeam;
 };
 
