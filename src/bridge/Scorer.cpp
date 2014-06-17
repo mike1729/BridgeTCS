@@ -5,6 +5,16 @@ namespace bridge
 
 void Scorer::update(const DealResult & result)
 {
+	if ( firstTeam.getPointsBelow() >= 100 ) //move full vulnerability points above
+	{
+		firstTeam.updatePointsAbove(firstTeam.getPointsBelow());
+		firstTeam.updatePointsBelow(-firstTeam.getPointsBelow());
+	}
+	if ( secondTeam.getPointsBelow() >= 100 ) //move full vulnerability points above
+	{
+		secondTeam.updatePointsAbove(secondTeam.getPointsBelow());
+		secondTeam.updatePointsBelow(-secondTeam.getPointsBelow());
+	}
 	TeamScore & declaringTeam = (result.contract.declarer % 2 == 0) ? firstTeam : secondTeam;
 	TeamScore & defendingTeam = (result.contract.declarer % 2 == 0) ? secondTeam : firstTeam;
 	int overtricks = result.declarerTakenTricks - result.contract.level - 6;
@@ -52,7 +62,7 @@ void Scorer::update(const DealResult & result)
 			if ( declaringTeam.isVulnerable() )
 				bonusPoints += 500;
 		}
-		if ( contractPoints >= 100 ) //becoming vulnerable, possibly finished rubber
+		if ( declaringTeam.getPointsBelow() >= 100 ) //becoming vulnerable, possibly finished rubber
 		{
 			if ( declaringTeam.isVulnerable() ) //finished rubber
 			{
