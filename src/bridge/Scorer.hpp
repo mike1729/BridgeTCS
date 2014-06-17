@@ -43,7 +43,7 @@ public:
 	void update(const DealResult & result);
 	const TeamScore& getFirstTeam() const { return firstTeam; }
 	const TeamScore& getSecondTeam() const { return secondTeam; }
-    bool gameOver() const { return firstTeam.getPointsBelow() > 200 || secondTeam.getPointsBelow() > 200; }
+	bool gameOver() const { return firstTeam.getPointsBelow() > 200 || secondTeam.getPointsBelow() > 200; }
 
 private:
 	TeamScore firstTeam, secondTeam;
