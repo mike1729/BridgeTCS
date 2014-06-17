@@ -12,8 +12,11 @@ void Scorer::update(const DealResult & result)
 	if ( overtricks >= 0) // declaring team won
 	{
 		int contractPoints = 0;
-		if ( result.contract.denomination == Denomination::NT ) 
-			contractPoints += 30 * (result.contract.level - 1) + 40;
+		if ( result.contract.denomination == Denomination::NT )
+		{
+			contractPoints += 40;
+			contractPoints += 30 * (result.contract.level - 1);
+		}
 		else if ( result.contract.denomination == Denomination::SPADES || result.contract.denomination == Denomination:: HEARTS )
 			contractPoints += 30 * result.contract.level;
 		else
