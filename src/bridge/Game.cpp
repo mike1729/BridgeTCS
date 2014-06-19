@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include "Deal.hpp"
+
 namespace bridge {
 
 void Game::start()

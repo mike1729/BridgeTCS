@@ -4,7 +4,7 @@
 #include "ui/Observable.hpp"
 #include "bridge/Player.hpp"
 #include "ui/text/PlayerUI.hpp"
-#include "ui/text/Game.hpp"
+//#include "ui/text/Game.hpp"
 #include "bridge/Game.hpp"
 #include "Bot.hpp"
 

@@ -1,10 +1,10 @@
 #ifndef BRIDGE_PLAY_HPP
 #define BRIDGE_PLAY_HPP
 
-#include <array>
+//#include <array>
 #include <list>
-#include <memory>
-#include <utility>
+//#include <memory>
+//#include <utility>
 
 #include "Card.hpp"
 #include "Contract.hpp"
