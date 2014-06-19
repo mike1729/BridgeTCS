@@ -69,7 +69,7 @@ bridge::Card PlayerUI::chooseCard(bridge::Bidding const &, bridge::Play const &,
 	
 	if (dummyHand!=nullptr)
 	{
-		std::cout << "Dummy Hand:\n\t";
+		std::cout << "Dummy Hand:\n";
 		Printer::print(*dummyHand);
 	}
 
@@ -82,7 +82,7 @@ bridge::Card PlayerUI::chooseCardFromDummy(bridge::Bidding const &, bridge::Play
 {
 	Printer::print(hand);
 
-	std::cout << "Dummy Hand:\n\t";
+	std::cout << "Dummy Hand:\n";
 	Printer::print(dummyHand);
 
 	return chooseAndParseCard(true);

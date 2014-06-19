@@ -1,5 +1,6 @@
 #include "Printer.hpp"
 #include <iostream>
+#include <list>
 
 namespace ui
 {
@@ -32,16 +33,29 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 		std::cout << "PASS\n";
 }
 
-
 /*static*/ void Printer::print(bridge::Hand const & hand)
 {
-	
-	for(auto & card : hand.getCards())
+	auto cardsIt = hand.getCards().rbegin();
+	auto endIt = hand.getCards().rend();
+	while (cardsIt != endIt)
 	{
-        Printer::print(card);
-		std::cout << "  ";
+		if (cardsIt->suit == bridge::Suit::HEARTS or 
+			cardsIt->suit == bridge::Suit::DIAMONDS)
+        	std::cout<< "\e[1;31m"; // red
+    	else
+        	std::cout<<"\e[1;30m"; // black 
+		Printer::print(cardsIt->suit);
+		std::cout << ": ";
+		for (bridge::Suit currentSuit = cardsIt->suit; 
+			currentSuit == cardsIt->suit && cardsIt != endIt; cardsIt++)
+		{
+			Printer::print(cardsIt->rank);
+			std::cout << " ";
+		}
+		std::cout << std::endl;
+		std::cout<<"\e[0m";
 	}
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 }
 
 /*static*/ void Printer::print(bridge::Play::Trick const & trick)
