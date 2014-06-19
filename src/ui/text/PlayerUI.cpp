@@ -11,45 +11,29 @@ bridge::Card chooseAndParseCard(bool fromDummy=false)
 	while(true)
 	{
 		if(!fromDummy)
-		{
 			std::cout << "Throw a card.\nFormat: [2-9|t|j|q|k|a] [c|d|h|s]\n";
-		}
 		else
-		{
 			std::cout << "Throw a card from Dummy.\nFormat: [2-9|t|j|q|k|a] [c|d|h|s]\n";
-		}
 		
 		char rankStr;
 		std::cin >> rankStr;
 		bridge::Rank rank;
 		
 		if(rankStr == 't')
-		{
 			rank = bridge::Rank::TEN;
-		}
 		else if(rankStr == 'j')
-		{
 			rank = bridge::Rank::JACK;
-		}
 		else if(rankStr == 'q')
-		{
 			rank = bridge::Rank::QUEEN;
-		}
 		else if(rankStr == 'k')
-		{
 			rank = bridge::Rank::KING;
-		}
 		else if(rankStr == 'a')
-		{
 			rank = bridge::Rank::ACE;
-		}
 		else
 		{
 			int rankInt = rankStr-'0';
 			if(rankInt<= 9 && rankInt >= 2)
-			{
 				rank = static_cast<bridge::Rank>(rankInt - 2);
-			}
 			else
 			{
 				std::cout << "Wrong rank format.\n";
@@ -62,21 +46,13 @@ bridge::Card chooseAndParseCard(bool fromDummy=false)
 		std::cin >> suitStr;
 		
 		if(suitStr == 'c')
-		{
 			suit = bridge::Suit::CLUBS;
-		}
 		else if(suitStr == 'd')
-		{
 			suit = bridge::Suit::DIAMONDS;
-		}
 		else if(suitStr == 'h')
-		{
 			suit = bridge::Suit::HEARTS;
-		}
 		else if(suitStr == 's')
-		{
 			suit = bridge::Suit::SPADES;
-		}
 		else
 		{
 			std::cout << "Wrong suit format.\n";
@@ -123,19 +99,13 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & ha
 		std::cin >> in;
 		
 		if(in[0] == 'p')
-		{
 			return bridge::Call::PASS();
-		}
 		
 		if(in[0] == 'd')
-		{
 			return bridge::Call::DOUBLE();
-		}
 		
 		if(in[0] == 'r')
-		{
 			return bridge::Call::REDOUBLE();
-		}
 		
 		int level;
 		try {
@@ -156,6 +126,7 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & ha
 		std::string denominationStr;
 		std::cin >> denominationStr;
 		bridge::Denomination denomination;
+
 		try {
 			denominationInt = std::stoi(denominationStr);
 		} catch (...)
@@ -163,10 +134,9 @@ bridge::Call PlayerUI::makeCall(bridge::Bidding const &, bridge::Hand const & ha
 			std::cout << "Wrong format\n";
 			continue;
 		}
+
 		if(denominationInt <= 5 && denominationInt >= 1)
-		{
 			denomination = static_cast<bridge::Denomination>(denominationInt - 1);
-		}
 		else
 		{
 			std::cout << "Wrong denomination\n";

@@ -40,13 +40,9 @@ public:
 		int nr = static_cast<int>(denomination);
 		
 		if(nr == 4)
-		{
 			std::cout << "NT";
-		}
 		else
-		{
 			std::cout << suitSymbols[nr];
-		}
 	}
 
 	static void print(bridge::Call const & call);

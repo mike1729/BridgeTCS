@@ -20,25 +20,10 @@ public:
 	int level;
 	Denomination denomination;
 	
-	static Call PASS()
-	{
-		return Call(CallType::PASS);
-	}
-	
-	static Call DOUBLE()
-	{
-		return Call(CallType::DOUBLE);
-	}
-
-	static Call REDOUBLE()
-	{
-		return Call(CallType::REDOUBLE);
-	}
-
-	static Call BID(int level, Denomination denomination)
-	{
-		return Call(CallType::BID, level, denomination);
-	}
+	static Call PASS()	{ return Call(CallType::PASS); }
+	static Call DOUBLE() {	return Call(CallType::DOUBLE); }
+	static Call REDOUBLE() { return Call(CallType::REDOUBLE); }
+	static Call BID(int level, Denomination denomination) { return Call(CallType::BID, level, denomination); }
 };
 
 } //namespace bridge

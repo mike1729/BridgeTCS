@@ -27,32 +27,11 @@ class Play: public ui::Observable<Play>
 				}
 
 				void add(Card card);
-
-				bool full() const
-				{
-					return (cards.size() == 4);
-				}
-
-				int getWinner() const
-				{
-					return presentWinner;
-				}
-				
-				std::list<Card> const & getCards() const
-				{
-					return cards;
-				}
-				
-				Denomination getTrump() const
-				{
-					return trump;
-				}
-				
-				int getInitiator() const
-				{
-					return initiator;
-				}
-
+				bool full() const { return (cards.size() == 4); }
+				int getWinner() const { return presentWinner; }
+				std::list<Card> const & getCards() const { return cards; }
+				Denomination getTrump() const	{ return trump; }
+				int getInitiator() const { return initiator;}
 				
 			private:
 				std::list<Card> cards;
@@ -60,32 +39,15 @@ class Play: public ui::Observable<Play>
 				Card * presentWinningCard;
 				Denomination trump;
 				int initiator;
-				
 				bool defeat(const Card& winningCard, const Card& attempterCard);
 		};
 
 		using History = std::list< std::unique_ptr<Trick> >;
 
-		int getLastTrickWinner()
-		{
-			return history.back()->getWinner();
-		}
-
-		int getTricksTaken()
-		{
-			return tricksTaken;
-		}
-		
-		const Trick & getTrick() const
-		{
-			return *currentTrick;
-		}
-
-		const History & recentHistory() const
-		{
-			return history; //TODO return up to last 8 tricks
-		}
-
+		int getLastTrickWinner() { return history.back()->getWinner(); }
+		int getTricksTaken() { return tricksTaken; }
+		const Trick & getTrick() const { return *currentTrick; }
+		const History & recentHistory() const { return history; } //TODO return up to last 8 tricks
 		void add(Card card);
 
 	private:

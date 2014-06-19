@@ -37,35 +37,12 @@ public:
 		return history[ history.size() - 1];
 	}
 	
-	int getCurrentCaller() const
-	{
-		return (firstCaller + history.size())%4;
-	}
-	
-	int getLastBidder() const
-	{
-		return lastBidder;
-	}
-	
-	History const & getHistory() const
-	{
-		return history;
-	}
-	
-	int getCallNumber() const
-	{
-		return history.size();
-	}
-	
-	int getConsecutivePassesNumber() const
-	{
-		return consecutivePasses;
-	}
-	
-	int getFirstCaller() const
-	{
-		return firstCaller;
-	}
+	int getCurrentCaller() const { return (firstCaller + history.size())%4; }
+	int getLastBidder() const { return lastBidder; }
+	History const & getHistory() const { return history; }
+	int getCallNumber() const { return history.size(); }
+	int getConsecutivePassesNumber() const { return consecutivePasses; }
+	int getFirstCaller() const	{ return firstCaller; }
 
 private:
 	Contract currentContract;

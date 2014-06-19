@@ -25,17 +25,11 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 		std::cout << "\n";
 	}
 	else if(callType == bridge::CallType::DOUBLE)
-	{
 		std::cout << "Double\n";
-	}
 	else if(callType == bridge::CallType::REDOUBLE)
-	{
 		std::cout << "Redouble\n";
-	}
 	else if(callType == bridge::CallType::PASS)
-	{
 		std::cout << "PASS\n";
-	}
 }
 
 
@@ -66,13 +60,9 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	}
 	
 	if(trick.full())
-	{
 		std::cout << "Player " << trick.getWinner() + 1 << "won this trick.\n";
-	}
 	else
-	{
 		std::cout << "Player " << trick.getWinner() + 1 << "leading.\n";
-	}
 		
 	std::cout << std::endl;
 }
@@ -87,13 +77,9 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 /*static*/ void Printer::print(bridge::Card const & card)
 {
     if (card.suit == bridge::Suit::HEARTS or card.suit == bridge::Suit::DIAMONDS)
-    {
         std::cout<< "\e[1;31m"; // red
-    }
     else
-    {
         std::cout<<"\e[1;30m"; // black 
-    }
     
     Printer::print(card.rank);
     Printer::print(card.suit);

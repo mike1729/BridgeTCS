@@ -10,14 +10,10 @@ void Deal::dealCards()
 	deck.shuffle();
 	
 	for (int currentPlayer = firstCaller; deck.cardsLeft(); currentPlayer = (currentPlayer+1) % 4)
-	{
 		hands[currentPlayer].insert(deck.dealCard());
-	}
 	
 	for (int i = 0; i < 4; i++)
-	{
 		hands[i].sort();
-	}
 	
 	event = DealEvent::CardsDealt;
 	sigModified(*this);
@@ -52,9 +48,7 @@ DealResult Deal::performPlay()
 	int dummyPlayer = (contract.declarer + 2) % 4;
 	
 	for (int i = 0; i < 4; i++)
-	{
 		arbiters[i].setRole((i == dummyPlayer) ? Arbiter::Role::DUMMY : Arbiter::Role::NORMAL);
-	}
 	
 	arbiters[dummyPlayer].setPartnerHand(&hands[contract.declarer]);
 	

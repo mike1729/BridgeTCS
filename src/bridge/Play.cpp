@@ -10,15 +10,9 @@ bool operator==(Suit suit, Denomination denomination)
 /* true if attempterCard beats the winningCard */
 bool Play::Trick::defeat(const Card& winningCard, const Card& attempterCard)
 {
-	if(winningCard.suit == attempterCard.suit  &&  winningCard.rank < attempterCard.rank)
-	{
-		return true;
-	}
-	
-	if(attempterCard.suit == trump  &&  !(winningCard.suit == trump) )
-	{
-		return true;
-	}
+	if(winningCard.suit == attempterCard.suit  &&  winningCard.rank < attempterCard.rank) return true;	
+	if(attempterCard.suit == trump  &&  !(winningCard.suit == trump) ) return true;
+
 	return false;
 }
 
@@ -47,10 +41,7 @@ void Play::add(Card card)
 	currentTrick->add(card);
 	if (currentTrick->full())
 	{
-		if(arePartners(currentTrick->getWinner(), declarer))
-		{
-			tricksTaken++;
-		}
+		if(arePartners(currentTrick->getWinner(), declarer)) tricksTaken++;
 		
 		history.push_back( std::move(currentTrick) );
 		currentTrick.reset(new Trick(trump, getLastTrickWinner()) );

@@ -35,9 +35,7 @@ void Deal::notify(const bridge::Deal & deal)
 			{
 				bridge::Contract contract = deal.getContract();
 				if ( contract.redeal )
-				{
 					std::cout << "Bidding finished. Since there were four passes the cards shall be redealt." << std::endl;
-				}
 				else
 				{
 					std::cout << "Bidding finished. The contract is " << contract.level << " ";
@@ -65,13 +63,9 @@ void Deal::notify(const bridge::Deal & deal)
 			bridge::DealResult result = deal.getResult();
 			int extra = result.declarerTakenTricks - result.contract.level - 6;
 			if(extra >= 0)
-			{
 				std::cout << "Contract accomplished. " <<  extra << " overtricks.\n";
-			}
 			else
-			{
 				std::cout << "Contract failed. " <<  extra << " undertricks.\n";
-			}
 				
 			break;
 	}

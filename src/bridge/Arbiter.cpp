@@ -5,21 +5,15 @@ namespace bridge {
 bool Arbiter::validateCard(Card & card, Hand & hand, Play const & play)
 {
 	if(!hand.hasCard(card))
-	{
 		return false;
-	}
 
 	std::list<Card> const & cards = play.getTrick().getCards();
 	if(cards.empty())
-	{
 		return true;
-	}
 
 	Suit suit = cards.front().suit;
 	if(hand.hasSuit(suit) && card.suit != suit)
-	{
 		return false;
-	}
 	
 	return true;
 }
@@ -42,13 +36,9 @@ Card Arbiter::getCard(Bidding const & bidding, Play const & play, Hand & hand, H
 	{
 		Hand const * dummy_ptr;
 		if(hand.getCards().size() == 13 && play.getTrick().getCards().empty())
-		{
 			dummy_ptr = nullptr;
-		}
 		else
-		{
 			dummy_ptr = &dummy;
-		}
 		
 		while(true)
 		{
@@ -69,48 +59,27 @@ bool Arbiter::isValid(Call call, Bidding const & bidding)
 	{
 	case CallType::BID:
 		if ( call.level < 1 || call.level > 7 || call.level < contract.level )
-		{
 			return false;
-		}
-		
 		if ( call.level == contract.level && call.denomination <= contract.denomination )
-		{
 			return false;
-		}
 		return true;
 	
 	case CallType::DOUBLE:
 		if ( contract.level == 0 )
-		{
 			return false;
-		}
-	
 		if ( contract.pointMultiplier != 1 )
-		{
-			return false;
-		}
-		
+			return false;		
 		if ( bidding.getLastBidder()%2 == bidding.getCallNumber()%2 )
-		{
 			return false;
-		}
 		return true;
 	
 	case CallType::REDOUBLE:
 		if ( contract.level == 0 )
-		{
 			return false;
-		}
-		
 		if ( contract.pointMultiplier != 2 )
-		{
 			return false;
-		}
-		
 		if ( bidding.getLastBidder()%2 != bidding.getCallNumber()%2 )
-		{
 			return false;
-		}
 		return true;
 		
 	case CallType::PASS:
@@ -125,9 +94,7 @@ Call Arbiter::getCall(Bidding const & bidding, Hand const & hand)
 	{
 		Call call = player.makeCall(bidding, hand);
 		if ( isValid(call, bidding) )
-		{
 			return call;
-		}
 	}
 }
 

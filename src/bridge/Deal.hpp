@@ -39,6 +39,7 @@ public:
 		{*players[2], *players[0]},
 		{*players[3], *players[1]}}},
 		firstCaller(firstCaller)
+
 	{
 	}
 
@@ -46,32 +47,13 @@ public:
 	Contract performBidding();
 	DealResult performPlay();
 	
-	const Bidding & getBidding() const
-	{
-		return *bidding;
-	}
-	const Play & getPlay() const
-	{
-		return *play;
-	}
-	const DealEvent & getEvent() const
-	{
-		return event;
-	}
+	const Bidding & getBidding() const { return *bidding; }
+	const Play & getPlay() const { return *play; }
+	const DealEvent & getEvent() const { return event; }
+	const Contract & getContract() const { return contract; }
+	const Hands & getHands() const { return hands; }
+	const DealResult & getResult() const { return result; } 
 
-	const Contract & getContract() const 
-	{
-		return contract;
-	}
-
-	const Hands & getHands() const
-	{
-		return hands;
-	} 
-	const DealResult & getResult() const
-	{
-		return result;
-	} 
 private:
 	Contract contract;
 	Arbiters arbiters;

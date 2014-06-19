@@ -22,10 +22,7 @@ public:
 class Deck : public IDeck
 {
 protected:
-	Card createCard(Rank rank, Suit suit) 
-	{
-		return Card(rank, suit);
-	}
+	Card createCard(Rank rank, Suit suit) { return Card(rank, suit); }
 };
 
 class Standard52Deck : public Deck
