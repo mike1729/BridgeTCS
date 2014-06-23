@@ -74,9 +74,9 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	}
 	
 	if(trick.full())
-		std::cout << "Player " << trick.getWinner() + 1 << "won this trick.\n";
+		std::cout << "Player " << trick.getWinner() + 1 << " won this trick.\n";
 	else
-		std::cout << "Player " << trick.getWinner() + 1 << "leading.\n";
+		std::cout << "Player " << trick.getWinner() + 1 << " leading.\n";
 		
 	std::cout << std::endl;
 }
