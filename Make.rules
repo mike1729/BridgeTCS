@@ -1,4 +1,4 @@
-CXX?=clang++
+CXX?=g++-4.8
 CXXFLAGS+=-std=c++11 -c -Wall -Wextra -O2 -I$(SRCDIRECTORY)
 TESTLDFLAGS+=-lgtest -lgtest_main -pthread
 LDFLAGS+=

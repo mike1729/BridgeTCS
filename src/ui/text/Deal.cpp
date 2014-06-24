@@ -65,7 +65,7 @@ void Deal::notify(const bridge::Deal & deal)
 			if(extra >= 0)
 				std::cout << "Contract accomplished. " <<  extra << " overtricks.\n";
 			else
-				std::cout << "Contract failed. " <<  extra << " undertricks.\n";
+				std::cout << "Contract failed. " <<  -extra << " undertricks.\n";
 				
 			break;
 	}
