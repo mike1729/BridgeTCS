@@ -1,6 +1,6 @@
 #include "Printer.hpp"
 #include <iostream>
-#include <list>
+#include <vector>
 
 namespace ui
 {
@@ -35,6 +35,72 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 
 /*static*/ void Printer::print(bridge::Hand const & hand)
 {
+	std::vector<bridge::Card> spades, hearts, diamonds, clubs;
+
+	for (auto & card : hand.getCards())
+	{
+		switch(card.suit)
+		{
+			case bridge::Suit::SPADES:
+				spades.push_back(card);
+				break;
+			case bridge::Suit::HEARTS:
+				hearts.push_back(card);
+				break;
+			case bridge::Suit::DIAMONDS:
+				diamonds.push_back(card);
+				break;
+			case bridge::Suit::CLUBS:
+				clubs.push_back(card);
+				break;
+			default:
+				std::cout << "An error occured in Printer::print(bridge::Hand const&)\n";
+				break;
+		}
+	}
+
+	// set black color for spades
+	std::cout<<"\e[1;30m"; // black
+	std::cout << "S: ";
+
+	for (auto& card : spades)
+	{
+		Printer::print(card.rank);
+		std::cout << " ";
+	}
+	std::cout << "\n";
+
+	// set red color for hearts and diamonds
+	std::cout<< "\e[1;31m"; // red
+	std::cout << "H: ";
+	
+	for (auto& card : hearts)
+	{
+		Printer::print(card.rank);
+		std::cout << " ";
+	}
+	std::cout << "\n";
+
+	std::cout << "D: ";
+	for (auto& card : diamonds)
+	{
+		Printer::print(card.rank);
+		std::cout << " ";
+	}
+	std::cout << "\n";
+
+	// set black color for clubs
+	std::cout<<"\e[1;30m"; // black
+	std::cout << "C: ";
+
+	for (auto& card : clubs)
+	{
+		Printer::print(card.rank);
+		std::cout << " ";
+	}
+	std::cout<<"\e[0m";
+	std::cout << "\n\n";
+/*
 	auto cardsIt = hand.getCards().rbegin();
 	auto endIt = hand.getCards().rend();
 	while (cardsIt != endIt)
@@ -56,6 +122,7 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 		std::cout<<"\e[0m";
 	}
 	std::cout << std::endl;
+*/
 }
 
 /*static*/ void Printer::print(bridge::Play::Trick const & trick)
