@@ -42,6 +42,9 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 		bridge::Suit::CLUBS
 	};
 
+	auto cardsIt = hand.getCards().rbegin();
+	auto endIt = hand.getCards().rend();
+
 	for (auto & suit : suits)
 	{
 		if (suit == bridge::Suit::HEARTS or 
@@ -51,15 +54,10 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 			std::cout<<"\e[1;30m"; // black 
 		Printer::print(suit);
 		std::cout << ": ";
-		auto cardsIt = hand.getCards().rbegin();
-		auto endIt = hand.getCards().rend();
-		while (cardsIt != endIt)
+		while (cardsIt != endIt && cardsIt->suit == suit)
 		{
-			if (cardsIt->suit == suit)
-			{
-				Printer::print(cardsIt->rank);
-				std::cout << " ";
-			}
+			Printer::print(cardsIt->rank);
+			std::cout << " ";
 			cardsIt++;
 		}
 		std::cout << "\n";
