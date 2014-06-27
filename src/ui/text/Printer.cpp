@@ -48,8 +48,8 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 	for (auto & suit : suits)
 	{
 		if (suit == bridge::Suit::HEARTS || suit == bridge::Suit::DIAMONDS)
-	    	std::cout << "\e[1;31m"; // setting color for suit: red
-	    else
+			std::cout << "\e[1;31m"; // setting color for suit: red
+		else
 			std::cout << "\e[1;30m"; //setting color for suit: black 
 		Printer::print(suit);
 		std::cout << ": ";
