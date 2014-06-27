@@ -19,7 +19,7 @@ void Scorer::update(const DealResult & result)
 	
 	TeamScore & declaringTeam = (result.contract.declarer % 2 == 0) ? firstTeam : secondTeam;
 	TeamScore & defendingTeam = (result.contract.declarer % 2 == 0) ? secondTeam : firstTeam;
-	int overtricks = result.declarerTakenTricks - result.contract.level - 6;
+	int overtricks = result.tricksWon - result.contract.level - 6;
 	
 	if ( overtricks >= 0) // declaring team won
 	{

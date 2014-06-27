@@ -32,7 +32,7 @@ TEST_F(ScorerTest, WonMinorExact)
 		scorer = new Scorer();
 		con.level = i;
 		result.contract = con;
-		result.declarerTakenTricks = 6 + i;
+		result.tricksWon = 6 + i;
 		scorer->update(result);
 		EXPECT_EQ(false, scorer->gameOver());
 		EXPECT_EQ(20*i, scorer->getFirstTeam().getPointsBelow());
@@ -67,7 +67,7 @@ TEST_F(ScorerTest, WonMinorExact)
 		scorer = new Scorer();
 		con.level = i;
 		result.contract = con;
-		result.declarerTakenTricks = 6 + i;
+		result.tricksWon = 6 + i;
 		scorer->update(result);
 		EXPECT_EQ(false, scorer->gameOver());
 		EXPECT_EQ(20*i, scorer->getFirstTeam().getPointsBelow());
@@ -105,7 +105,7 @@ TEST_F(ScorerTest, WonMajorExact)
 		scorer = new Scorer();
 		con.level = i;
 		result.contract = con;
-		result.declarerTakenTricks = 6 + i;
+		result.tricksWon = 6 + i;
 		scorer->update(result);
 		EXPECT_EQ(false, scorer->gameOver());
 		EXPECT_EQ(30*i, scorer->getFirstTeam().getPointsBelow());
@@ -140,7 +140,7 @@ TEST_F(ScorerTest, WonMajorExact)
 		scorer = new Scorer();
 		con.level = i;
 		result.contract = con;
-		result.declarerTakenTricks = 6 + i;
+		result.tricksWon = 6 + i;
 		scorer->update(result);
 		EXPECT_EQ(false, scorer->gameOver());
 		EXPECT_EQ(30*i, scorer->getFirstTeam().getPointsBelow());
@@ -180,7 +180,7 @@ TEST_F(ScorerTest, WonNoTrumpExact)
 		scorer = new Scorer();
 		con.level = i;
 		result.contract = con;
-		result.declarerTakenTricks = 6 + i;
+		result.tricksWon = 6 + i;
 		scorer->update(result);
 		EXPECT_EQ(false, scorer->gameOver());
 		EXPECT_EQ(40 + 30*(i-1), scorer->getFirstTeam().getPointsBelow());
@@ -215,7 +215,7 @@ TEST_F(ScorerTest, TwoDealsGame)
 	con.declarer = 0;
 	con.level = 3;
 	result.contract = con;
-	result.declarerTakenTricks = 9;
+	result.tricksWon = 9;
 	
 	scorer->update(result);
 	

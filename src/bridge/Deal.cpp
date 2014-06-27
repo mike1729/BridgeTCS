@@ -62,7 +62,7 @@ DealResult Deal::performPlay()
 		currentPlayer = play->getLastTrickWinner();
 	}
 	
-	result.declarerTakenTricks = play->getTricksTaken();
+	result.tricksWon = play->getTricksTaken();
 	event = DealEvent::PlayEnd;
 	sigModified(*this);
 	

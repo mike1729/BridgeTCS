@@ -25,7 +25,7 @@ enum class DealEvent
 struct DealResult
 {
 	Contract contract;
-	int declarerTakenTricks;
+	int tricksWon;	//by declaring team
 };
 
 
