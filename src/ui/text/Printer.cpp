@@ -47,22 +47,20 @@ char Printer::rankSymbols[] = {'2','3','4','5','6','7','8','9','T','J','Q','K','
 
 	for (auto & suit : suits)
 	{
-		if (suit == bridge::Suit::HEARTS or 
-			suit == bridge::Suit::DIAMONDS)
-	    	std::cout<< "\e[1;31m"; // red
+		if (suit == bridge::Suit::HEARTS || suit == bridge::Suit::DIAMONDS)
+	    	std::cout << "\e[1;31m"; // setting color for suit: red
 	    else
-			std::cout<<"\e[1;30m"; // black 
+			std::cout << "\e[1;30m"; //setting color for suit: black 
 		Printer::print(suit);
 		std::cout << ": ";
-		while (cardsIt != endIt && cardsIt->suit == suit)
+		for (; cardsIt != endIt && cardsIt->suit == suit; cardsIt++)
 		{
 			Printer::print(cardsIt->rank);
 			std::cout << " ";
-			cardsIt++;
 		}
 		std::cout << "\n";
 	}
-	std::cout<<"\e[0m";
+	std::cout << "\e[0m"; // reset color
 	std::cout << "\n";
 }
 
